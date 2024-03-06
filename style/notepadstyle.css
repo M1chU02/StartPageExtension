@@ -1,0 +1,235 @@
+#editor-buttons {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#editor-buttons button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+label {
+  font-weight: bold;
+}
+
+#fontSize {
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+#notepad-navbar {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#note-list {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  margin: 8px;
+}
+
+#note-list > div {
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switchnote {
+  border-radius: 40px;
+  cursor: pointer;
+  width: 70px;
+  height: 40px;
+  outline: none;
+  border: none;
+}
+
+#add-note-btn {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 50px;
+}
+
+#note-list {
+  --sb-size: 8px;
+}
+
+#note-list::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+#note-list::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+#note-list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+#note-settings-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  display: none;
+}
+
+#note-settings-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+  box-shadow: none;
+}
+
+#note-settings-form-container form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 90%;
+}
+
+#note-settings-form-container input[type="text"] {
+  outline: none;
+  border: none;
+  margin: 10px;
+  width: 90%;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+#note-settings-form-container label {
+  text-transform: uppercase;
+}
+
+#note-settings-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+}
+
+#note-settings-form #rename-note {
+  padding: 1rem 0.75rem;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 3rem;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#note-settings-form #rename-note:hover {
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+#note-settings-form #download-note {
+  padding: 1rem 0.75rem;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 3rem;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#note-settings-form #download-note:hover {
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+#note-settings-form #delete-note {
+  margin-top: 5px;
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex !important;
+  justify-self: center;
+  align-self: center;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+}
+
+#note-settings-form #delete-note,
+button span {
+  transition: 200ms;
+}
+
+#note-settings-form #delete-note .text {
+  transform: translateX(35px);
+  font-weight: bold;
+}
+
+#note-settings-form #delete-note .icon {
+  position: absolute;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#note-settings-form #delete-note svg {
+  width: 15px;
+}
+
+#note-settings-form #delete-note:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+#note-settings-form #delete-note:focus {
+  outline: none;
+}
+
+#note-settings-form #delete-note:active .icon svg {
+  transform: scale(0.8);
+}

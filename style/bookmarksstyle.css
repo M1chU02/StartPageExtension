@@ -1,0 +1,300 @@
+#add-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#add-button > svg {
+  width: 75%;
+  height: 75%;
+}
+
+#add-button:hover {
+  transition: 0.5s ease;
+}
+
+#bookmark-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  display: none;
+}
+
+#bookmark-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+  box-shadow: none;
+  font-size: 1.5rem;
+}
+
+input[type="color"] {
+  outline: none;
+  border: none;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  margin: 10px;
+  padding: 0;
+  background-color: transparent;
+  width: 15%;
+  height: auto;
+  cursor: pointer;
+}
+
+#bookmarkcolor::-webkit-color-swatch {
+  border-radius: 50%;
+}
+
+#bookmarkcolor::-moz-color-swatch {
+  border-radius: 50%;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+#close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+}
+
+#bookmark-form input[type="text"] {
+  margin: 10px;
+  width: 90%;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+#bookmark-form label {
+  text-transform: uppercase;
+}
+
+#bookmark-form #submit {
+  padding: 1rem 0.75rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 3rem;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#bookmark-form #submit:hover {
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+#bookmark-list {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.bookmark-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.settingsbtn {
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  place-items: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.settingsbtn > svg {
+  border-radius: inherit;
+  padding: 0.5rem;
+  width: 38px;
+  height: 38px;
+}
+
+#settings-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+}
+
+#settings-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  display: none;
+}
+
+#settings-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+  box-shadow: none;
+}
+
+#new-bookmarkcolor {
+  outline: none;
+  border: none;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  margin: 10px;
+  padding: 0;
+  background-color: transparent;
+  width: 15%;
+  height: auto;
+}
+
+#new-bookmarkcolor::-webkit-color-swatch {
+  border-radius: 50%;
+}
+
+#new-bookmarkcolor::-moz-color-swatch {
+  border-radius: 50%;
+}
+
+#settings-form-container form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#settings-form {
+  width: 80%;
+}
+
+#settings-form input[type="text"] {
+  margin: 10px;
+  width: 90%;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+#settings-form label {
+  text-transform: uppercase;
+}
+
+#settings-form #submit {
+  padding: 1rem 0.75rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 3rem;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#settings-form #submit:hover {
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+#delete-settings {
+  margin-top: 5px;
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex !important;
+  justify-self: center;
+  align-self: center;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+}
+
+#delete-settings,
+button span {
+  transition: 200ms;
+}
+
+#delete-settings .text {
+  transform: translateX(35px);
+  font-weight: bold;
+}
+
+#delete-settings .icon {
+  position: absolute;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#delete-settings svg {
+  width: 15px;
+}
+
+#delete-settings:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+#delete-settings:focus {
+  outline: none;
+}
+
+#delete-settings:active .icon svg {
+  transform: scale(0.8);
+}

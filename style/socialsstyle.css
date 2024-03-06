@@ -1,0 +1,154 @@
+.up {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.down {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.card1 {
+  width: 140px;
+  height: 140px;
+  outline: none;
+  border: none;
+  background: #e889c6;
+  border-radius: 90px 5px 50% 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+  z-index: 2;
+}
+
+.instagram {
+  margin-top: 1.5em;
+  margin-left: 1.2em;
+  fill: white;
+}
+
+.card2 {
+  width: 140px;
+  height: 140px;
+  outline: none;
+  border: none;
+  background: #66b5f9;
+  border-radius: 5px 90px 5px 50%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+  z-index: 2;
+}
+
+.twitter {
+  margin-top: 1.5em;
+  margin-left: -0.9em;
+  fill: white;
+}
+
+.spotifycard {
+  width: 290px;
+  height: 290px;
+  outline: none;
+  border: none;
+  background: #5bb87b;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+  position: absolute;
+  border-radius: 92px;
+}
+
+.spotify {
+  fill: white;
+}
+
+.card3 {
+  width: 140px;
+  height: 140px;
+  outline: none;
+  border: none;
+  background: #333333;
+  border-radius: 5px 50% 5px 90px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+  z-index: 2;
+}
+
+.github {
+  margin-top: -0.6em;
+  margin-left: 1.2em;
+  fill: white;
+}
+
+.card4 {
+  width: 140px;
+  height: 140px;
+  outline: none;
+  border: none;
+  background: #ff6666;
+  border-radius: 50% 5px 90px 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+  z-index: 2;
+}
+
+.youtube {
+  margin-top: -0.9em;
+  margin-left: -1.2em;
+  fill: white;
+}
+
+.card1:hover {
+  cursor: pointer;
+  scale: 1.1;
+  background-color: #cc39a4;
+}
+
+.card1:hover .instagram {
+  fill: white;
+}
+
+.card2:hover {
+  cursor: pointer;
+  scale: 1.1;
+  background-color: #03a9f4;
+}
+
+.card2:hover .twitter {
+  fill: white;
+}
+
+.spotifycard:hover {
+  cursor: pointer;
+  scale: 1.05;
+  background-color: #1db954;
+}
+
+.spotifycard:hover .spotify {
+  fill: white;
+}
+
+.card3:hover {
+  cursor: pointer;
+  scale: 1.1;
+  background-color: black;
+}
+
+.card3:hover .github {
+  fill: white;
+}
+
+.card4:hover {
+  cursor: pointer;
+  scale: 1.1;
+  background-color: red;
+}
+
+.card4:hover .youtube {
+  fill: white;
+}

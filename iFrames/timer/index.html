@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Simple Timer App</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Countdown Timer</h1>
+      <div id="setTimer">
+        <label for="hours">Hours: </label>
+        <input type="number" id="hours" min="0" max="24" />
+        <label for="minutes">Minutes: </label>
+        <input type="number" id="minutes" min="0" max="60" value="5" />
+        <label for="seconds">Seconds: </label>
+        <input type="number" id="seconds" min="0" max="60" />
+      </div>
+      <div id="controls">
+        <button onclick="startTimer()">Start</button>
+        <button onclick="stopTimer()">Stop</button>
+        <button onclick="resumeTimer()">Resume</button>
+        <button onclick="resetTimer()">Reset</button>
+      </div>
+      <div id="timer">00:00:00</div>
+      <audio id="alarm" src="/iFrames/timer/audio/alarm.mp3"></audio>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

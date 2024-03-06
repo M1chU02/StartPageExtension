@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "StartPageExtension",
+  "version": "1.0",
+  "permissions": ["tabs", "activeTab", "declarativeContent", "storage"],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
+}

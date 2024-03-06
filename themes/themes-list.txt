@@ -1,0 +1,111 @@
+Dark Mode:
+    --font-family: "Gruppo", "Chakra Petch";
+    --background-color: #141414;
+    --button-hover-background: #0052aa;
+    --button-background: #007bff;
+    --font-color: #ffffff;
+    --submit-button-background: #707070;
+    --submit-button-hover-background: #458bc2;
+    --submit-button-font-color: #efefef;
+    --modal-background: rgba(0, 0, 0, 0.7);
+    --form-container-background: #303030;
+    --sb-track-color: #232e33;
+    --sb-thumb-color: #007bff;
+
+Ocean Blue:
+    --font-family: "Helvetica Neue", Arial, sans-serif;
+    --background-color: #1c2331;
+    --button-hover-background: #00a8cc;
+    --button-background: #0097e6;
+    --font-color: #ffffff;
+    --submit-button-background: #4b4b4b;
+    --submit-button-hover-background: #757575;
+    --submit-button-font-color: #efefef;
+    --modal-background: rgba(0, 0, 0, 0.7);
+    --form-container-background: #2d343e;
+    --sb-track-color: #1c2331;
+    --sb-thumb-color: #0097e6;
+
+Forest Green:
+    --font-family: "Roboto", Arial, sans-serif;
+    --background-color: #1d2d22;
+    --button-hover-background: #4caf50;
+    --button-background: #388e3c;
+    --font-color: #ffffff;
+    --submit-button-background: #546e7a;
+    --submit-button-hover-background: #78909c;
+    --submit-button-font-color: #efefef;
+    --modal-background: rgba(0, 0, 0, 0.7);
+    --form-container-background: #34495e;
+    --sb-track-color: #1d2d22;
+    --sb-thumb-color: #388e3c;
+
+Violet:
+    --font-family: "Caveat", cursive;
+    --background-color: #2d1b3a;
+    --button-hover-background: #9b59b6;
+    --button-background: #8e44ad;
+    --font-color: #ffffff;
+    --submit-button-background: #6c3483;
+    --submit-button-hover-background: #a569bd;
+    --submit-button-font-color: #efefef;
+    --modal-background: rgba(0, 0, 0, 0.7);
+    --form-container-background: #5d4d65;
+    --sb-track-color: #2d1b3a;
+    --sb-thumb-color: #8e44ad;
+
+Sunset Orange:
+    --font-family: "Georgia", serif;
+    --background-color: #3c2f2f;
+    --button-hover-background: #ff6b6b;
+    --button-background: #ff5733;
+    --font-color: #ffffff;
+    --submit-button-background: #b33939;
+    --submit-button-hover-background: #ff8566;
+    --submit-button-font-color: #efefef;
+    --modal-background: rgba(0, 0, 0, 0.7);
+    --form-container-background: #6b5b5b;
+    --sb-track-color: #3c2f2f;
+    --sb-thumb-color: #ff5733;
+
+Midnight Black:
+    --font-family: "Courier New", monospace;
+    --background-color: #000000;
+    --button-hover-background: #1a1a1a;
+    --button-background: #333333;
+    --font-color: #ffffff;
+    --submit-button-background: #707070;
+    --submit-button-hover-background: #999999;
+    --submit-button-font-color: #efefef;
+    --modal-background: rgba(0, 0, 0, 0.7);
+    --form-container-background: #1a1a1a;
+    --sb-track-color: #000000;
+    --sb-thumb-color: #333333;
+
+Retro Brown:
+    --font-family: "Times New Roman", serif;
+    --background-color: #392f2f;
+    --button-hover-background: #b98484;
+    --button-background: #a26767;
+    --font-color: #ffffff;
+    --submit-button-background: #734f4f;
+    --submit-button-hover-background: #a67d7d;
+    --submit-button-font-color: #efefef;
+    --modal-background: rgba(0, 0, 0, 0.7);
+    --form-container-background: #5b4d4d;
+    --sb-track-color: #392f2f;
+    --sb-thumb-color: #a26767;
+
+Deep Purple:
+    --font-family: "Pacifico", cursive;
+    --background-color: #2c3e50;
+    --button-hover-background: #8e44ad;
+    --button-background: #9b59b6;
+    --font-color: #ffffff;
+    --submit-button-background: #6c3483;
+    --submit-button-hover-background: #a569bd;
+    --submit-button-font-color: #efefef;
+    --modal-background: rgba(0, 0, 0, 0.7);
+    --form-container-background: #5d4d65;
+    --sb-track-color: #2c3e50;
+    --sb-thumb-color: #9b59b6;

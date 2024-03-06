@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/img/home-favicon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Gruppo"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Chakra Petch"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/style/socialsstyle.css" />
+    <link rel="stylesheet" href="/style/bookmarksstyle.css" />
+    <link rel="stylesheet" href="style/notepadstyle.css" />
+    <link rel="stylesheet" href="/style/settingsstyle.css" />
+    <link rel="stylesheet" id="themestylesheet" href="/themes/dark-mode.css" />
+
+    <title>HomePage</title>
+  </head>
+  <body>
+    <!--<div id="particles-js"></div>!-->
+    <div id="headerdiv">
+      <h2 class="header" id="nameheader"></h2>
+      <h2 class="header" id="greetingsheader"></h2>
+    </div>
+
+    <div id="infodiv">
+      <div id="datediv">
+        <p class="paragraph" id="date"></p>
+        <p class="paragraph" id="hour"></p>
+      </div>
+      <div id="separatordiv">
+        <p class="paragraph" id="separatorchar">|</p>
+      </div>
+      <div id="weatherdiv">
+        <p class="paragraph" id="temperature"></p>
+        <p class="paragraph" id="city"></p>
+      </div>
+    </div>
+
+    <div id="searchdiv">
+      <form id="searchform">
+        <input
+          type="text"
+          id="searchinput"
+          placeholder="Search on Google"
+          autocomplete="off"
+        />
+      </form>
+    </div>
+
+    <div id="bookmarksdiv">
+      <h1>Bookmarks</h1>
+      <div id="bookmark-modal">
+        <div id="bookmark-form-container">
+          <button id="close-button">&times;</button>
+          <form id="bookmark-form">
+            <label for="url">URL:</label>
+            <input
+              type="text"
+              id="url"
+              placeholder="Enter URL"
+              required
+              autocomplete="off"
+            />
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter Name"
+              required
+              autocomplete="off"
+            />
+            <label for="bookmarkcolor">Background Color</label><br />
+            <input type="color" id="bookmarkcolor" />
+            <button type="submit" id="submit">Add Bookmark</button>
+          </form>
+        </div>
+      </div>
+      <div id="bookmark-list"></div>
+
+      <button id="add-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          x="0px"
+          y="0px"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="content">
+      <div id="allnews">
+        <div id="newsselection">
+          <label id="localNewsLabel">
+            <input
+              value="value-1"
+              name="value-radio"
+              id="value-1"
+              type="radio"
+            />
+            <span>Local News</span>
+          </label>
+          <button id="refreshNewsBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+            >
+              <use xlink:href="/svg/newssvg/refresh.svg#refresh"></use>
+            </svg>
+          </button>
+          <label id="globalNewsLabel">
+            <input
+              value="value-2"
+              name="value-radio"
+              id="value-2"
+              type="radio"
+            />
+            <span>Global News</span>
+          </label>
+        </div>
+        <div class="newsdivs" id="newsdiv"></div>
+        <div class="newsdivs" id="worldnewsdiv"></div>
+      </div>
+
+      <div id="socials-apps">
+        <div id="socialsdiv">
+          <div class="up">
+            <button class="card1" id="card1" title="Instagram">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0,0,48,48"
+                width="30px"
+                height="30px"
+                class="instagram"
+              >
+                <use xlink:href="/svg/socialsvg/instagram.svg#instagram" />
+              </svg>
+            </button>
+            <button class="card2" id="card2" title="Twitter">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                width="30px"
+                height="30px"
+                class="twitter"
+              >
+                <use xlink:href="/svg/socialsvg/twitter.svg#twitter" />
+              </svg>
+            </button>
+          </div>
+
+          <button class="spotifycard" id="spotifycard" title="Spotify">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              width="40px"
+              height="40px"
+              viewBox="0 0 50 50"
+              class="spotify"
+            >
+              <use xlink:href="/svg/socialsvg/spotify.svg#spotify" />
+            </svg>
+          </button>
+
+          <div class="down">
+            <button class="card3" id="card3" title="Github">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                width="30px"
+                height="30px"
+                class="github"
+              >
+                <use xlink:href="/svg/socialsvg/github.svg#github" />
+              </svg>
+            </button>
+            <button class="card4" id="card4" title="Youtube">
+              <svg
+                height="30px"
+                width="30px"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+                class="youtube"
+              >
+                <use xlink:href="/svg/socialsvg/youtube.svg#youtube" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div id="appsdiv">
+          <button id="timerBtn" title="Timer" class="appbutton">
+            <svg
+              height="36px"
+              width="36px"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 296.228 296.228"
+              class="appsvg"
+            >
+              <use xlink:href="/svg/appsvg/timer.svg#timer" />
+            </svg>
+            Timer
+          </button>
+          <button id="calendarBtn" title="Calendar" class="appbutton">
+            <svg
+              height="36px"
+              width="36px"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="appsvg"
+            >
+              <use xlink:href="/svg/appsvg/calendar.svg#calendar" />
+            </svg>
+            Calendar
+          </button>
+          <button id="calculatorBtn" title="Calculator" class="appbutton">
+            <svg
+              height="36px"
+              width="36px"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="appsvg"
+            >
+              <use xlink:href="/svg/appsvg/calculator.svg#calculator" />
+            </svg>
+            Calculator
+          </button>
+          <button id="translatorBtn" title="Translator" class="appbutton">
+            <svg
+              height="36px"
+              width="36px"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 24 24"
+              class="appsvg"
+            >
+              <use xlink:href="/svg/appsvg/translator.svg#translator" />
+            </svg>
+            Translator
+          </button>
+        </div>
+      </div>
+
+      <div id="notepaddiv">
+        <div id="notepad-navbar">
+          <div id="note-list"></div>
+          <button id="add-note-btn">Add Note</button>
+        </div>
+        <div
+          id="notepadarea"
+          contenteditable="true"
+          data-placeholder="Make a note..."
+        ></div>
+        <div id="editor-buttons">
+          <div id="basic-text-editor">
+            <button id="notepadboldbtn">
+              <strong>B</strong>
+            </button>
+            <button id="notepaditalicbtn">
+              <em>I</em>
+            </button>
+            <button id="notepadunderlinebtn">
+              <u>U</u>
+            </button>
+            <label for="fontSize">Font Size:</label>
+            <select id="fontSize">
+              <option value="16px">16px</option>
+              <option value="20px">20px</option>
+              <option value="24px">24px</option>
+              <option value="28px">28px</option>
+              <option selected value="36px">36px</option>
+              <option value="48px">48px</option>
+            </select>
+          </div>
+          <div id="advanced-text-editor">
+            <button id="notepadlistbtn">&#8226; List</button>
+            <button id="notepadcheckbtn">☑ Checkbox</button>
+          </div>
+        </div>
+        <div id="savenotesbtn">
+          <div class="loader-container">
+            <div class="loader"></div>
+            <span>Save notes</span>
+          </div>
+        </div>
+      </div>
+      <div id="todolistdiv" style="display: none">
+        <h2>todolist</h2>
+        to do lsit content here
+      </div>
+    </div>
+
+    <div id="footer">
+      <button id="settingsBtn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          x="0px"
+          y="0px"
+          width="20"
+          height="20"
+          viewBox="0 0 50 50"
+          class="settingssvg"
+        >
+          <use xlink:href="/svg/settingssvg/settings.svg#settings" />
+        </svg>
+      </button>
+      <button id="focusmodeBtn">Focus Mode</button>
+    </div>
+
+    <div class="AppFrame" id="timerFrame" style="display: none">
+      <button>&times;</button>
+      <iframe src="/iFrames/timer/index.html" frameborder="0"></iframe>
+    </div>
+    <div class="AppFrame" id="calendarFrame" style="display: none">
+      <button>&times;</button>
+      <iframe src="/iFrames/calendar/index.html" frameborder="0"></iframe>
+    </div>
+    <div class="AppFrame" id="calculatorFrame" style="display: none">
+      <button>&times;</button>
+      <iframe src="/iFrames/calculator/index.html" frameborder="0"></iframe>
+    </div>
+    <div class="AppFrame" id="translatorFrame" style="display: none">
+      <button>&times;</button>
+      <iframe src="/iFrames/translator/index.html" frameborder="0"></iframe>
+    </div>
+
+    <!--<script src="/cdn/particles.min.js"></script>
+    <script src="/cdn/particles.js"></script>!-->
+
+    <script src="/script/search.js"></script>
+    <script src="/script/date.js"></script>
+    <script src="/script/weather.js"></script>
+    <script src="/script/user.js"></script>
+    <script src="/script/news.js"></script>
+    <script src="/script/news-cat-change.js"></script>
+    <script src="/script/socials.js"></script>
+    <script src="/script/bookmarks.js"></script>
+    <script src="/script/notepad.js"></script>
+    <script src="/script/notepad-text-editor.js"></script>
+    <script src="/script/settings.js"></script>
+    <script src="/script/backup.js"></script>
+    <script src="/script/iframes.js"></script>
+    <script src="/script/focus/on.js"></script>
+  </body>
+</html>

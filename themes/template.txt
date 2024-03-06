@@ -1,0 +1,501 @@
+:root {
+  --font-family: " ", " ";
+  --background-color: ;
+  --button-background: ;
+  --button-hover-background: ;
+  --font-color: ;
+  --submit-button-background: ;
+  --submit-button-hover-background: ;
+  --submit-button-font-color: ;
+  --modal-background: rgba( , , , );
+  --form-container-background: ;
+  --sb-track-color: ;
+  --sb-thumb-color: ;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--font-color);
+  font-family: var(--font-family);
+}
+
+* {
+  font-family: var(--font-family);
+}
+
+#username-modal {
+  background-color: var(--modal-background);
+}
+
+#username-form-container {
+  background-color: var(--form-container-background);
+}
+
+#username-close-button {
+  background-color: red;
+  color: var(--font-color);
+}
+
+#username-form input[type="text"] {
+  border: 1px solid var(--submit-button-font-color);
+  background-color: var(--form-container-background);
+  color: var(--font-color);
+}
+
+#username-form #username-submit-button {
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+#username-form #username-submit-button:hover {
+  background-color: var(--submit-button-hover-background);
+  color: var(--font-color);
+}
+
+#searchinput {
+  background-color: var(--form-container-background);
+  color: var(--font-color);
+}
+/* Bookmarks */
+#add-button {
+  background-color: var(--button-background);
+  color: var(--font-color);
+}
+
+#add-button > svg {
+  fill: var(--font-color);
+}
+
+#add-button:hover {
+  background-color: var(--button-hover-background);
+}
+
+#bookmark-modal {
+  background-color: var(--modal-background);
+}
+
+#bookmark-form-container {
+  background-color: var(--form-container-background);
+}
+
+#bookmarkcolor::-webkit-color-swatch {
+  border: 2px solid #fff;
+}
+
+#bookmarkcolor::-moz-color-swatch {
+  border: 2px solid #fff;
+}
+
+#close-button {
+  background-color: red;
+  color: var(--font-color);
+}
+
+#bookmark-form input[type="text"] {
+  border: 1px solid var(--submit-button-font-color);
+  background-color: var(--form-container-background);
+  color: var(--font-color);
+}
+
+#bookmark-form #submit {
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+#bookmark-form #submit:hover {
+  background-color: var(--submit-button-hover-background);
+  color: var(--font-color);
+}
+
+#bookmark-list a,
+#bookmark-list a:visited,
+#bookmark-list a:link {
+  color: var(--font-color);
+  text-decoration: none;
+}
+
+.settingsbtn:hover {
+  background-color: transparent;
+}
+
+.settingsbtn:hover {
+  background-color: rgba(65, 65, 65, 0.5);
+}
+
+.settingsbtn > svg {
+  fill: var(--font-color);
+}
+
+.settingsbtn > svg:active {
+  background-color: rgba(65, 65, 65, 0.5);
+}
+
+.settingsbtn > svg:not(:active) {
+  animation: fadeOut 0.9s;
+}
+
+@keyframes fadeOut {
+  0% {
+    outline: 1px solid rgba(90, 90, 90, 0.5);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+#settings-close-button {
+  background-color: red;
+  color: var(--font-color);
+}
+
+#settings-modal {
+  background-color: var(--modal-background);
+}
+
+#settings-form-container {
+  background-color: var(--form-container-background);
+}
+
+#new-bookmarkcolor::-webkit-color-swatch {
+  border: 2px solid #fff;
+}
+
+#new-bookmarkcolor::-moz-color-swatch {
+  border: 2px solid #fff;
+}
+
+#settings-form input[type="text"] {
+  background-color: var(--form-container-background);
+  color: var(--font-color);
+  border: 1px solid var(--submit-button-font-color);
+}
+
+#settings-form #submit {
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+#settings-form #submit:hover {
+  background-color: var(--submit-button-hover-background);
+  color: var(--font-color);
+}
+
+#delete-settings {
+  font-family: var(--font-family);
+  background: #e62222;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+#delete-settings .text {
+  color: var(--font-color);
+}
+
+#delete-settings .icon {
+  border-left: 1px solid #c41b1b;
+}
+
+#delete-settings svg {
+  width: 15px;
+  fill: var(--font-color);
+}
+
+#delete-settings:hover {
+  background: #ff3636;
+}
+
+#delete-settings:hover .text {
+  color: transparent;
+}
+
+.drop-target {
+  border: 2px dashed #3498db;
+  background-color: rgba(52, 152, 219, 0.2);
+}
+/* --------- */
+#newsselection label {
+  background-color: var(--submit-button-background);
+  border: 1px solid var(--submit-button-hover-background);
+  color: var(--font-color);
+}
+
+#newsselection label:hover {
+  background-color: var(--submit-button-hover-background);
+}
+
+#refreshNewsBtn {
+  border: 1px solid var(--submit-button-hover-background);
+  background-color: var(--submit-button-background);
+  fill: var(--font-color);
+}
+
+#refreshNewsBtn:hover {
+  background-color: var(--submit-button-hover-background);
+}
+
+.newsdivs::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+}
+.newsdivs::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+}
+
+.newstile a:link,
+.newstile a:visited {
+  color: var(--font-color);
+}
+
+.newstile:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Apps */
+.appbutton {
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+.appbutton:hover {
+  background-color: var(--submit-button-hover-background);
+}
+
+.appsvg {
+  fill: var(--font-color);
+}
+/*         */
+
+/* Notepad */
+#editor-buttons button {
+  background-color: var(--button-background);
+  color: var(--font-color);
+  border: 2px solid var(--button-background);
+}
+
+#editor-buttons button:hover {
+  background-color: var(--button-hover-background);
+  color: var(--font-color);
+}
+
+#fontsize {
+  background-color: var(--font-color);
+  color: var(--background-color);
+  border: 2px solid var(--button-background);
+}
+
+#fontsize:hover {
+  border-color: var(--button-hover-background);
+}
+
+#notepad-navbar {
+  color: var(--font-color);
+}
+
+.switchnote {
+  background-color: var(--submit-button-background);
+  color: var(--font-color);
+}
+
+.switchnote:hover {
+  background-color: var(--submit-button-hover-background);
+}
+
+.currentNote {
+  background-color: var(--button-background);
+}
+
+.currentNote:hover {
+  background-color: var(--button-background);
+}
+
+#add-note-btn {
+  background-color: var(--button-background);
+  color: var(--font-color);
+}
+
+#add-note-btn:hover {
+  background-color: var(--button-hover-background);
+}
+
+#note-list::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+}
+
+#note-list::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+}
+
+#note-settings-modal {
+  background-color: var(--modal-background);
+}
+
+#note-settings-form-container {
+  background-color: var(--form-container-background);
+}
+
+#note-settings-form-container input[type="text"] {
+  background-color: var(--form-container-background);
+  color: var(--font-color);
+  border: 1px solid var(--submit-button-font-color);
+}
+
+#note-settings-close-button {
+  background-color: red;
+  color: var(--font-color);
+}
+
+#note-settings-form #rename-note {
+  font-family: var(--font-family);
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+#note-settings-form #rename-note:hover {
+  background-color: var(--submit-button-hover-background);
+  color: var(--font-color);
+}
+
+#note-settings-form #download-note {
+  font-family: var(--font-family);
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+#note-settings-form #download-note:hover {
+  background-color: var(--submit-button-hover-background);
+  color: var(--font-color);
+}
+
+#note-settings-form #delete-note {
+  font-family: var(--font-family);
+  background-color: #e62222;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+#note-settings-form #delete-note .text {
+  color: var(--font-color);
+}
+
+#note-settings-form #delete-note .icon {
+  border-left: 1px solid #c41b1b;
+}
+
+#note-settings-form #delete-note svg {
+  fill: #eee;
+}
+
+#note-settings-form #delete-note:hover {
+  background: #ff3636;
+}
+
+#note-settings-form #delete-note:hover .text {
+  color: transparent;
+}
+
+#notepadarea {
+  background-color: var(--form-container-background);
+  color: var(--font-color);
+}
+
+#savenotesbtn {
+  font-family: var(--font-family);
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+#savenotesbtn:hover {
+  background-color: var(--submit-button-hover-background);
+  color: var(--font-color);
+}
+
+#notepadarea::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+}
+#notepadarea::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+}
+
+.loader {
+  border: 4px solid rgba(255, 255, 255, 0.6);
+  border-left-color: transparent;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  animation: spin 1s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* General Settings */
+#settingsBtn {
+  background-color: var(--submit-button-background);
+}
+
+#settingsBtn:hover {
+  background-color: var(--submit-button-hover-background);
+}
+
+.settingssvg {
+  fill: var(--font-color);
+}
+
+#general-settings {
+  background: var(--modal-background);
+}
+
+#general-settings-form {
+  background: var(--form-container-background);
+  color: var(--font-color);
+}
+
+#general-settings-close-button {
+  background-color: red !important;
+  color: var(--font-color);
+}
+
+#general-settings-form input[type="text"] {
+  background-color: var(--form-container-background);
+  color: var(--font-color);
+  border: 1px solid var(--submit-button-font-color);
+}
+
+#general-settings-form button,
+#import-bookmarks-label,
+#import-notes-label {
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+#general-settings-form button:hover,
+#import-bookmarks-label:hover,
+#import-notes-label:hover {
+  background-color: var(--submit-button-hover-background);
+}
+
+#general-settings-form button#changeUsername {
+  background-color: var(--button-background);
+  color: var(--font-color);
+}
+
+#general-settings-form button#changeUsername:hover {
+  background-color: var(--button-hover-background);
+}
+
+/* focus mode */
+
+#focusmodeBtn {
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+#focusmodeBtn:hover {
+  background-color: var(--submit-button-hover-background);
+}
+/*            */
