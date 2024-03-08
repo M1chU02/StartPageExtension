@@ -1,4 +1,7 @@
-//Analog Clock
+document.body.onload = function () {
+  document.body.classList.add("visible");
+};
+
 let hr = document.querySelector("#hr");
 let mn = document.querySelector("#mn");
 let sc = document.querySelector("#sc");

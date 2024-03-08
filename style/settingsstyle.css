@@ -88,3 +88,17 @@ input[type="text"]:focus {
   font-size: 1em;
   font-weight: initial;
 }
+
+#backgroundImagesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.miniBg {
+  cursor: pointer;
+  width: 80px;
+  height: 50px;
+}

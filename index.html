@@ -211,10 +211,10 @@
         <div id="appsdiv">
           <button id="timerBtn" title="Timer" class="appbutton">
             <svg
-              height="36px"
-              width="36px"
+              height="32px"
+              width="32px"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 296.228 296.228"
+              viewBox="0 0 24 24"
               class="appsvg"
             >
               <use xlink:href="/svg/appsvg/timer.svg#timer" />
@@ -223,8 +223,8 @@
           </button>
           <button id="calendarBtn" title="Calendar" class="appbutton">
             <svg
-              height="36px"
-              width="36px"
+              height="32px"
+              width="32px"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               class="appsvg"
@@ -235,8 +235,8 @@
           </button>
           <button id="calculatorBtn" title="Calculator" class="appbutton">
             <svg
-              height="36px"
-              width="36px"
+              height="32px"
+              width="32px"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               class="appsvg"
@@ -247,11 +247,11 @@
           </button>
           <button id="translatorBtn" title="Translator" class="appbutton">
             <svg
-              height="36px"
-              width="36px"
+              height="32px"
+              width="32px"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 24 24"
+              viewBox="0 0 48 48"
               class="appsvg"
             >
               <use xlink:href="/svg/appsvg/translator.svg#translator" />
@@ -312,19 +312,32 @@
 
     <div id="footer">
       <button id="settingsBtn">
+        <a>Settings</a>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
           y="0px"
-          width="20"
-          height="20"
+          width="36px"
+          height="36px"
           viewBox="0 0 50 50"
           class="settingssvg"
         >
           <use xlink:href="/svg/settingssvg/settings.svg#settings" />
         </svg>
       </button>
-      <button id="focusmodeBtn">Focus Mode</button>
+
+      <button id="focusmodeBtn">
+        <a>Focus Mode</a>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="36px"
+          height="36px"
+          viewBox="0 0 335.522 335.522"
+          class="settingssvg"
+        >
+          <use xlink:href="/svg/settingssvg/zen.svg#zen" />
+        </svg>
+      </button>
     </div>
 
     <div class="AppFrame" id="timerFrame" style="display: none">
@@ -347,6 +360,7 @@
     <!--<script src="/cdn/particles.min.js"></script>
     <script src="/cdn/particles.js"></script>!-->
 
+    <script src="script/background.js"></script>
     <script src="/script/search.js"></script>
     <script src="/script/date.js"></script>
     <script src="/script/weather.js"></script>

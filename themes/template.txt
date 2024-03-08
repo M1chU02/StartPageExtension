@@ -60,6 +60,7 @@ body {
 #add-button {
   background-color: var(--button-background);
   color: var(--font-color);
+  border: 2px solid var(--button-background);
 }
 
 #add-button > svg {
@@ -252,10 +253,12 @@ body {
 .appbutton {
   background-color: var(--submit-button-background);
   color: var(--submit-button-font-color);
+  border: 2px solid var(--submit-button-hover-background);
 }
 
 .appbutton:hover {
   background-color: var(--submit-button-hover-background);
+  border: 2px solid var(--submit-button-background);
 }
 
 .appsvg {
@@ -292,10 +295,12 @@ body {
 .switchnote {
   background-color: var(--submit-button-background);
   color: var(--font-color);
+  border: 2px solid var(--submit-button-hover-background);
 }
 
 .switchnote:hover {
   background-color: var(--submit-button-hover-background);
+  border: 2px solid var(--submit-button-background);
 }
 
 .currentNote {
@@ -303,12 +308,14 @@ body {
 }
 
 .currentNote:hover {
-  background-color: var(--button-background);
+  background-color: var(--button-hover-background);
+  border: 2px solid var(--button-background);
 }
 
 #add-note-btn {
   background-color: var(--button-background);
   color: var(--font-color);
+  border: 2px solid var(--button-background);
 }
 
 #add-note-btn:hover {
@@ -399,11 +406,13 @@ body {
   font-family: var(--font-family);
   background-color: var(--submit-button-background);
   color: var(--submit-button-font-color);
+  border: 2px solid var(--submit-button-hover-background);
 }
 
 #savenotesbtn:hover {
   background-color: var(--submit-button-hover-background);
   color: var(--font-color);
+  border: 2px solid var(--submit-button-background);
 }
 
 #notepadarea::-webkit-scrollbar-track {
@@ -436,10 +445,13 @@ body {
 /* General Settings */
 #settingsBtn {
   background-color: var(--submit-button-background);
+  color: var(--font-color);
+  border: 2px solid var(--submit-button-hover-background);
 }
 
 #settingsBtn:hover {
   background-color: var(--submit-button-hover-background);
+  border: 2px solid var(--submit-button-background);
 }
 
 .settingssvg {
@@ -488,14 +500,20 @@ body {
   background-color: var(--button-hover-background);
 }
 
+#themeBg {
+  background-color: var(--background-color);
+}
+
 /* focus mode */
 
 #focusmodeBtn {
   background-color: var(--submit-button-background);
   color: var(--submit-button-font-color);
+  border: 2px solid var(--submit-button-hover-background);
 }
 
 #focusmodeBtn:hover {
   background-color: var(--submit-button-hover-background);
+  border: 2px solid var(--submit-button-background);
 }
 /*            */

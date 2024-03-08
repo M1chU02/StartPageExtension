@@ -5,7 +5,8 @@ exitFocusModeBtn.addEventListener("click", (event) => {
   localStorage.setItem("mode", "normal");
 
   if (window.location.pathname !== "/index.html") {
-    window.location.href = "/index.html";
+    //window.location.href = "/index.html";
+    window.location.replace("/index.html");
   }
 });
 
@@ -14,11 +15,13 @@ function checkFocus() {
 
   if (savedMode === "normal") {
     if (window.location.pathname !== "/index.html") {
-      window.location.href = "/index.html";
+      //window.location.href = "/index.html";
+      window.location.replace("/index.html");
     }
   } else if (savedMode === "focus") {
     if (window.location.pathname !== "/focusmode/index.html") {
-      window.location.href = "/focusmode/index.html";
+      //window.location.href = "/focusmode/index.html";
+      window.location.replace("/focusmode/index.html");
     }
   }
 }

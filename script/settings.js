@@ -29,6 +29,10 @@ generalSettingsModal.innerHTML = `<div id="general-settings" style="display: non
 
     <button id="change-theme-button">Change Theme</button>
 
+    <div id="backgroundSelection">
+      <a>Select background: </a>
+      <div id="backgroundImagesContainer"></div>
+    </div>
   </div>
 </div>`;
 document.body.appendChild(generalSettingsModal);

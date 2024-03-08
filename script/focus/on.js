@@ -3,7 +3,8 @@ const focusmodeBtn = document.getElementById("focusmodeBtn");
 focusmodeBtn.addEventListener("click", (event) => {
   event.preventDefault();
   localStorage.setItem("mode", "focus");
-  window.location.href = "/focusmode/index.html";
+  //window.location.href = "/focusmode/index.html";
+  window.location.replace("/focusmode/index.html");
 });
 
 function checkFocus() {
@@ -11,11 +12,13 @@ function checkFocus() {
 
   if (savedMode === "normal") {
     if (window.location.pathname !== "/index.html") {
-      window.location.href = "/index.html";
+      //window.location.href = "/index.html";
+      window.location.replace("/index.html");
     }
   } else if (savedMode === "focus") {
     if (window.location.pathname !== "/focusmode/index.html") {
-      window.location.href = "/focusmode/index.html";
+      //window.location.href = "/focusmode/index.html";
+      window.location.replace("/focusmode/index.html");
     }
   }
 }
