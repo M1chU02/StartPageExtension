@@ -7,7 +7,7 @@
   --submit-button-background: #707070;
   --submit-button-hover-background: #458bc2;
   --submit-button-font-color: #efefef;
-  --modal-background: rgba(0, 0, 0, 0.7);
+  --modal-background: rgba(0, 0, 0, 0.4);
   --form-container-background: #303030;
   --sb-track-color: #232e33;
   --sb-thumb-color: #007bff;
@@ -21,6 +21,10 @@ body {
 
 * {
   font-family: var(--font-family);
+}
+
+hr {
+  border: 1px solid var(--button-background);
 }
 
 #username-modal {
@@ -53,8 +57,9 @@ body {
 }
 
 #searchinput {
-  background-color: var(--form-container-background);
+  background-color: var(--modal-background);
   color: var(--font-color);
+  box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.15);
 }
 /* Bookmarks */
 #add-button {
@@ -213,6 +218,11 @@ body {
   background-color: rgba(52, 152, 219, 0.2);
 }
 /* --------- */
+#allnews {
+  background-color: var(--modal-background);
+  box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.15);
+}
+
 #newsselection label {
   background-color: var(--submit-button-background);
   border: 1px solid var(--submit-button-hover-background);
@@ -267,6 +277,11 @@ body {
 /*         */
 
 /* Notepad */
+#notepaddiv {
+  background-color: var(--modal-background);
+  box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.15);
+}
+
 #editor-buttons button {
   background-color: var(--button-background);
   color: var(--font-color);
@@ -398,7 +413,6 @@ body {
 }
 
 #notepadarea {
-  background-color: var(--form-container-background);
   color: var(--font-color);
 }
 

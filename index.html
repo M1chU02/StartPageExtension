@@ -42,13 +42,16 @@
       <div id="separatordiv">
         <p class="paragraph" id="separatorchar">|</p>
       </div>
-      <div id="weatherdiv">
+      <div id="weatherdiv" class="offline">
         <p class="paragraph" id="temperature"></p>
         <p class="paragraph" id="city"></p>
       </div>
+      <div id="offlinediv" style="display: none">
+        <p class="paragraph">You're offline.</p>
+      </div>
     </div>
 
-    <div id="searchdiv">
+    <div id="searchdiv" class="offline">
       <form id="searchform">
         <input
           type="text"
@@ -59,7 +62,7 @@
       </form>
     </div>
 
-    <div id="bookmarksdiv">
+    <div id="bookmarksdiv" class="offline">
       <h1>Bookmarks</h1>
       <div id="bookmark-modal">
         <div id="bookmark-form-container">
@@ -104,7 +107,7 @@
     </div>
 
     <div id="content">
-      <div id="allnews">
+      <div id="allnews" class="offline">
         <div id="newsselection">
           <label id="localNewsLabel">
             <input
@@ -137,12 +140,13 @@
             <span>Global News</span>
           </label>
         </div>
+        <hr />
         <div class="newsdivs" id="newsdiv"></div>
         <div class="newsdivs" id="worldnewsdiv"></div>
       </div>
 
       <div id="socials-apps">
-        <div id="socialsdiv">
+        <div id="socialsdiv" class="offline">
           <div class="up">
             <button class="card1" id="card1" title="Instagram">
               <svg
@@ -266,6 +270,7 @@
           <div id="note-list"></div>
           <button id="add-note-btn">Add Note</button>
         </div>
+        <hr />
         <div
           id="notepadarea"
           contenteditable="true"
@@ -361,6 +366,7 @@
     <script src="/cdn/particles.js"></script>!-->
 
     <script src="script/background.js"></script>
+    <script src="/script/offline.js"></script>
     <script src="/script/search.js"></script>
     <script src="/script/date.js"></script>
     <script src="/script/weather.js"></script>
