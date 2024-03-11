@@ -462,13 +462,13 @@ hr {
 #settingsBtn {
   position: absolute;
   bottom: 0;
-  left: -113px;
+  left: -164px;
   margin-bottom: 10px;
   transition: left 0.5s ease;
   font-size: 1.5rem;
   cursor: pointer;
   outline: none;
-  border: none;
+  min-width: 220px;
   height: 48px;
   display: flex;
   justify-content: space-between;
@@ -494,19 +494,19 @@ hr {
 }
 
 #settingsBtn:active {
-  left: -113px;
+  left: -164px;
   transition-delay: 2s;
 }
 
 #focusmodeBtn {
   position: absolute;
   bottom: 63px;
-  left: -155px;
+  left: -164px;
   transition: left 0.5s ease;
   font-size: 1.5rem;
   cursor: pointer;
   outline: none;
-  border: none;
+  min-width: 220px;
   height: 48px;
   display: flex;
   justify-content: space-between;
@@ -532,6 +532,6 @@ hr {
 }
 
 #focusmodeBtn:active {
-  left: -155px;
+  left: -164px;
   transition-delay: 2s;
 }

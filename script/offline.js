@@ -1,7 +1,5 @@
-console.log((window.navigator.onLine ? "on" : "off") + "line");
-
 const onlineStatus = window.navigator.onLine;
-console.log(onlineStatus);
+
 if (!onlineStatus) {
   const offlineElements = document.querySelectorAll(".offline");
   offlineElements.forEach((element) => (element.style.display = "none"));
