@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" id="iframesStyle" href="../themes/dark-mode.css" />
     <title>Simple Timer App</title>
   </head>
   <body>
@@ -18,10 +19,10 @@
         <input type="number" id="seconds" min="0" max="60" />
       </div>
       <div id="controls">
-        <button onclick="startTimer()">Start</button>
-        <button onclick="stopTimer()">Stop</button>
-        <button onclick="resumeTimer()">Resume</button>
-        <button onclick="resetTimer()">Reset</button>
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <button id="resumeBtn">Resume</button>
+        <button id="resetBtn">Reset</button>
       </div>
       <div id="timer">00:00:00</div>
       <audio id="alarm" src="/iFrames/timer/audio/alarm.mp3"></audio>

@@ -3,6 +3,16 @@ let paused = false;
 let endTime;
 let remainingTime = 0;
 
+const startBtn = document.getElementById("startBtn");
+const stopBtn = document.getElementById("stopBtn");
+const resumeBtn = document.getElementById("resumeBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+startBtn.addEventListener("click", startTimer);
+stopBtn.addEventListener("click", stopTimer);
+resumeBtn.addEventListener("click", resumeTimer);
+resetBtn.addEventListener("click", resetTimer);
+
 function startTimer() {
   if (paused) {
     resumeTimer();
