@@ -180,11 +180,62 @@ function importNotes() {
   }
 }
 
-document.getElementById("change-theme-button").addEventListener("click", () => {
-  const currentstylesheet = document.getElementById("themestylesheet");
-  if (currentstylesheet.href.endsWith("/themes/dark-mode.css")) {
-    currentstylesheet.href = "/themes/ocean-blue.css";
-  } else {
-    currentstylesheet.href = "/themes/dark-mode.css";
+function createThemeModal() {
+  const themeModal = document.createElement("div");
+  themeModal.id = "theme-modal";
+  themeModal.innerHTML = `
+    <div id="theme-modal-content">
+      <button id="theme-modal-close-button">&times;</button>
+      <h2>Select Theme</h2>
+      <ul id="theme-list">
+        <li data-theme="dark-mode">Dark Mode</li>
+        <li data-theme="ocean-blue">Ocean Blue</li>
+        <!-- Add more themes here -->
+      </ul>
+    </div>
+  `;
+  document.body.appendChild(themeModal);
+
+  const closeButton = document.getElementById("theme-modal-close-button");
+  closeButton.addEventListener("click", hideThemeModal);
+
+  const themeList = document.getElementById("theme-list");
+  themeList.addEventListener("click", handleThemeSelection);
+}
+
+function handleThemeSelection(event) {
+  const selectedTheme = event.target.dataset.theme;
+  if (selectedTheme) {
+    localStorage.setItem("selectedTheme", selectedTheme);
+    applyTheme(selectedTheme);
+    hideThemeModal();
+  }
+}
+
+function applyTheme(theme) {
+  const currentStylesheet = document.getElementById("themestylesheet");
+  currentStylesheet.href = `../themes/${theme}.css`;
+}
+function showThemeModal() {
+  hideGeneralSettingsModal();
+  const themeModal = document.getElementById("theme-modal");
+  themeModal.style.display = "flex";
+}
+
+function hideThemeModal() {
+  const themeModal = document.getElementById("theme-modal");
+  themeModal.style.display = "none";
+}
+
+createThemeModal();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const selectedTheme = localStorage.getItem("selectedTheme");
+  if (selectedTheme) {
+    applyTheme(selectedTheme);
   }
 });
+
+document
+  .getElementById("change-theme-button")
+  .addEventListener("click", showThemeModal);

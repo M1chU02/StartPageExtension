@@ -514,6 +514,27 @@ hr {
   background-color: var(--button-hover-background);
 }
 
+#theme-modal {
+  background: var(--modal-background);
+}
+
+#theme-modal-content {
+  background: var(--form-container-background);
+}
+
+#theme-modal-close-button {
+  background-color: red !important;
+  color: var(--font-color);
+}
+
+#theme-modal-content h2 {
+  color: var(--font-color);
+}
+
+#theme-list li:hover {
+  color: var(--submit-button-hover-background);
+}
+
 #themeBg {
   background-color: var(--background-color);
 }
