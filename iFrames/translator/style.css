@@ -1,11 +1,3 @@
-:root {
-  --primary-color: #356aff;
-  --bg-color: #f5f5f5;
-  --light-bg-color: #fff;
-  --text-color: #111116;
-  --light-text-color: #cdccd1;
-  --primary-text-color: #fff;
-}
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -15,31 +7,17 @@
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 30px;
-  background: var(--primary-color);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--bg-color);
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
 body {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
-  background-color: var(--bg-color);
-}
-body.dark {
-  --bg-color: #111116;
-  --light-bg-color: #1c1b20;
-  --text-color: #fff;
-  --light-text-color: #58575c;
 }
 .container {
   position: relative;
@@ -52,7 +30,6 @@ body.dark {
   flex: 1;
   padding: 30px;
   border-radius: 20px;
-  background-color: var(--light-bg-color);
 }
 .container .card .from,
 .container .card .to {
@@ -69,7 +46,6 @@ body.dark {
 .container .card .heading {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--light-text-color);
   white-space: nowrap;
 }
 .dropdown-container {
@@ -82,7 +58,6 @@ body.dark {
   align-items: center;
   padding: 15px 20px;
   border-radius: 30px;
-  background-color: var(--bg-color);
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -112,7 +87,6 @@ body.dark {
   z-index: 1;
   list-style: none;
   flex-direction: column;
-  background-color: var(--bg-color);
   transition: all 1s;
   border-radius: 0 0 20px 20px;
 }
@@ -128,15 +102,7 @@ body.dark {
   border-radius: 20px;
   cursor: pointer;
   margin-bottom: 5px;
-  border-bottom: 1px solid var(--light-bg-color);
   transition: all 0.3s ease;
-}
-.dropdown-container .dropdown-menu li:hover {
-  background-color: var(--light-bg-color);
-}
-.dropdown-container .dropdown-menu li.active {
-  color: var(--primary-text-color);
-  background-color: var(--primary-color);
 }
 .container .text-area {
   position: relative;
@@ -149,9 +115,7 @@ body.dark {
   resize: none;
   outline: none;
   border: none;
-  color: var(--text-color);
   font-size: 18px;
-  font-family: "Poppins", sans-serif;
 }
 .container .text-area .chars {
   position: absolute;
@@ -159,7 +123,6 @@ body.dark {
   right: 0;
   padding: 10px;
   font-size: 0.8rem;
-  color: var(--light-text-color);
 }
 .container .center {
   position: relative;
@@ -176,10 +139,7 @@ body.dark {
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  border: 5px solid var(--bg-color);
   transition: all 0.3s ease;
-  color: var(--primary-text-color);
-  background-color: var(--primary-color);
 }
 .swap-position:hover {
   transform: translateX(-50%) scale(1.1);
@@ -193,7 +153,6 @@ svg {
   flex-direction: column;
   justify-content: center;
   padding-top: 20px;
-  border-top: 2px solid var(--bg-color);
 }
 .card-bottom p {
   margin-bottom: 20px;
@@ -206,11 +165,6 @@ svg {
   padding: 0 20px;
   cursor: pointer;
   border-radius: 30px;
-  background-color: var(--bg-color);
-}
-.card-bottom label:hover {
-  color: var(--primary-text-color);
-  background-color: var(--primary-color);
 }
 .card-bottom span {
   font-size: 12px;
@@ -229,11 +183,5 @@ svg {
   border-radius: 30px;
   border: none;
   outline: none;
-  color: var(--text-color);
   cursor: pointer;
-  background-color: var(--bg-color);
-}
-.card-bottom button:hover {
-  color: var(--primary-text-color);
-  background-color: var(--primary-color);
 }

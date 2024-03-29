@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const setAndSaveBackground = (src) => {
     document.body.style.backgroundImage = `url(${src})`;
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
     document.body.style.backgroundColor = "";
     localStorage.setItem("backgroundImage", src);
     localStorage.removeItem("backgroundColor");
@@ -31,6 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (storedBackgroundImage) {
       document.body.style.backgroundImage = `url(${storedBackgroundImage})`;
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundSize = "cover";
     } else if (storedBackgroundColor) {
       document.body.style.backgroundColor = storedBackgroundColor;
     }

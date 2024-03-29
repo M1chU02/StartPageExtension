@@ -1,8 +1,5 @@
 body {
-  font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #f0f0f0;
-  color: #333;
   margin: 0;
   padding: 0;
   display: flex;
@@ -18,21 +15,18 @@ body {
   align-items: center;
   flex-direction: column;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  background-color: azure;
 }
 
-h1 {
-  color: #fff;
+#timerHeader {
   font-size: 3em;
-  background-color: #007bff;
-  padding: 1em;
+  padding: 1rem;
+  border-radius: 25px;
 }
 
 #setTimer,
 #controls {
   margin: 20px;
   padding: 10px;
-  background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -45,16 +39,13 @@ input {
   width: 60px;
   padding: 5px;
   margin: 0 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  outline: none;
 }
 
 button {
   padding: 10px 20px;
   margin: 10px;
   font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;

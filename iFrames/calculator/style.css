@@ -27,6 +27,13 @@ body {
   text-align: right;
   padding: 10px;
   box-sizing: border-box;
+  cursor: default;
+  margin-bottom: 1rem;
+}
+
+#display:focus {
+  border: none;
+  outline: none;
 }
 
 .keys {

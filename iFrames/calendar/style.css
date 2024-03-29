@@ -7,9 +7,6 @@
   text-decoration: none;
   font-family: "Noto Sans", sans-serif;
 }
-body {
-  background-color: pink;
-}
 .container {
   width: 100%;
   height: 100vh;
@@ -18,7 +15,6 @@ body {
 }
 .content {
   width: 400px;
-  background-color: #fff;
   border-radius: 5px;
   padding: 1rem;
 }
@@ -33,7 +29,6 @@ header .current-date {
   font-weight: 700;
 }
 header .icons {
-  color: gray;
   display: flex;
   gap: 1rem;
 }
@@ -43,12 +38,7 @@ header .icons span i {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background-color: #f9f6f6;
   border-radius: 50%;
-}
-header .icons span i:hover {
-  background-color: #bdbdbd;
-  color: antiquewhite;
 }
 /* ============================================== */
 .calendar {
@@ -78,21 +68,8 @@ header .icons span i:hover {
   content: "";
   width: 40px;
   height: 40px;
-  background-color: #e3e1e1;
   border-radius: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-.days li.active {
-  color: white;
-}
-.days li.inactive {
-  color: #717171;
-}
-.days li:hover::before {
-  background-color: #d6d2d2;
-}
-.days li.active::before {
-  background-color: rgb(23, 3, 138);
 }

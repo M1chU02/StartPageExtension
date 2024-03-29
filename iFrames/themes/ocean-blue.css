@@ -1,0 +1,14 @@
+:root {
+  --font-family: "Helvetica Neue", Arial, sans-serif;
+  --background-color: #1c2331;
+  --button-hover-background: #00a8cc;
+  --button-background: #0097e6;
+  --font-color: #ffffff;
+  --submit-button-background: #4b4b4b;
+  --submit-button-hover-background: #757575;
+  --submit-button-font-color: #efefef;
+  --modal-background: rgba(0, 0, 0, 0.4);
+  --form-container-background: #2d343e;
+  --sb-track-color: #4b4b4b;
+  --sb-thumb-color: #0097e6;
+}
