@@ -494,14 +494,16 @@ hr {
 
 #general-settings-form button,
 #import-bookmarks-label,
-#import-notes-label {
+#import-notes-label,
+#import-all-data-label {
   background-color: var(--submit-button-background);
   color: var(--submit-button-font-color);
 }
 
 #general-settings-form button:hover,
 #import-bookmarks-label:hover,
-#import-notes-label:hover {
+#import-notes-label:hover,
+#import-all-data-label:hover {
   background-color: var(--submit-button-hover-background);
 }
 

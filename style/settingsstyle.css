@@ -89,6 +89,17 @@ input[type="text"]:focus {
   font-weight: initial;
 }
 
+#import-all-data-input {
+  display: none;
+}
+
+#import-all-data-label {
+  text-align: center;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: initial;
+}
+
 #theme-modal {
   display: none;
   position: fixed;

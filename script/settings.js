@@ -27,6 +27,12 @@ generalSettingsModal.innerHTML = `<div id="general-settings" style="display: non
 
     <br>
 
+    <button id="export-all-data-button">Export All Data</button>
+    <label for="import-all-data-input" id="import-all-data-label">Import All Data</label>
+    <input type="file" accept=".json" id="import-all-data-input">
+
+    <br>
+
     <button id="change-theme-button">Change Theme</button>
 
     <div id="backgroundSelection">
@@ -239,3 +245,56 @@ document.addEventListener("DOMContentLoaded", () => {
 document
   .getElementById("change-theme-button")
   .addEventListener("click", showThemeModal);
+
+document
+  .getElementById("export-all-data-button")
+  .addEventListener("click", exportAllData);
+
+document
+  .getElementById("import-all-data-input")
+  .addEventListener("change", importAllData);
+
+function exportAllData() {
+  const allData = {
+    bookmarks: localStorage.getItem("bookmarks"),
+    notes: localStorage.getItem("notepadNotes"),
+    selectedTheme: localStorage.getItem("selectedTheme"),
+    background: localStorage.getItem("backgroundImage"),
+    username: localStorage.getItem("userName"),
+  };
+
+  const blob = new Blob([JSON.stringify(allData)], {
+    type: "application/json",
+  });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "alldata.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+function importAllData() {
+  const fileInput = document.getElementById("import-all-data-input");
+  const file = fileInput.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const importedData = JSON.parse(e.target.result);
+
+      localStorage.setItem("bookmarks", importedData.bookmarks);
+      localStorage.setItem("notepadNotes", importedData.notes);
+      localStorage.setItem("selectedTheme", importedData.selectedTheme);
+      localStorage.setItem("backgroundImage", importedData.background);
+      localStorage.setItem("userName", importedData.username);
+
+      location.reload();
+    };
+
+    reader.readAsText(file);
+  }
+}
