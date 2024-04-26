@@ -1,1 +1,32 @@
-// backup all bookmarks, notes, name, chosen theme. user can use backup file and restore all data. prepare for future implementation of page initial config
+function createBackup() {
+  var currentDate = new Date();
+  var lastBackupDate = localStorage.getItem("backupdate");
+  if (
+    !lastBackupDate ||
+    currentDate - new Date(lastBackupDate) > 24 * 60 * 60 * 1000
+  ) {
+    var timestamp = currentDate
+      .toISOString()
+      .replace(/[-T:]/g, "")
+      .slice(0, -5);
+
+    const allData = {
+      bookmarks: localStorage.getItem("bookmarks"),
+      notes: localStorage.getItem("notepadNotes"),
+      selectedTheme: localStorage.getItem("selectedTheme"),
+      background: localStorage.getItem("backgroundImage"),
+      username: localStorage.getItem("userName"),
+    };
+
+    const backupData = JSON.stringify(allData);
+    var blob = new Blob([backupData], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(blob);
+    a.download = "backup_" + timestamp + ".json";
+    a.click();
+    localStorage.setItem("backupdate", currentDate.toISOString());
+    URL.revokeObjectURL(url);
+  }
+}
+
+createBackup();
