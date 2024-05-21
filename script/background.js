@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const backgroundContainer = document.getElementById(
     "backgroundImagesContainer"
   );
+  const randomThemeButton = document.getElementById(
+    "random-theme-background-button"
+  );
 
   const addBackgroundImage = (src) => {
     const img = document.createElement("img");
@@ -17,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundColor = "";
     localStorage.setItem("backgroundImage", src);
+    localStorage.setItem("isRandomBackground", "false");
     localStorage.removeItem("backgroundColor");
   };
 
@@ -24,21 +28,58 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.backgroundColor = color;
     document.body.style.backgroundImage = "";
     localStorage.setItem("backgroundColor", color);
+    localStorage.setItem("isRandomBackground", "false");
     localStorage.removeItem("backgroundImage");
   };
 
   const loadBackgroundFromStorage = () => {
     const storedBackgroundImage = localStorage.getItem("backgroundImage");
     const storedBackgroundColor = localStorage.getItem("backgroundColor");
+    const isRandomBackground =
+      localStorage.getItem("isRandomBackground") === "true";
 
-    if (storedBackgroundImage) {
-      document.body.style.backgroundImage = `url(${storedBackgroundImage})`;
-      document.body.style.backgroundRepeat = "no-repeat";
-      document.body.style.backgroundSize = "cover";
-    } else if (storedBackgroundColor) {
-      document.body.style.backgroundColor = storedBackgroundColor;
+    if (isRandomBackground) {
+      randomThemeButton.classList.add("toggleOn");
+      setRandomBackground();
+    } else {
+      randomThemeButton.classList.add("toggleOff");
+      if (storedBackgroundImage) {
+        document.body.style.backgroundImage = `url(${storedBackgroundImage})`;
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundSize = "cover";
+      } else if (storedBackgroundColor) {
+        document.body.style.backgroundColor = storedBackgroundColor;
+      }
     }
   };
+
+  const setRandomBackground = () => {
+    const randomIndex = Math.floor(Math.random() * 39) + 1;
+    const randomBackgroundSrc = `../backgrounds/${randomIndex}-min.jpg`;
+    document.body.style.backgroundImage = `url(${randomBackgroundSrc})`;
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundColor = "";
+    localStorage.setItem("backgroundImage", randomBackgroundSrc);
+  };
+
+  const toggleRandomBackground = () => {
+    const isRandomBackground =
+      localStorage.getItem("isRandomBackground") === "true";
+    if (isRandomBackground) {
+      localStorage.setItem("isRandomBackground", "false");
+      randomThemeButton.classList.add("toggleOff");
+      loadBackgroundFromStorage();
+      location.reload();
+    } else {
+      localStorage.setItem("isRandomBackground", "true");
+      randomThemeButton.classList.add("toggleOn");
+      setRandomBackground();
+      location.reload();
+    }
+  };
+
+  randomThemeButton.addEventListener("click", toggleRandomBackground);
 
   for (let i = 0; i <= 39; i++) {
     if (i === 0) {

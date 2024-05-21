@@ -11,6 +11,8 @@
   --form-container-background: #303030;
   --sb-track-color: #232e33;
   --sb-thumb-color: #007bff;
+  --tile-background: #3b3b3b;
+  --tile-border-radius: 10px;
 }
 
 body {
@@ -25,6 +27,41 @@ body {
 
 hr {
   border: 1px solid var(--button-background);
+}
+
+#recent-tabs-button {
+  background-color: var(--submit-button-background);
+  border: 2px solid var(--submit-button-hover-background);
+  color: var(--font-color);
+}
+
+#recent-tabs-button:hover {
+  background-color: var(--submit-button-hover-background);
+  border: 2px solid var(--submit-button-background);
+}
+
+#recent-tabs-list {
+  background-color: var(--modal-background);
+}
+
+#recent-tabs-list > a:hover {
+  background-color: var(--submit-button-hover-background);
+}
+
+#recent-tabs-list > a:link,
+#recent-tabs-list > a:active,
+#recent-tabs-list > a:visited,
+#recent-tabs-list > a:hover {
+  color: var(--font-color);
+  text-decoration: none;
+}
+
+#recent-tabs-list > a > a:link,
+#recent-tabs-list > a > a:active,
+#recent-tabs-list > a > a:visited,
+#recent-tabs-list > a > a:hover {
+  color: var(--font-color);
+  text-decoration: none;
 }
 
 #username-modal {
@@ -54,6 +91,11 @@ hr {
 #username-form #username-submit-button:hover {
   background-color: var(--submit-button-hover-background);
   color: var(--font-color);
+}
+
+#header-info {
+  background-color: var(--modal-background);
+  box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.15);
 }
 
 #searchinput {
@@ -486,34 +528,65 @@ hr {
   color: var(--font-color);
 }
 
-#general-settings-form input[type="text"] {
-  background-color: var(--form-container-background);
-  color: var(--font-color);
-  border: 1px solid var(--submit-button-font-color);
+#general-settings-close-button:hover {
+  background-color: #c41b1b !important;
 }
 
-#general-settings-form button,
-#import-bookmarks-label,
-#import-notes-label,
-#import-all-data-label {
+.settings-tile {
+  background: var(--tile-background);
+}
+
+.settings-tile input[type="text"],
+.settings-tile input[type="file"] {
+  border: 1px solid var(--submit-button-font-color);
+  background-color: var(--form-container-background);
+  color: var (--font-color);
+}
+
+.settings-tile > button {
   background-color: var(--submit-button-background);
   color: var(--submit-button-font-color);
 }
 
-#general-settings-form button:hover,
-#import-bookmarks-label:hover,
-#import-notes-label:hover,
-#import-all-data-label:hover {
+.settings-tile > button:hover {
   background-color: var(--submit-button-hover-background);
 }
 
-#general-settings-form button#changeUsername {
-  background-color: var(--button-background);
-  color: var(--font-color);
+.settings-tile > button.toggleOn {
+  background-color: green;
 }
 
-#general-settings-form button#changeUsername:hover {
-  background-color: var(--button-hover-background);
+.settings-tile > button.toggleOn:hover {
+  background-color: rgb(3, 87, 3);
+}
+
+.settings-tile > button.toggleOff {
+  background-color: red;
+}
+
+.settings-tile > button.toggleOff:hover {
+  background-color: #c41b1b;
+}
+
+.settings-tile label[for="import-bookmarks-input"],
+.settings-tile label[for="import-notes-input"],
+.settings-tile label[for="import-all-data-input"] {
+  background-color: var(--submit-button-background);
+  color: var(--submit-button-font-color);
+}
+
+.settings-tile label[for="import-bookmarks-input"]:hover,
+.settings-tile label[for="import-notes-input"]:hover,
+.settings-tile label[for="import-all-data-input"]:hover {
+  background-color: var(--submit-button-hover-background);
+}
+
+.delete {
+  background-color: red !important;
+}
+
+.delete:hover {
+  background-color: #c41b1b !important;
 }
 
 #theme-modal {
@@ -554,3 +627,27 @@ hr {
   border: 2px solid var(--submit-button-background);
 }
 /*            */
+
+/* backup button */
+.downloadBackupButton {
+  background-color: var(--submit-button-background);
+  border: 2px solid var(--submit-button-hover-background);
+  color: var(--font-color);
+  box-shadow: 0 0 0 var(--submit-button-hover-background);
+  animation: pulsate 1.2s infinite alternate;
+}
+
+.downloadBackupButton:hover {
+  background-color: var(--submit-button-hover-background);
+  border: 2px solid var(--submit-button-background);
+}
+
+@keyframes pulsate {
+  0% {
+    box-shadow: 0 0 15px var(--submit-button-hover-background);
+  }
+  100% {
+    box-shadow: 0 0 36px var(--modal-background);
+  }
+}
+/*               */

@@ -17,6 +17,34 @@ body {
   z-index: -1;
 }
 
+#recent-tabs-button {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 15px;
+}
+
+#recent-tabs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 18%;
+  word-wrap: break-word;
+  font-size: 24px;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 15px;
+  z-index: 9999;
+}
+
 #headerdiv {
   margin: 10px;
   display: flex;
@@ -139,6 +167,11 @@ body {
 .paragraph {
   margin: 2px;
   font-size: 1.5rem;
+}
+
+#header-info {
+  min-width: 1000px;
+  border-radius: 15px;
 }
 
 #searchdiv {
@@ -534,4 +567,17 @@ hr {
 #focusmodeBtn:active {
   left: -164px;
   transition-delay: 2s;
+}
+
+.downloadBackupButton {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+  font-size: 24px;
+  border-radius: 15px;
 }

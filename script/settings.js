@@ -5,39 +5,45 @@ settingsBtn.addEventListener("click", showGeneralSettingsModal);
 const generalSettingsModal = document.createElement("div");
 generalSettingsModal.innerHTML = `<div id="general-settings" style="display: none">
   <div id="general-settings-form">
+    
+    <div class="settings-tile" id="usernameChangeEl">
     <button id="general-settings-close-button">&times;</button>
-
-    <div id="usernameChangeEl">
-      <label for="username" id="change-username-label">Change Username:</label>
+      <h1>Change Username</h1>
+      <label for="username" id="change-username-label">Username:</label>
       <input type="text" id="username" autocomplete="off">
       <button id="changeUsername">Save</button>
     </div>
-    
-    <button id="delete-bookmarks-button">Delete All Bookmarks</button>
-    <button id="export-bookmarks-button">Export Bookmarks</button>
-    <label for="import-bookmarks-input" id="import-bookmarks-label">Import Bookmarks</label>
-    <input type="file" accept=".json" id="import-bookmarks-input">
 
-    <br>
+    <div class="settings-tile">
+      <h1>Bookmarks</h1>
+      <button id="export-bookmarks-button">Export Bookmarks</button>
+      <label for="import-bookmarks-input" id="import-bookmarks-label">Import Bookmarks</label>
+      <input type="file" accept=".json" id="import-bookmarks-input">
+      <button id="delete-bookmarks-button" class="delete">Delete All Bookmarks</button>
+    </div>
 
-    <button id="delete-notes-button">Delete All Notes</button>
-    <button id="export-notes-button">Export Notes</button>
-    <label for="import-notes-input" id="import-notes-label">Import Notes</label>
-    <input type="file" accept=".json" id="import-notes-input">
+    <div class="settings-tile">
+      <h1>Notes</h1>
+      <button id="export-notes-button">Export Notes</button>
+      <label for="import-notes-input" id="import-notes-label">Import Notes</label>
+      <input type="file" accept=".json" id="import-notes-input">
+      <button id="delete-notes-button" class="delete">Delete All Notes</button>
+    </div>
 
-    <br>
+    <div class="settings-tile">
+      <h1>All Data</h1>
+      <button id="export-all-data-button">Export All Data</button>
+      <label for="import-all-data-input" id="import-all-data-label">Import All Data</label>
+      <input type="file" accept=".json" id="import-all-data-input">
+      <button id="delete-all-data" class="delete">Delete All Data</button>
+    </div>
 
-    <button id="export-all-data-button">Export All Data</button>
-    <label for="import-all-data-input" id="import-all-data-label">Import All Data</label>
-    <input type="file" accept=".json" id="import-all-data-input">
-
-    <br>
-
-    <button id="change-theme-button">Change Theme</button>
-
-    <div id="backgroundSelection">
-      <a>Select background: </a>
+    <div class="settings-tile" id="backgroundSelection">
+      <h1>Appearance</h1>
+      <button id="change-theme-button">Change Theme</button>
+      <label>Select Background:</label>
       <div id="backgroundImagesContainer"></div>
+      <button id="random-theme-background-button">Random Background</button>
     </div>
   </div>
 </div>`;
@@ -222,16 +228,30 @@ function applyTheme(theme) {
   const currentStylesheet = document.getElementById("themestylesheet");
   currentStylesheet.href = `../themes/${theme}.css`;
 }
+
 function showThemeModal() {
   hideGeneralSettingsModal();
   const themeModal = document.getElementById("theme-modal");
   themeModal.style.display = "flex";
+  document
+    .getElementById("theme-modal")
+    .addEventListener("click", function (e) {
+      if (e.target === themeModal) {
+        hideThemeModal();
+      }
+    });
 }
 
 function hideThemeModal() {
   const themeModal = document.getElementById("theme-modal");
   themeModal.style.display = "none";
 }
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    hideThemeModal();
+  }
+});
 
 createThemeModal();
 

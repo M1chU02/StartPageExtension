@@ -28,26 +28,30 @@
     <title>HomePage</title>
   </head>
   <body>
+    <button id="recent-tabs-button">History</button>
+    <ul id="recent-tabs-list"></ul>
     <!--<div id="particles-js"></div>!-->
-    <div id="headerdiv">
-      <h2 class="header" id="nameheader"></h2>
-      <h2 class="header" id="greetingsheader"></h2>
-    </div>
+    <div id="header-info">
+      <div id="headerdiv">
+        <h2 class="header" id="nameheader"></h2>
+        <h2 class="header" id="greetingsheader"></h2>
+      </div>
 
-    <div id="infodiv">
-      <div id="datediv">
-        <p class="paragraph" id="date"></p>
-        <p class="paragraph" id="hour"></p>
-      </div>
-      <div id="separatordiv">
-        <p class="paragraph" id="separatorchar">|</p>
-      </div>
-      <div id="weatherdiv" class="offline">
-        <p class="paragraph" id="temperature"></p>
-        <p class="paragraph" id="city"></p>
-      </div>
-      <div id="offlinediv" style="display: none">
-        <p class="paragraph">You're offline.</p>
+      <div id="infodiv">
+        <div id="datediv">
+          <p class="paragraph" id="date"></p>
+          <p class="paragraph" id="hour"></p>
+        </div>
+        <div id="separatordiv">
+          <p class="paragraph" id="separatorchar">|</p>
+        </div>
+        <div id="weatherdiv" class="offline">
+          <p class="paragraph" id="temperature"></p>
+          <p class="paragraph" id="city"></p>
+        </div>
+        <div id="offlinediv" style="display: none">
+          <p class="paragraph">You're offline.</p>
+        </div>
       </div>
     </div>
 
@@ -386,5 +390,6 @@
     <script src="/script/iframes.js"></script>
     <script src="/script/themes.js"></script>
     <script src="/script/focus/on.js"></script>
+    <script src="/script/history.js"></script>
   </body>
 </html>

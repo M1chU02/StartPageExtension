@@ -2,8 +2,18 @@
   "manifest_version": 3,
   "name": "StartPageExtension",
   "version": "1.0",
-  "permissions": ["tabs", "activeTab", "declarativeContent", "storage"],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "history"
+  ],
   "chrome_url_overrides": {
     "newtab": "index.html"
-  }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "host_permissions": ["http://*/*", "https://*/*"]
 }
