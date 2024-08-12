@@ -19,6 +19,7 @@ body {
   background-color: var(--background-color);
   color: var(--font-color);
   font-family: var(--font-family);
+  /* cursor: url("/cursors/default_min.png"), auto; */
 }
 
 * {
@@ -540,7 +541,7 @@ hr {
 .settings-tile input[type="file"] {
   border: 1px solid var(--submit-button-font-color);
   background-color: var(--form-container-background);
-  color: var (--font-color);
+  color: var(--font-color);
 }
 
 .settings-tile > button {
