@@ -273,66 +273,76 @@
         </div>
       </div>
 
-      <div id="gamesnotepadtodolist">
-        <div id="gameselectdiv" style="display: none">
-          <h1>games</h1>
-          <div id="gameiconsgrid">
-            <div class="gameicon">game 1</div>
-            <div class="gameicon">game 2</div>
-            <div class="gameicon">game 3</div>
-            <div class="gameicon">game 4</div>
-          </div>
-        </div>
-        <div id="notepaddiv">
-          <div id="notepad-navbar">
-            <div id="note-list"></div>
-            <button id="add-note-btn">Add Note</button>
-          </div>
-          <hr />
-          <div
-            id="notepadarea"
-            contenteditable="true"
-            data-placeholder="Make a note..."
-          ></div>
-          <div id="editor-buttons">
-            <div id="basic-text-editor">
-              <button id="notepadboldbtn">
-                <strong>B</strong>
-              </button>
-              <button id="notepaditalicbtn">
-                <em>I</em>
-              </button>
-              <button id="notepadunderlinebtn">
-                <u>U</u>
-              </button>
-              <label for="fontSize">Font Size:</label>
-              <select id="fontSize">
-                <option value="16px">16px</option>
-                <option value="20px">20px</option>
-                <option value="24px">24px</option>
-                <option value="28px">28px</option>
-                <option selected value="36px">36px</option>
-                <option value="48px">48px</option>
-              </select>
-            </div>
-            <div id="advanced-text-editor">
-              <button id="notepadlistbtn">&#8226; List</button>
-              <button id="notepadcheckbtn">☑ Checkbox</button>
-            </div>
-          </div>
-          <div id="savenotesbtn">
-            <div class="loader-container">
-              <div class="loader"></div>
-              <span>Save notes</span>
-            </div>
-          </div>
-        </div>
-        <div id="todolistdiv" style="display: none">
-          <h2>todolist</h2>
-          to do lsit content here
-        </div>
+<div id="gamesnotepadtodolist">
+  <!-- Central Navigation Bar on Top -->
+  <div id="navbar">
+    <button id="nav-games-btn" class="button">Games</button>
+    <button id="nav-notepad-btn" class="button">Notepad</button>
+    <button id="nav-todolist-btn" class="button">To Do List</button>
+  </div>
+
+  <!-- Notepad Section (visible by default) -->
+  <div id="notepaddiv">
+    <div id="notepad-navbar">
+      <div id="note-list"></div>
+      <button id="add-note-btn">Add Note</button>
+    </div>
+    <hr />
+    <div id="notepadarea" contenteditable="true" data-placeholder="Make a note..."></div>
+    <div id="editor-buttons">
+      <div id="basic-text-editor">
+        <button id="notepadboldbtn"><strong>B</strong></button>
+        <button id="notepaditalicbtn"><em>I</em></button>
+        <button id="notepadunderlinebtn"><u>U</u></button>
+        <label for="fontSize">Font Size:</label>
+        <select id="fontSize">
+          <option value="16px">16px</option>
+          <option value="20px">20px</option>
+          <option value="24px">24px</option>
+          <option value="28px">28px</option>
+          <option selected value="36px">36px</option>
+          <option value="48px">48px</option>
+        </select>
+      </div>
+      <div id="advanced-text-editor">
+        <button id="notepadlistbtn">&#8226; List</button>
+        <button id="notepadcheckbtn">☑ Checkbox</button>
       </div>
     </div>
+    <div id="savenotesbtn">
+      <div class="loader-container">
+        <div class="loader"></div>
+        <span>Save notes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Section (hidden by default) -->
+  <div id="gameselectdiv" style="display: none;">
+    <h1>Games</h1>
+    <div id="gameiconsgrid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+      <div class="gameicon" style="background-color: red; padding: 20px;">Game 1</div>
+      <div class="gameicon" style="background-color: green; padding: 20px;">Game 2</div>
+      <div class="gameicon" style="background-color: blue; padding: 20px;">Game 3</div>
+      <div class="gameicon" style="background-color: yellow; padding: 20px;">Game 4</div>
+    </div>
+  </div>
+
+  <!-- To-Do List Section (hidden by default) -->
+  <div id="todolistdiv" style="display: none;">
+    <h2>To Do List</h2>
+    <div id="todolist" contenteditable="true" data-placeholder="Create your to-do list...">
+      <ul>
+        <li>Task 1</li>
+        <li>Task 2</li>
+        <li>Task 3</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
 
     <div id="footer">
       <button id="settingsBtn">
@@ -396,6 +406,7 @@
     <script src="/script/bookmarks.js"></script>
     <script src="/script/notepad.js"></script>
     <script src="/script/notepad-text-editor.js"></script>
+    <script src="/script/gamesnotepadtodolist.js"></script>
     <script src="/script/settings.js"></script>
     <script src="/script/backup.js"></script>
     <script src="/script/iframes.js"></script>
