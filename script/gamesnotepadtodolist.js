@@ -19,19 +19,29 @@ function hideAllSections() {
 navGamesBtn.addEventListener("click", () => {
   hideAllSections();
   gameselectDiv.style.display = "flex";
+  navGamesBtn.classList.add("active");
+  navNotepadBtn.classList.remove("active");
+  navTodolistBtn.classList.remove("active");
 });
 
 navNotepadBtn.addEventListener("click", () => {
   hideAllSections();
   notepadDiv.style.display = "flex";
+  navNotepadBtn.classList.add("active");
+  navGamesBtn.classList.remove("active");
+  navTodolistBtn.classList.remove("active");
 });
 
 navTodolistBtn.addEventListener("click", () => {
   hideAllSections();
   todolistDiv.style.display = "flex";
+  navTodolistBtn.classList.add("active");
+  navGamesBtn.classList.remove("active");
+  navNotepadBtn.classList.remove("active");
 });
 
 // Display Notepad section by default on page load
 window.addEventListener("DOMContentLoaded", () => {
   notepadDiv.style.display = "flex";
+  navNotepadBtn.classList.add("active");
 });
