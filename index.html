@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="/style/bookmarksstyle.css" />
     <link rel="stylesheet" href="style/notepadstyle.css" />
     <link rel="stylesheet" href="/style/settingsstyle.css" />
+    <link rel="stylesheet" href="/style/gamestodolist.css">
     <link rel="stylesheet" id="themestylesheet" href="/themes/dark-mode.css" />
 
     <title>HomePage</title>
@@ -330,15 +331,18 @@
 
   <!-- To-Do List Section (hidden by default) -->
   <div id="todolistdiv" style="display: none;">
-    <h2>To Do List</h2>
-    <div id="todolist" contenteditable="true" data-placeholder="Create your to-do list...">
-      <ul>
-        <li>Task 1</li>
-        <li>Task 2</li>
-        <li>Task 3</li>
-      </ul>
+        <h2>To Do List</h2>
+        <!-- Select to choose between lists -->
+        <select id="listSelector"></select>
+        <!-- Button to add a new list -->
+        <button id="addListBtn">Add New List</button>
+        <!-- Editable To-Do list -->
+        <div id="todolist" contenteditable="true" data-placeholder="Create your to-do list...">
+            <ul></ul>
+        </div>
+        <!-- Button to save list to localStorage -->
+        <button id="saveBtn">Save List</button>
     </div>
-  </div>
 </div>
 
 

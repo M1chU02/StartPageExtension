@@ -1,0 +1,17 @@
+#todolist {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 100px;
+  margin-bottom: 10px;
+}
+#listSelector,
+#saveBtn,
+#addListBtn {
+  margin: 10px 0;
+}
+ul {
+  padding-left: 20px;
+}
+li {
+  list-style-type: disc;
+}

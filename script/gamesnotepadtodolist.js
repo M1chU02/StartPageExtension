@@ -45,3 +45,68 @@ window.addEventListener("DOMContentLoaded", () => {
   notepadDiv.style.display = "flex";
   navNotepadBtn.classList.add("active");
 });
+
+const listSelector = document.getElementById("listSelector");
+const saveBtn = document.getElementById("saveBtn");
+const addListBtn = document.getElementById("addListBtn");
+
+// Object to hold all lists
+let lists = JSON.parse(localStorage.getItem("toDoLists")) || {};
+
+// Function to update the list selector dropdown
+function updateListSelector() {
+  listSelector.innerHTML = "";
+  for (let listName in lists) {
+    let option = document.createElement("option");
+    option.value = listName;
+    option.textContent = listName;
+    listSelector.appendChild(option);
+  }
+}
+
+// Function to display the selected list
+function displayList(listName) {
+  const tasks = lists[listName] || [];
+  todolistDiv.innerHTML = `<ul>${tasks
+    .map((task) => `<li>${task}</li>`)
+    .join("")}</ul>`;
+}
+
+// Event handler for switching between lists
+listSelector.addEventListener("change", (e) => {
+  const selectedList = e.target.value;
+  displayList(selectedList);
+});
+
+// Event handler for saving the current list to localStorage
+saveBtn.addEventListener("click", () => {
+  const selectedList = listSelector.value;
+  if (!selectedList) return;
+
+  const taskElements = todolistDiv.querySelectorAll("li");
+  const tasks = Array.from(taskElements).map((taskEl) => taskEl.textContent);
+  lists[selectedList] = tasks;
+
+  localStorage.setItem("toDoLists", JSON.stringify(lists));
+  alert("List saved!");
+});
+
+// Event handler for adding a new list
+addListBtn.addEventListener("click", () => {
+  const newListName = prompt("Enter a name for the new list:");
+  if (newListName && !lists[newListName]) {
+    lists[newListName] = [];
+    updateListSelector();
+    listSelector.value = newListName;
+    todolistDiv.innerHTML = "<ul></ul>";
+  } else {
+    alert("List name already exists or is invalid.");
+  }
+});
+
+// Initialize the list selector with any stored lists
+updateListSelector();
+if (listSelector.options.length > 0) {
+  listSelector.selectedIndex = 0;
+  displayList(listSelector.value);
+}

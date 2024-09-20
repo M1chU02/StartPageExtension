@@ -220,10 +220,8 @@ body {
   align-items: center;
   border-radius: 15px;
   margin-top: 10px;
-  min-height: 45vh;
-  max-height: 650px;
-  min-width: 600px;
-  max-width: 700px;
+  height: 100%;
+  width: 33%;
 }
 
 #newsselection {
@@ -324,7 +322,8 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 60vh;
+  max-height: 50vh;
+  min-width: 80vw;
 }
 
 #socials-apps {
@@ -332,11 +331,8 @@ hr {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-width: 33%;
-  min-height: 45vh;
-  max-height: 650px;
-  min-width: 600px;
-  max-width: 700px;
+  height: 100%;
+  width: 33%;
 }
 
 #socialsdiv {
@@ -413,10 +409,8 @@ hr {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 45vh;
-  max-height: 650px;
-  min-width: 600px;
-  max-width: 700px;
+  height: 100%;
+  width: 33%;
 }
 
 #gamesnotepadtodolist > #navbar {
@@ -425,7 +419,7 @@ hr {
   justify-content: space-around;
   align-items: center;
   margin-bottom: 10px;
-  min-height: 60px;
+  height: 8%;
   border-radius: 15px;
 }
 
@@ -448,10 +442,8 @@ hr {
   align-items: center;
   border-radius: 15px;
   margin-top: 10px;
-  min-height: 45vh;
-  max-height: 650px;
-  min-width: 600px;
-  max-width: 700px;
+  height: 92%;
+  width: 100%;
 }
 
 #gameselectdiv #gameiconsgrid {
@@ -474,11 +466,8 @@ hr {
   justify-content: space-between;
   align-items: center;
   border-radius: 15px;
-  margin-top: 10px;
-  min-height: 45vh;
-  max-height: 650px;
-  min-width: 600px;
-  max-width: 700px;
+  height: 92%;
+  width: 100%;
 }
 
 #notepadarea {
@@ -554,10 +543,8 @@ hr {
   align-items: center;
   border-radius: 15px;
   margin-top: 10px;
-  min-height: 45vh;
-  max-height: 650px;
-  min-width: 600px;
-  max-width: 700px;
+  height: 92%;
+  width: 100%;
 }
 
 #footer {
