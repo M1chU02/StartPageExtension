@@ -47,11 +47,13 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 const listSelector = document.getElementById("listSelector");
+const taskList = todolistDiv.querySelector("ul");
 const saveBtn = document.getElementById("saveBtn");
 const addListBtn = document.getElementById("addListBtn");
 
 // Object to hold all lists
 let lists = JSON.parse(localStorage.getItem("toDoLists")) || {};
+let currentList = "";
 
 // Function to update the list selector dropdown
 function updateListSelector() {
@@ -67,27 +69,35 @@ function updateListSelector() {
 // Function to display the selected list
 function displayList(listName) {
   const tasks = lists[listName] || [];
-  todolistDiv.innerHTML = `<ul>${tasks
-    .map((task) => `<li>${task}</li>`)
-    .join("")}</ul>`;
+  taskList.innerHTML = tasks
+    .map((task) => `<li contenteditable="true">${task}</li>`)
+    .join("");
+  currentList = listName;
 }
 
 // Event handler for switching between lists
 listSelector.addEventListener("change", (e) => {
+  saveCurrentList(); // Save before switching
   const selectedList = e.target.value;
   displayList(selectedList);
 });
 
-// Event handler for saving the current list to localStorage
-saveBtn.addEventListener("click", () => {
-  const selectedList = listSelector.value;
-  if (!selectedList) return;
+// Save the current list into localStorage
+function saveCurrentList() {
+  if (!currentList) return;
 
-  const taskElements = todolistDiv.querySelectorAll("li");
-  const tasks = Array.from(taskElements).map((taskEl) => taskEl.textContent);
-  lists[selectedList] = tasks;
+  const taskElements = taskList.querySelectorAll("li");
+  const tasks = Array.from(taskElements)
+    .map((taskEl) => taskEl.textContent.trim())
+    .filter((task) => task.length > 0);
+  lists[currentList] = tasks;
 
   localStorage.setItem("toDoLists", JSON.stringify(lists));
+}
+
+// Event handler for saving the current list manually
+saveBtn.addEventListener("click", () => {
+  saveCurrentList();
   alert("List saved!");
 });
 
@@ -98,9 +108,22 @@ addListBtn.addEventListener("click", () => {
     lists[newListName] = [];
     updateListSelector();
     listSelector.value = newListName;
-    todolistDiv.innerHTML = "<ul></ul>";
+    taskList.innerHTML = "";
+    currentList = newListName;
   } else {
     alert("List name already exists or is invalid.");
+  }
+});
+
+// Add new list item on Enter key
+taskList.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault(); // Prevent line break
+    const newTask = document.createElement("li");
+    newTask.setAttribute("contenteditable", "true");
+    newTask.textContent = "";
+    taskList.appendChild(newTask);
+    newTask.focus(); // Focus on the new task
   }
 });
 

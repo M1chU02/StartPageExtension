@@ -4,14 +4,17 @@
   min-height: 100px;
   margin-bottom: 10px;
 }
+
 #listSelector,
 #saveBtn,
 #addListBtn {
   margin: 10px 0;
 }
-ul {
+
+#todolist ul {
   padding-left: 20px;
 }
-li {
+
+#todolist li {
   list-style-type: disc;
 }

@@ -323,7 +323,7 @@ hr {
   justify-content: center;
   align-items: center;
   max-height: 50vh;
-  min-width: 80vw;
+  width: 80vw;
 }
 
 #socials-apps {
