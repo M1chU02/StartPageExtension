@@ -331,17 +331,19 @@
 
   <!-- To-Do List Section (hidden by default) -->
   <div id="todolistdiv" style="display: none;">
-        <h2>To Do List</h2>
+    <div id="todolistnav">
         <!-- Select to choose between lists -->
         <select id="listSelector"></select>
         <!-- Button to add a new list -->
-        <button id="addListBtn">Add New List</button>
-        <!-- Editable To-Do list -->
-        <div id="todolist">
-            <ul contenteditable="true" data-placeholder="Type a task and press Enter"></ul>
-        </div>
-        <!-- Button to save list to localStorage -->
-        <button id="saveBtn">Save List</button>
+        <button id="addListBtn">Add New List</button> 
+    </div>
+    <hr>
+    <!-- Editable To-Do list -->
+    <div id="todolist">
+        <ul contenteditable="true" data-placeholder="Type a task and press Enter"></ul>
+    </div>
+    <!-- Button to save list to localStorage -->
+    <button id="saveBtn">Save List</button>
   </div>
 </div>
 

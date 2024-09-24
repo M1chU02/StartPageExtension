@@ -47,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 const listSelector = document.getElementById("listSelector");
-const taskList = todolistDiv.querySelector("ul");
+const taskList = document.querySelector("#todolist ul");
 const saveBtn = document.getElementById("saveBtn");
 const addListBtn = document.getElementById("addListBtn");
 
@@ -57,7 +57,7 @@ let currentList = "";
 
 // Function to update the list selector dropdown
 function updateListSelector() {
-  listSelector.innerHTML = "";
+  listSelector.innerHTML = ""; // Clear existing options
   for (let listName in lists) {
     let option = document.createElement("option");
     option.value = listName;
@@ -77,22 +77,21 @@ function displayList(listName) {
 
 // Event handler for switching between lists
 listSelector.addEventListener("change", (e) => {
-  saveCurrentList(); // Save before switching
+  saveCurrentList(); // Save current list before switching
   const selectedList = e.target.value;
-  displayList(selectedList);
+  displayList(selectedList); // Display the selected list
 });
 
 // Save the current list into localStorage
 function saveCurrentList() {
-  if (!currentList) return;
-
+  if (!currentList) return; // Don't save if no list is selected
   const taskElements = taskList.querySelectorAll("li");
   const tasks = Array.from(taskElements)
-    .map((taskEl) => taskEl.textContent.trim())
-    .filter((task) => task.length > 0);
-  lists[currentList] = tasks;
+    .map((taskEl) => taskEl.textContent.trim()) // Get task text
+    .filter((task) => task.length > 0); // Exclude empty tasks
+  lists[currentList] = tasks; // Update tasks for the current list
 
-  localStorage.setItem("toDoLists", JSON.stringify(lists));
+  localStorage.setItem("toDoLists", JSON.stringify(lists)); // Save all lists to localStorage
 }
 
 // Event handler for saving the current list manually
@@ -105,11 +104,11 @@ saveBtn.addEventListener("click", () => {
 addListBtn.addEventListener("click", () => {
   const newListName = prompt("Enter a name for the new list:");
   if (newListName && !lists[newListName]) {
-    lists[newListName] = [];
+    lists[newListName] = []; // Create a new empty list
     updateListSelector();
     listSelector.value = newListName;
-    taskList.innerHTML = "";
-    currentList = newListName;
+    taskList.innerHTML = ""; // Clear task list
+    currentList = newListName; // Set current list to the new one
   } else {
     alert("List name already exists or is invalid.");
   }
@@ -127,9 +126,25 @@ taskList.addEventListener("keypress", (e) => {
   }
 });
 
-// Initialize the list selector with any stored lists
-updateListSelector();
-if (listSelector.options.length > 0) {
-  listSelector.selectedIndex = 0;
-  displayList(listSelector.value);
+// Initialize the list selector with any stored lists and load the last selected list
+function init() {
+  updateListSelector();
+
+  const lastSelectedList = localStorage.getItem("lastSelectedList");
+  if (lastSelectedList && lists[lastSelectedList]) {
+    listSelector.value = lastSelectedList; // Set dropdown to the last selected list
+    displayList(lastSelectedList); // Display the last selected list
+  } else if (listSelector.options.length > 0) {
+    listSelector.selectedIndex = 0; // Default to the first list if any exists
+    displayList(listSelector.value); // Display the first list
+  }
 }
+
+// Save the current list when switching sections or when the page is about to unload
+window.addEventListener("beforeunload", saveCurrentList);
+listSelector.addEventListener("change", (e) => {
+  localStorage.setItem("lastSelectedList", e.target.value); // Save the selected list in localStorage
+});
+
+// Initialize the app on page load
+window.addEventListener("DOMContentLoaded", init);
