@@ -12,16 +12,33 @@ function displayTabHistory(historyItems) {
 
   historyItems.forEach(function (item) {
     var listItemLink = document.createElement("a");
+    listItemLink.href = item.url;
+    listItemLink.style.display = "flex";
+    listItemLink.style.alignItems = "center";
+    listItemLink.style.gap = "10px";
+
+    // Get domain from URL to fetch the favicon
+    var url = new URL(item.url);
+    var domain = url.hostname;
+    var faviconUrl = "https://www.google.com/s2/favicons?domain=" + domain;
+
+    // Create favicon image element
+    var faviconImg = document.createElement("img");
+    faviconImg.src = faviconUrl;
+    faviconImg.style.width = "16px";
+    faviconImg.style.height = "16px";
+    faviconImg.alt = "favicon";
 
     var timestamp = new Date(item.lastVisitTime);
     var timestampElement = document.createElement("span");
     timestampElement.textContent = timestamp.toLocaleString() + ": ";
 
     var link = document.createElement("a");
-    link.textContent = item.title;
+    link.textContent = item.title || item.url; // Fallback to URL if no title
     link.href = item.url;
-    listItemLink.href = item.url;
 
+    // Append favicon, timestamp, and link to the list item
+    listItemLink.appendChild(faviconImg);
     listItemLink.appendChild(timestampElement);
     listItemLink.appendChild(link);
 

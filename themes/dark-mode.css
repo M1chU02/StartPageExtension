@@ -105,6 +105,13 @@ hr {
   box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.15);
 }
 /* Bookmarks */
+
+/*#bookmark-list {
+  background-color: var(--modal-background);
+  color: var(--font-color);
+  box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.15);
+}*/
+
 #add-button {
   background-color: var(--button-background);
   color: var(--font-color);

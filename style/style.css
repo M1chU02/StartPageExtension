@@ -206,7 +206,7 @@ body {
 
 #bookmarksdiv {
   margin-top: 10px;
-  width: 60%;
+  width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -265,7 +265,6 @@ body {
   align-items: flex-start;
   margin-top: 10px;
   width: 100%;
-  max-width: 800px;
   overflow-y: auto;
 }
 
