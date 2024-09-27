@@ -183,25 +183,80 @@ body {
 }
 
 #searchform {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
 }
 
 #searchinput {
+  width: 100%;
   border: none;
-  width: 90%;
-  max-width: 1000px;
   border-radius: 15px;
   height: 5vh;
   max-height: 40px;
-  text-align: center;
   font-size: 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 #searchinput:focus {
   outline: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#voiceSearchBtn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+#voiceSearchBtn svg {
+  fill: var(--font-color);
+  transition: fill 0.3s ease;
+  width: 24px;
+  height: 24px;
+}
+
+#voiceSearchBtn:hover svg {
+  fill: var(--submit-button-hover-background);
+  transform: scale(1.1);
+}
+
+#voiceSearchBtn.listening svg {
+  fill: #ff4081;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  #searchinput {
+    font-size: 20px;
+    padding: 8px 40px 8px 15px;
+  }
+
+  #voiceSearchBtn svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 #bookmarksdiv {
