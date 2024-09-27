@@ -14,6 +14,17 @@ generalSettingsModal.innerHTML = `<div id="general-settings" style="display: non
       <button id="changeUsername">Save</button>
     </div>
 
+    <div class="settings-tile" id="searchEngineChangeEl">
+      <h1>Search Engine</h1>
+      <select>
+        <option>Google</option>
+        <option>Microsoft Bing</option>
+        <option>Yahoo!</option>
+        <option>Yandex</option>
+        <option>DuckDuckGo</option>
+      </select>
+    </div>
+
     <div class="settings-tile">
       <h1>Bookmarks</h1>
       <button id="export-bookmarks-button">Export Bookmarks</button>
@@ -94,6 +105,54 @@ function changeUserName() {
     location.reload();
   }
 }
+
+function manageSearchEngine() {
+  const searchEngineSelect = document
+    .getElementById("searchEngineChangeEl")
+    .querySelector("select");
+  const searchForm = document.querySelector("#searchform");
+  const searchInput = document.querySelector("#searchinput");
+
+  // Define search engine URLs
+  const searchEngines = {
+    Google: "https://www.google.com/search?q=",
+    "Microsoft Bing": "https://www.bing.com/search?q=",
+    "Yahoo!": "https://search.yahoo.com/search?p=",
+    Yandex: "https://yandex.com/search/?text=",
+    DuckDuckGo: "https://duckduckgo.com/?q=",
+  };
+
+  // Load saved search engine from localStorage
+  const savedSearchEngine = localStorage.getItem("selectedSearchEngine");
+  if (savedSearchEngine && searchEngines[savedSearchEngine]) {
+    searchEngineSelect.value = savedSearchEngine;
+  }
+
+  // Function to update search form action
+  function updateSearchForm() {
+    const selectedEngine = searchEngineSelect.value;
+    const searchUrl = searchEngines[selectedEngine];
+    localStorage.setItem("selectedSearchEngine", selectedEngine);
+  }
+
+  // Initial update
+  updateSearchForm();
+
+  // Listen for changes in search engine selection
+  searchEngineSelect.addEventListener("change", updateSearchForm);
+
+  // Modify form submission behavior
+  searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const selectedEngine = searchEngineSelect.value;
+    const searchUrl = searchEngines[selectedEngine];
+    const searchQuery = encodeURIComponent(searchInput.value);
+    window.location.href = `${searchUrl}${searchQuery}`;
+  });
+}
+
+// Call the function to set up the search engine management
+manageSearchEngine();
 
 document
   .getElementById("delete-bookmarks-button")
@@ -204,8 +263,7 @@ function createThemeModal() {
         <li data-theme="ocean-blue">Ocean Blue</li>
         <!-- Add more themes here -->
       </ul>
-    </div>
-  `;
+    </div>`;
   document.body.appendChild(themeModal);
 
   const closeButton = document.getElementById("theme-modal-close-button");

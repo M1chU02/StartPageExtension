@@ -152,8 +152,7 @@ function showNoteSettings(index) {
           </button>
         </form>
       </div>
-    </div>
-  `;
+    </div>`;
 
   noteList.appendChild(settingsModal);
   const noteSettingsModal = document.getElementById("note-settings-modal");
