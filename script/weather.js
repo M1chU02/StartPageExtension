@@ -15,15 +15,22 @@ function getCookie(name) {
   return null;
 }
 
+function updateWeatherLink(city) {
+  const link = document.getElementById("extendedWeatherLink");
+  if (link) {
+    link.href = `https://www.google.com/search?q=weather+${encodeURIComponent(
+      city
+    )}`;
+  }
+}
+
 const geolocationCookie = getCookie("geolocation");
 
 if (geolocationCookie) {
   const [lat, lng] = geolocationCookie.split(",");
   const weather = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true`;
   fetch(weather)
-    .then((response) => {
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
       const temperature = data.current_weather.temperature + "°C, ";
       document.getElementById("temperature").innerHTML = temperature;
@@ -31,12 +38,11 @@ if (geolocationCookie) {
 
   const city = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`;
   fetch(city)
-    .then((response) => {
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
       const city = data.city;
       document.getElementById("city").innerHTML = city;
+      updateWeatherLink(city);
     });
 } else if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(
@@ -48,9 +54,7 @@ if (geolocationCookie) {
 
       const weather = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true`;
       fetch(weather)
-        .then((response) => {
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
           const temperature = data.current_weather.temperature + "°C, ";
           document.getElementById("temperature").innerHTML = temperature;
@@ -58,18 +62,21 @@ if (geolocationCookie) {
 
       const city = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`;
       fetch(city)
-        .then((response) => {
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
           const city = data.city;
           document.getElementById("city").innerHTML = city;
+          updateWeatherLink(city);
         });
     },
     (error) => {
-      console.error("Error getting user location:", error);
+      console.error("Error getting location:", error);
+      document.getElementById("weatherdiv").style.display = "none";
+      document.getElementById("offlinediv").style.display = "block";
     }
   );
 } else {
-  console.error("Geolocation is not supported by this browser.");
+  console.log("Geolocation is not supported by this browser.");
+  document.getElementById("weatherdiv").style.display = "none";
+  document.getElementById("offlinediv").style.display = "block";
 }

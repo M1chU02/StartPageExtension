@@ -99,11 +99,28 @@ hr {
   box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.15);
 }
 
+.weather-link {
+  background-color: var(--form-container-background);
+}
+
+.weather-icon {
+  fill: var(--font-color);
+}
+
 #searchinput {
   background-color: var(--modal-background);
   color: var(--font-color);
   box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.15);
 }
+
+#voiceSearchBtn svg {
+  fill: var(--font-color);
+}
+
+#voiceSearchBtn:hover svg {
+  fill: var(--submit-button-hover-background);
+}
+
 /* Bookmarks */
 
 /*#bookmark-list {
@@ -609,6 +626,12 @@ hr {
 
 #general-settings-close-button:hover {
   background-color: #c41b1b !important;
+}
+
+#searchEngineChangeEl select {
+  border: 1px solid var(--submit-button-font-color);
+  background-color: var(--form-container-background);
+  color: var(--font-color);
 }
 
 .settings-tile {

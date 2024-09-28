@@ -169,6 +169,21 @@ body {
   font-size: 1.5rem;
 }
 
+.weather-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.weather-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 #header-info {
   min-width: 1000px;
   border-radius: 15px;
@@ -219,14 +234,12 @@ body {
 }
 
 #voiceSearchBtn svg {
-  fill: var(--font-color);
   transition: fill 0.3s ease;
   width: 24px;
   height: 24px;
 }
 
 #voiceSearchBtn:hover svg {
-  fill: var(--submit-button-hover-background);
   transform: scale(1.1);
 }
 
