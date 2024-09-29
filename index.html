@@ -76,32 +76,6 @@
 
     <div id="bookmarksdiv" class="offline">
       <h1>Bookmarks</h1>
-      <div id="bookmark-modal">
-        <div id="bookmark-form-container">
-          <button id="close-button">&times;</button>
-          <form id="bookmark-form">
-            <label for="url">URL:</label>
-            <input
-              type="text"
-              id="url"
-              placeholder="Enter URL"
-              required
-              autocomplete="off"
-            />
-            <label for="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Enter Name"
-              required
-              autocomplete="off"
-            />
-            <label for="bookmarkcolor">Background Color</label><br />
-            <input type="color" id="bookmarkcolor" />
-            <button type="submit" id="submit">Add Bookmark</button>
-          </form>
-        </div>
-      </div>
       <div id="bookmark-list"></div>
 
       <button id="add-button">
@@ -281,13 +255,12 @@
         </div>
       </div>
 
-<div id="gamesnotepadtodolist">
-  <!-- Central Navigation Bar on Top -->
-  <div id="navbar">
-    <button id="nav-games-btn" class="button">Games</button>
-    <button id="nav-notepad-btn" class="button">Notepad</button>
-    <button id="nav-todolist-btn" class="button">To Do List</button>
-  </div>
+      <div id="gamesnotepadtodolist">
+        <div id="navbar">
+          <button id="nav-games-btn" class="button">Games</button>
+          <button id="nav-notepad-btn" class="button">Notepad</button>
+          <button id="nav-todolist-btn" class="button">To Do List</button>
+        </div>
 
   <!-- Notepad Section (visible by default) -->
   <div id="notepaddiv">
@@ -353,10 +326,7 @@
     <!-- Button to save list to localStorage -->
     <button id="saveBtn">Save List</button>
   </div>
-</div>
-
-
-
+      </div>
 
     <div id="footer">
       <button id="settingsBtn">

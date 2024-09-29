@@ -23,17 +23,17 @@ const notepadArea = document.getElementById("notepadarea");
 notepadArea.addEventListener("input", handleInput);
 
 function handleInput() {
-  const content = notepadarea.innerHTML;
+  const content = notepadArea.innerHTML;
   if (content === "") {
-    notepadarea.innerHTML = `<div class="placeholder">${placeholder}</div>`;
+    notepadArea.innerHTML = `<div class="placeholder">${placeholder}</div>`;
   } else if (content === placeholder) {
-    notepadarea.innerHTML = "";
+    notepadArea.innerHTML = "";
   }
 }
 
 function execCommandWithDefault(command, value = null) {
   document.execCommand(command, false, value);
-  notepadarea.focus();
+  notepadArea.focus();
 }
 
 function makeBold() {
@@ -53,10 +53,24 @@ function addList() {
 }
 
 function addCheckbox() {
+  const checkboxContainer = document.createElement("div");
+  checkboxContainer.className = "checkbox-container";
+
   const checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
-  notepadarea.appendChild(checkbox);
-  notepadarea.focus();
+  checkbox.className = "notepad-checkbox";
+
+  const label = document.createElement("span");
+  label.className = "checkbox-label";
+  label.contentEditable = true;
+  label.textContent = "New item";
+
+  checkboxContainer.appendChild(checkbox);
+  checkboxContainer.appendChild(label);
+
+  notepadArea.appendChild(checkboxContainer);
+  notepadArea.appendChild(document.createElement("br"));
+  label.focus();
 }
 
 function changeFontSize(fontSize) {
