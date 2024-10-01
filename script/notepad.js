@@ -133,11 +133,9 @@ function updateNoteList() {
 function showNoteSettings(index) {
   const currentTitle = notes[index].title;
 
-  const settingsModal = document.createElement("div");
-  settingsModal.innerHTML = `
-    <div id="note-settings-modal" style="display: none;">
+  const settingsModal = `
+    <div id="note-settings-modal">
       <div id="note-settings-form-container">
-        <button id="note-settings-close-button">&times;</button>
         <form id="note-settings-form">
           <label for="new-note-title">New Note Title:</label>
           <input type="text" id="new-note-title" placeholder="Enter New Title" value="${currentTitle}" required autocomplete="off" />
@@ -154,28 +152,31 @@ function showNoteSettings(index) {
       </div>
     </div>`;
 
-  noteList.appendChild(settingsModal);
-  const noteSettingsModal = document.getElementById("note-settings-modal");
-  noteSettingsModal.style.display = "flex";
-
-  const noteSettingsCloseButton = document.getElementById(
-    "note-settings-close-button"
-  );
-  noteSettingsCloseButton.addEventListener("click", () => {
-    noteSettingsModal.style.display = "none";
-    updateNoteList();
+  const settingsWindow = new WinBox({
+    title: "Note Settings",
+    background: "transparent",
+    modal: true,
+    width: "400px",
+    height: "500px",
+    html: settingsModal,
+    x: "center",
+    y: "center",
+    onclose: function () {
+      updateNoteList();
+    },
   });
 
-  const renameNoteButton = document.getElementById("rename-note");
+  const renameNoteButton = settingsWindow.body.querySelector("#rename-note");
   renameNoteButton.addEventListener("click", function (e) {
     e.preventDefault();
-    const newNoteTitle = document.getElementById("new-note-title").value;
+    const newNoteTitle =
+      settingsWindow.body.querySelector("#new-note-title").value;
     renameNote(index, newNoteTitle);
-    noteSettingsModal.style.display = "none";
-    updateNoteList();
+    settingsWindow.close();
   });
 
-  const downloadNoteButton = document.getElementById("download-note");
+  const downloadNoteButton =
+    settingsWindow.body.querySelector("#download-note");
   downloadNoteButton.addEventListener("click", function (e) {
     e.preventDefault();
     const plainTextContent = notes[currentNoteIndex].content.replace(
@@ -195,29 +196,12 @@ function showNoteSettings(index) {
     URL.revokeObjectURL(url);
   });
 
-  const deleteNoteButton = document.getElementById("delete-note");
+  const deleteNoteButton = settingsWindow.body.querySelector("#delete-note");
   deleteNoteButton.addEventListener("click", function () {
     const confirmation = confirm("Are you sure you want to delete this note?");
     if (confirmation) {
       deleteNote(index);
-      noteSettingsModal.style.display = "none";
-      updateNoteList();
-    }
-  });
-
-  document
-    .getElementById("note-settings-modal")
-    .addEventListener("click", function (e) {
-      if (e.target === document.getElementById("note-settings-modal")) {
-        document.getElementById("note-settings-modal").style.display = "none";
-        updateNoteList();
-      }
-    });
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      document.getElementById("note-settings-modal").style.display = "none";
-      updateNoteList();
+      settingsWindow.close();
     }
   });
 }
