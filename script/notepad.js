@@ -64,11 +64,14 @@ function deleteNote(index) {
 
   notes.splice(index, 1);
   saveNotes();
-  if (currentNoteIndex === index) {
-    switchNote(0);
-  } else {
-    updateNoteList();
+
+  // Update currentNoteIndex
+  if (currentNoteIndex >= index) {
+    currentNoteIndex = Math.max(0, currentNoteIndex - 1);
   }
+
+  updateNoteList();
+  switchNote(currentNoteIndex);
 }
 
 function addNote() {
@@ -103,8 +106,37 @@ function loadDefaultNote() {
   }
 }
 
+function reorderNotes(oldIndex, newIndex) {
+  if (
+    oldIndex < 0 ||
+    oldIndex >= notes.length ||
+    newIndex < 0 ||
+    newIndex >= notes.length
+  ) {
+    console.error("Invalid index for reordering");
+    return;
+  }
+
+  const [movedNote] = notes.splice(oldIndex, 1);
+  notes.splice(newIndex, 0, movedNote);
+
+  saveNotes();
+  updateNoteList();
+  switchNote(newIndex);
+}
+
 function updateNoteList() {
   noteList.innerHTML = "";
+  // Check if the reorder button already exists
+  let reorderButton = document.querySelector(".reorder-btn");
+  if (!reorderButton) {
+    reorderButton = document.createElement("button");
+    reorderButton.textContent = "Reorder Notes";
+    reorderButton.classList.add("reorder-btn", "addnote"); // Add the 'addnote' class
+    const notepadNavbar = document.getElementById("notepad-navbar");
+    notepadNavbar.appendChild(reorderButton);
+    reorderButton.addEventListener("click", showReorderModal);
+  }
   notes.forEach((note, index) => {
     const noteTitle = note.title || "Untitled Note";
     const noteItem = document.createElement("div");
@@ -200,7 +232,7 @@ function showNoteSettings(index) {
   deleteNoteButton.addEventListener("click", function () {
     const confirmation = confirm("Are you sure you want to delete this note?");
     if (confirmation) {
-      deleteNote(index);
+      deleteNote(currentNoteIndex);
       settingsWindow.close();
     }
   });
@@ -237,3 +269,72 @@ saveButton.addEventListener("click", function () {
 });
 
 addNoteBtn.addEventListener("click", addNote);
+
+function showReorderModal() {
+  const reorderModal = `
+    <div id="reorder-modal">
+      <div id="note-settings-form-container">
+        <h3>Reorder Notes</h3>
+        <ul id="reorder-list"></ul>
+        <button id="save-order">Save Order</button>
+      </div>
+    </div>`;
+
+  const reorderWindow = new WinBox({
+    title: "Reorder Notes",
+    background: "transparent",
+    modal: true,
+    width: "400px",
+    height: "500px",
+    html: reorderModal,
+    x: "center",
+    y: "center",
+    onclose: function () {
+      updateNoteList();
+    },
+  });
+
+  const reorderList = reorderWindow.body.querySelector("#reorder-list");
+
+  function updateReorderList() {
+    reorderList.innerHTML = "";
+    notes.forEach((note, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <span class="note-title">${note.title}
+        <button class="move-up" ${index === 0 ? "disabled" : ""}>▲</button>
+        <button class="move-down" ${
+          index === notes.length - 1 ? "disabled" : ""
+        }>▼</button>`;
+      reorderList.appendChild(li);
+    });
+  }
+
+  updateReorderList();
+
+  reorderList.addEventListener("click", function (e) {
+    if (e.target.classList.contains("move-up")) {
+      const li = e.target.closest("li");
+      const index = Array.from(reorderList.children).indexOf(li);
+      if (index > 0) {
+        [notes[index - 1], notes[index]] = [notes[index], notes[index - 1]];
+        updateReorderList();
+      }
+    } else if (e.target.classList.contains("move-down")) {
+      const li = e.target.closest("li");
+      const index = Array.from(reorderList.children).indexOf(li);
+      if (index < notes.length - 1) {
+        [notes[index], notes[index + 1]] = [notes[index + 1], notes[index]];
+        updateReorderList();
+      }
+    }
+  });
+
+  const saveOrderButton = reorderWindow.body.querySelector("#save-order");
+  saveOrderButton.addEventListener("click", function () {
+    saveNotes();
+    updateNoteList();
+    switchNote(currentNoteIndex);
+    reorderWindow.close();
+  });
+}

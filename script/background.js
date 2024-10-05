@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const setAndSaveBackground = (src) => {
     document.body.style.backgroundImage = `url(${src})`;
-    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundRepeat = "repeat";
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundColor = "";
     localStorage.setItem("backgroundImage", src);
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
       randomThemeButton.classList.add("toggleOff");
       if (storedBackgroundImage) {
         document.body.style.backgroundImage = `url(${storedBackgroundImage})`;
-        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundRepeat = "repeat";
         document.body.style.backgroundSize = "cover";
       } else if (storedBackgroundColor) {
         document.body.style.backgroundColor = storedBackgroundColor;
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const randomIndex = Math.floor(Math.random() * 39) + 1;
     const randomBackgroundSrc = `../backgrounds/${randomIndex}-min.jpg`;
     document.body.style.backgroundImage = `url(${randomBackgroundSrc})`;
-    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundRepeat = "repeat";
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundColor = "";
     localStorage.setItem("backgroundImage", randomBackgroundSrc);
