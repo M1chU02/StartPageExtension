@@ -25,6 +25,19 @@ generalSettingsModal.innerHTML = `<div id="general-settings" style="display: non
       </select>
     </div>
 
+    <div class="settings-tile" id="socialsEdit">
+      <h1>Socials</h1>
+      <div id="socialsTilesContainer">
+        <!-- We'll populate this dynamically -->
+      </div>
+      <div id="socialsSitesList" style="display: none;">
+        <h2>Choose a site</h2>
+        <ul>
+          <!-- We'll populate this dynamically -->
+        </ul>
+      </div>
+    </div>
+
     <div class="settings-tile">
       <h1>Bookmarks</h1>
       <button id="export-bookmarks-button">Export Bookmarks</button>
@@ -376,3 +389,64 @@ function importAllData() {
     reader.readAsText(file);
   }
 }
+
+// Add this after your existing code in settings.js
+
+const socialsTilesContainer = document.getElementById("socialsTilesContainer");
+const socialsSitesList = document.getElementById("socialsSitesList");
+
+// Define the social sites options
+const socialSites = {
+  card1: ["Instagram", "Facebook", "TikTok"],
+  card2: ["Twitter", "LinkedIn", "Pinterest"],
+  card3: ["YouTube", "Twitch", "Vimeo"],
+  card4: ["Reddit", "Tumblr", "Snapchat"],
+  card5: ["WhatsApp", "Telegram", "Discord"],
+};
+
+// Function to create social tiles
+function createSocialTiles() {
+  for (let i = 1; i <= 5; i++) {
+    const tile = document.createElement("button");
+    tile.id = `card${i}`;
+    tile.className = "social-tile";
+    tile.textContent = `Social ${i}`;
+    socialsTilesContainer.appendChild(tile);
+  }
+}
+
+// Function to show social sites for a specific tile
+function showSocialSites(cardId) {
+  const sitesList = socialsSitesList.querySelector("ul");
+  sitesList.innerHTML = "";
+  socialSites[cardId].forEach((site) => {
+    const li = document.createElement("li");
+    li.textContent = site;
+    li.addEventListener("click", () => selectSocialSite(cardId, site));
+    sitesList.appendChild(li);
+  });
+  socialsSitesList.style.display = "block";
+}
+
+// Function to select a social site
+function selectSocialSite(cardId, site) {
+  localStorage.setItem(`social_${cardId}`, site);
+  document.getElementById(cardId).textContent = site;
+  socialsSitesList.style.display = "none";
+  // You might want to update the main page social tiles here as well
+}
+
+// Function to load saved social sites
+function loadSavedSocialSites() {
+  for (let i = 1; i <= 5; i++) {
+    const cardId = `card${i}`;
+    const savedSite = localStorage.getItem(`social_${cardId}`);
+    if (savedSite) {
+      document.getElementById(cardId).textContent = savedSite;
+    }
+  }
+}
+
+// Call these functions to set up the social tiles
+createSocialTiles();
+loadSavedSocialSites();

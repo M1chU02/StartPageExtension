@@ -442,6 +442,10 @@ hr {
   background-color: var(--button-hover-background);
 }
 
+#add-note-btn > svg {
+  fill: var(--font-color);
+}
+
 #note-list::-webkit-scrollbar-track {
   background: var(--sb-track-color);
 }
