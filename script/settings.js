@@ -390,38 +390,56 @@ function importAllData() {
   }
 }
 
-// Add this after your existing code in settings.js
-
 const socialsTilesContainer = document.getElementById("socialsTilesContainer");
 const socialsSitesList = document.getElementById("socialsSitesList");
 
 // Define the social sites options
-const socialSites = {
-  card1: ["Instagram", "Facebook", "TikTok"],
-  card2: ["Twitter", "LinkedIn", "Pinterest"],
-  card3: ["YouTube", "Twitch", "Vimeo"],
-  card4: ["Reddit", "Tumblr", "Snapchat"],
-  card5: ["WhatsApp", "Telegram", "Discord"],
-};
+const socialSites = [
+  { name: "Instagram", url: "https://www.instagram.com" },
+  { name: "Facebook", url: "https://www.facebook.com" },
+  { name: "TikTok", url: "https://www.tiktok.com" },
+  { name: "Twitter", url: "https://twitter.com" },
+  { name: "LinkedIn", url: "https://www.linkedin.com" },
+  { name: "Pinterest", url: "https://www.pinterest.com" },
+  { name: "YouTube", url: "https://www.youtube.com" },
+  { name: "Twitch", url: "https://www.twitch.tv" },
+  { name: "Reddit", url: "https://www.reddit.com" },
+  { name: "Telegram", url: "https://telegram.org" },
+  { name: "Discord", url: "https://discord.com" },
+];
 
 // Function to create social tiles
 function createSocialTiles() {
   for (let i = 1; i <= 5; i++) {
-    const tile = document.createElement("button");
+    const tile = document.createElement("div");
     tile.id = `card${i}`;
     tile.className = "social-tile";
-    tile.textContent = `Social ${i}`;
+
+    const siteDisplay = document.createElement("span");
+    siteDisplay.textContent =
+      localStorage.getItem(`social_card${i}`) || `Social ${i}`;
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", () => showSocialSites(`card${i}`));
+
+    tile.appendChild(siteDisplay);
+    tile.appendChild(editButton);
     socialsTilesContainer.appendChild(tile);
   }
+}
+
+function updateSocialUrl(cardId, url) {
+  localStorage.setItem(`social_url_${cardId}`, url);
 }
 
 // Function to show social sites for a specific tile
 function showSocialSites(cardId) {
   const sitesList = socialsSitesList.querySelector("ul");
   sitesList.innerHTML = "";
-  socialSites[cardId].forEach((site) => {
+  socialSites.forEach((site) => {
     const li = document.createElement("li");
-    li.textContent = site;
+    li.textContent = site.name;
     li.addEventListener("click", () => selectSocialSite(cardId, site));
     sitesList.appendChild(li);
   });
@@ -430,10 +448,11 @@ function showSocialSites(cardId) {
 
 // Function to select a social site
 function selectSocialSite(cardId, site) {
-  localStorage.setItem(`social_${cardId}`, site);
-  document.getElementById(cardId).textContent = site;
+  localStorage.setItem(`social_${cardId}`, site.name);
+  localStorage.setItem(`social_url_${cardId}`, site.url);
+  const siteDisplay = document.querySelector(`#${cardId} span`);
+  siteDisplay.textContent = site.name;
   socialsSitesList.style.display = "none";
-  // You might want to update the main page social tiles here as well
 }
 
 // Function to load saved social sites
@@ -442,11 +461,39 @@ function loadSavedSocialSites() {
     const cardId = `card${i}`;
     const savedSite = localStorage.getItem(`social_${cardId}`);
     if (savedSite) {
-      document.getElementById(cardId).textContent = savedSite;
+      const siteDisplay = document.querySelector(`#${cardId} span`);
+      siteDisplay.textContent = savedSite;
     }
+  }
+}
+
+function openSocialSite(cardId) {
+  const url = localStorage.getItem(`social_url_${cardId}`);
+  if (url) {
+    window.open(url, "_blank");
+  } else {
+    alert(
+      "No social site selected for this tile. Please select a site in the settings."
+    );
   }
 }
 
 // Call these functions to set up the social tiles
 createSocialTiles();
 loadSavedSocialSites();
+
+function createMainPageSocialTiles() {
+  const container = document.getElementById("socialsdiv"); // Make sure this container exists on your main page
+  for (let i = 1; i <= 5; i++) {
+    const cardId = `card${i}`;
+    const tile = document.createElement("div");
+    tile.className = "social-tile";
+    tile.textContent =
+      localStorage.getItem(`social_${cardId}`) || `Social ${i}`;
+    tile.addEventListener("click", () => openSocialSite(cardId));
+    container.appendChild(tile);
+  }
+}
+
+// Call this function when your main page loads
+createMainPageSocialTiles();
