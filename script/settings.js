@@ -390,6 +390,7 @@ function importAllData() {
   }
 }
 
+/*
 const socialsTilesContainer = document.getElementById("socialsTilesContainer");
 const socialsSitesList = document.getElementById("socialsSitesList");
 
@@ -410,6 +411,7 @@ const socialSites = [
 
 // Function to create social tiles
 function createSocialTiles() {
+  socialsTilesContainer.innerHTML = ""; // Clear existing tiles
   for (let i = 1; i <= 5; i++) {
     const tile = document.createElement("div");
     tile.id = `card${i}`;
@@ -427,10 +429,6 @@ function createSocialTiles() {
     tile.appendChild(editButton);
     socialsTilesContainer.appendChild(tile);
   }
-}
-
-function updateSocialUrl(cardId, url) {
-  localStorage.setItem(`social_url_${cardId}`, url);
 }
 
 // Function to show social sites for a specific tile
@@ -455,7 +453,10 @@ function selectSocialSite(cardId, site) {
   socialsSitesList.style.display = "none";
 }
 
-// Function to load saved social sites
+// Call these functions to set up the social tiles
+createSocialTiles();
+loadSavedSocialSites();
+
 function loadSavedSocialSites() {
   for (let i = 1; i <= 5; i++) {
     const cardId = `card${i}`;
@@ -478,9 +479,8 @@ function openSocialSite(cardId) {
   }
 }
 
-// Call these functions to set up the social tiles
-createSocialTiles();
-loadSavedSocialSites();
+// Call this function when your main page loads
+createMainPageSocialTiles();
 
 function createMainPageSocialTiles() {
   const container = document.getElementById("socialsdiv"); // Make sure this container exists on your main page
@@ -494,6 +494,4 @@ function createMainPageSocialTiles() {
     container.appendChild(tile);
   }
 }
-
-// Call this function when your main page loads
-createMainPageSocialTiles();
+*/

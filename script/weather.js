@@ -72,11 +72,11 @@ if (geolocationCookie) {
     (error) => {
       console.error("Error getting location:", error);
       document.getElementById("weatherdiv").style.display = "none";
-      document.getElementById("offlinediv").style.display = "block";
+      document.getElementById("offlinediv").style.display = "flex";
     }
   );
 } else {
   console.log("Geolocation is not supported by this browser.");
   document.getElementById("weatherdiv").style.display = "none";
-  document.getElementById("offlinediv").style.display = "block";
+  document.getElementById("offlinediv").style.display = "flex";
 }

@@ -34,7 +34,7 @@
   height: 140px;
   outline: none;
   border: none;
-  background: #66b5f9;
+  background: #000000;
   border-radius: 5px 90px 5px 50%;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -116,7 +116,7 @@
 .card2:hover {
   cursor: pointer;
   scale: 1.1;
-  background-color: #03a9f4;
+  background-color: #1a1a1a;
 }
 
 .card2:hover .twitter {
