@@ -71,8 +71,10 @@ const generalSettingsModalContent = `<div id="general-settings">
   </div>
 </div>`;
 
+let generalSettingsWindow;
+
 function showGeneralSettingsModal() {
-  const generalSettingsWindow = new WinBox({
+  generalSettingsWindow = new WinBox({
     title: "General Settings",
     background: "transparent",
     modal: true,
@@ -130,6 +132,15 @@ function showGeneralSettingsModal() {
   // Call the function to set up the search engine management
   manageSearchEngine();
 }
+
+function hideGeneralSettingsModal() {
+  generalSettingsWindow.hide();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  showGeneralSettingsModal();
+  hideGeneralSettingsModal();
+});
 
 document
   .getElementById("settingsBtn")
