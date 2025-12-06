@@ -29,6 +29,18 @@
   fill: white;
 }
 
+.facebook,
+.linkedin,
+.tiktok,
+.reddit,
+.discord,
+.messenger,
+.notion {
+  margin-top: 1.5em;
+  margin-left: 1.2em;
+  fill: white;
+}
+
 .card2 {
   width: 140px;
   height: 140px;

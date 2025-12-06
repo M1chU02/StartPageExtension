@@ -390,108 +390,135 @@ function importAllData() {
   }
 }
 
-/*
+// === SOCIALS – konfiguracja kafelków ===
 const socialsTilesContainer = document.getElementById("socialsTilesContainer");
 const socialsSitesList = document.getElementById("socialsSitesList");
 
-// Define the social sites options
-const socialSites = [
-  { name: "Instagram", url: "https://www.instagram.com" },
-  { name: "Facebook", url: "https://www.facebook.com" },
-  { name: "TikTok", url: "https://www.tiktok.com" },
-  { name: "Twitter", url: "https://twitter.com" },
-  { name: "LinkedIn", url: "https://www.linkedin.com" },
-  { name: "Pinterest", url: "https://www.pinterest.com" },
-  { name: "YouTube", url: "https://www.youtube.com" },
-  { name: "Twitch", url: "https://www.twitch.tv" },
-  { name: "Reddit", url: "https://www.reddit.com" },
-  { name: "Telegram", url: "https://telegram.org" },
-  { name: "Discord", url: "https://discord.com" },
+const SOCIAL_SETTINGS_CARD_IDS = [
+  "card1",
+  "card2",
+  "card3",
+  "card4",
+  "spotifycard",
 ];
 
-// Function to create social tiles
-function createSocialTiles() {
-  socialsTilesContainer.innerHTML = ""; // Clear existing tiles
-  for (let i = 1; i <= 5; i++) {
-    const tile = document.createElement("div");
-    tile.id = `card${i}`;
-    tile.className = "social-tile";
+const SOCIAL_SETTINGS_DEFAULTS = {
+  card1: "Instagram",
+  card2: "Twitter",
+  card3: "Github",
+  card4: "Youtube",
+  spotifycard: "Spotify",
+};
 
-    const siteDisplay = document.createElement("span");
-    siteDisplay.textContent =
-      localStorage.getItem(`social_card${i}`) || `Social ${i}`;
+const SOCIAL_SETTINGS_SITES = [
+  { name: "Spotify", url: "https://open.spotify.com/" },
+  { name: "Facebook", url: "https://www.facebook.com/" },
+  { name: "Instagram", url: "https://www.instagram.com/" },
+  { name: "Twitter", url: "https://twitter.com/" },
+  { name: "Linkedin", url: "https://www.linkedin.com/" },
+  { name: "Youtube", url: "https://www.youtube.com/" },
+  { name: "Github", url: "https://github.com/" },
+  { name: "TikTok", url: "https://www.tiktok.com/" },
+  { name: "Reddit", url: "https://www.reddit.com/" },
+  { name: "Discord", url: "https://discord.com/" },
+  { name: "Messenger", url: "https://www.messenger.com/" },
+  { name: "Notion", url: "https://www.notion.so/" },
+];
 
-    const editButton = document.createElement("button");
-    editButton.textContent = "Edit";
-    editButton.addEventListener("click", () => showSocialSites(`card${i}`));
-
-    tile.appendChild(siteDisplay);
-    tile.appendChild(editButton);
-    socialsTilesContainer.appendChild(tile);
+function getCardLabel(cardId) {
+  switch (cardId) {
+    case "card1":
+      return "Góra lewa";
+    case "card2":
+      return "Góra prawa";
+    case "card3":
+      return "Dół lewa";
+    case "card4":
+      return "Dół prawa";
+    case "spotifycard":
+      return "Środek";
+    default:
+      return cardId;
   }
 }
 
-// Function to show social sites for a specific tile
+// Tworzenie kafelków w ustawieniach
+function createSocialTiles() {
+  if (!socialsTilesContainer) return;
+  socialsTilesContainer.innerHTML = "";
+
+  SOCIAL_SETTINGS_CARD_IDS.forEach((cardId) => {
+    const tile = document.createElement("div");
+    tile.className = "social-settings-row";
+
+    const label = document.createElement("span");
+    label.className = "social-settings-label";
+    label.textContent = getCardLabel(cardId);
+    tile.appendChild(label);
+
+    const siteDisplay = document.createElement("span");
+    siteDisplay.id = `social-display-${cardId}`;
+    const savedName =
+      localStorage.getItem(`social_${cardId}`) ||
+      SOCIAL_SETTINGS_DEFAULTS[cardId] ||
+      "—";
+    siteDisplay.textContent = savedName;
+    tile.appendChild(siteDisplay);
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Zmień";
+    editButton.addEventListener("click", () => showSocialSites(cardId));
+    tile.appendChild(editButton);
+
+    socialsTilesContainer.appendChild(tile);
+  });
+}
+
+// Lista serwisów do wyboru
 function showSocialSites(cardId) {
+  if (!socialsSitesList) return;
   const sitesList = socialsSitesList.querySelector("ul");
   sitesList.innerHTML = "";
-  socialSites.forEach((site) => {
+
+  SOCIAL_SETTINGS_SITES.forEach((site) => {
     const li = document.createElement("li");
     li.textContent = site.name;
     li.addEventListener("click", () => selectSocialSite(cardId, site));
     sitesList.appendChild(li);
   });
+
   socialsSitesList.style.display = "block";
 }
 
-// Function to select a social site
+// Zapis wyboru
 function selectSocialSite(cardId, site) {
   localStorage.setItem(`social_${cardId}`, site.name);
   localStorage.setItem(`social_url_${cardId}`, site.url);
-  const siteDisplay = document.querySelector(`#${cardId} span`);
-  siteDisplay.textContent = site.name;
-  socialsSitesList.style.display = "none";
+
+  const siteDisplay = document.getElementById(`social-display-${cardId}`);
+  if (siteDisplay) {
+    siteDisplay.textContent = site.name;
+  }
+
+  if (socialsSitesList) {
+    socialsSitesList.style.display = "none";
+  }
 }
 
-// Call these functions to set up the social tiles
+// Wczytanie zapisanych wartości (np. po imporcie danych)
+function loadSavedSocialSites() {
+  SOCIAL_SETTINGS_CARD_IDS.forEach((cardId) => {
+    const siteDisplay = document.getElementById(`social-display-${cardId}`);
+    if (!siteDisplay) return;
+
+    const savedName =
+      localStorage.getItem(`social_${cardId}`) ||
+      SOCIAL_SETTINGS_DEFAULTS[cardId] ||
+      "—";
+    siteDisplay.textContent = savedName;
+  });
+}
+
+// inicjalizacja
 createSocialTiles();
 loadSavedSocialSites();
-
-function loadSavedSocialSites() {
-  for (let i = 1; i <= 5; i++) {
-    const cardId = `card${i}`;
-    const savedSite = localStorage.getItem(`social_${cardId}`);
-    if (savedSite) {
-      const siteDisplay = document.querySelector(`#${cardId} span`);
-      siteDisplay.textContent = savedSite;
-    }
-  }
-}
-
-function openSocialSite(cardId) {
-  const url = localStorage.getItem(`social_url_${cardId}`);
-  if (url) {
-    window.open(url, "_blank");
-  } else {
-    alert(
-      "No social site selected for this tile. Please select a site in the settings."
-    );
-  }
-}
-
-// Call this function when your main page loads
-createMainPageSocialTiles();
-
-function createMainPageSocialTiles() {
-  const container = document.getElementById("socialsdiv"); // Make sure this container exists on your main page
-  for (let i = 1; i <= 5; i++) {
-    const cardId = `card${i}`;
-    const tile = document.createElement("div");
-    tile.className = "social-tile";
-    tile.textContent =
-      localStorage.getItem(`social_${cardId}`) || `Social ${i}`;
-    tile.addEventListener("click", () => openSocialSite(cardId));
-    container.appendChild(tile);
-  }
-}
-*/
