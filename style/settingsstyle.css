@@ -228,7 +228,11 @@
   font-size: 1.2em;
 }
 
-/* Wiersze konfiguracji socials w oknie ustawień */
+/* Socials configuration layout in settings modal */
+#socialsEdit {
+  position: relative;
+}
+
 #socialsTilesContainer {
   display: flex;
   flex-direction: column;
@@ -245,4 +249,31 @@
 
 .social-settings-label {
   font-weight: 500;
+}
+
+/* Sites dropdown – keep it inside the settings tile */
+#socialsSitesList {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  background: #202020;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 20;
+}
+
+#socialsSitesList ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#socialsSitesList li {
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+#socialsSitesList li:hover {
+  text-decoration: underline;
 }

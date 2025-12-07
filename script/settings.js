@@ -390,7 +390,7 @@ function importAllData() {
   }
 }
 
-// === SOCIALS – konfiguracja kafelków ===
+// === SOCIALS – configuration of tiles in settings ===
 const socialsTilesContainer = document.getElementById("socialsTilesContainer");
 const socialsSitesList = document.getElementById("socialsSitesList");
 
@@ -428,33 +428,32 @@ const SOCIAL_SETTINGS_SITES = [
 function getCardLabel(cardId) {
   switch (cardId) {
     case "card1":
-      return "Góra lewa";
+      return "Top left";
     case "card2":
-      return "Góra prawa";
+      return "Top right";
     case "card3":
-      return "Dół lewa";
+      return "Bottom left";
     case "card4":
-      return "Dół prawa";
+      return "Bottom right";
     case "spotifycard":
-      return "Środek";
+      return "Center";
     default:
       return cardId;
   }
 }
 
-// Tworzenie kafelków w ustawieniach
 function createSocialTiles() {
   if (!socialsTilesContainer) return;
   socialsTilesContainer.innerHTML = "";
 
   SOCIAL_SETTINGS_CARD_IDS.forEach((cardId) => {
-    const tile = document.createElement("div");
-    tile.className = "social-settings-row";
+    const row = document.createElement("div");
+    row.className = "social-settings-row";
 
     const label = document.createElement("span");
     label.className = "social-settings-label";
     label.textContent = getCardLabel(cardId);
-    tile.appendChild(label);
+    row.appendChild(label);
 
     const siteDisplay = document.createElement("span");
     siteDisplay.id = `social-display-${cardId}`;
@@ -463,18 +462,17 @@ function createSocialTiles() {
       SOCIAL_SETTINGS_DEFAULTS[cardId] ||
       "—";
     siteDisplay.textContent = savedName;
-    tile.appendChild(siteDisplay);
+    row.appendChild(siteDisplay);
 
     const editButton = document.createElement("button");
-    editButton.textContent = "Zmień";
+    editButton.textContent = "Change";
     editButton.addEventListener("click", () => showSocialSites(cardId));
-    tile.appendChild(editButton);
+    row.appendChild(editButton);
 
-    socialsTilesContainer.appendChild(tile);
+    socialsTilesContainer.appendChild(row);
   });
 }
 
-// Lista serwisów do wyboru
 function showSocialSites(cardId) {
   if (!socialsSitesList) return;
   const sitesList = socialsSitesList.querySelector("ul");
@@ -487,10 +485,10 @@ function showSocialSites(cardId) {
     sitesList.appendChild(li);
   });
 
+  socialsSitesList.dataset.cardId = cardId;
   socialsSitesList.style.display = "block";
 }
 
-// Zapis wyboru
 function selectSocialSite(cardId, site) {
   localStorage.setItem(`social_${cardId}`, site.name);
   localStorage.setItem(`social_url_${cardId}`, site.url);
@@ -502,10 +500,15 @@ function selectSocialSite(cardId, site) {
 
   if (socialsSitesList) {
     socialsSitesList.style.display = "none";
+    delete socialsSitesList.dataset.cardId;
+  }
+
+  // Immediately update the tile on the main page (if function is available)
+  if (typeof applySocialToButton === "function") {
+    applySocialToButton(cardId);
   }
 }
 
-// Wczytanie zapisanych wartości (np. po imporcie danych)
 function loadSavedSocialSites() {
   SOCIAL_SETTINGS_CARD_IDS.forEach((cardId) => {
     const siteDisplay = document.getElementById(`social-display-${cardId}`);
@@ -519,6 +522,6 @@ function loadSavedSocialSites() {
   });
 }
 
-// inicjalizacja
+// initialization
 createSocialTiles();
 loadSavedSocialSites();
