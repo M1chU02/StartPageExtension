@@ -253,13 +253,13 @@
 /* dropdown with sites – positioned inside socials tile */
 #socialsSitesList {
   position: absolute;
-  top: 40px;
+  top: 10px;
   right: 10px;
   background: #202020;
   padding: 8px 12px;
   border-radius: 8px;
+  z-index: 99999;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  z-index: 20;
 }
 
 #socialsSitesList ul {
@@ -275,4 +275,15 @@
 
 #socialsSitesList li:hover {
   text-decoration: underline;
+}
+
+#socialsPreviewHost {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+#socialsPreviewHost .socials-preview-clone {
+  transform: scale(0.9);
+  transform-origin: top center;
 }

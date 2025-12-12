@@ -83,22 +83,21 @@ const SOCIAL_DEFAULTS = {
   spotifycard: "Spotify",
 };
 
-function applySocialToButton(cardId) {
-  const btn = document.getElementById(cardId);
-  if (!btn) return;
-
+function getSocialConfig(cardId) {
   const socialName =
     localStorage.getItem(`social_${cardId}`) || SOCIAL_DEFAULTS[cardId];
   const config = SOCIAL_SITES[socialName];
-  if (!config) return;
+  return { socialName, config };
+}
 
-  // persist default to storage as well
-  localStorage.setItem(`social_${cardId}`, socialName);
-  localStorage.setItem(`social_url_${cardId}`, config.url);
+function applySocialToElement(btn, cardId) {
+  if (!btn) return;
+
+  const { socialName, config } = getSocialConfig(cardId);
+  if (!config) return;
 
   btn.title = socialName;
 
-  // update SVG icon
   const svg = btn.querySelector("svg");
   if (svg) {
     svg.setAttribute("class", config.iconClass);
@@ -112,12 +111,26 @@ function applySocialToButton(cardId) {
     }
   }
 
-  // update tile background color (overrides CSS background)
   if (config.backgroundColor) {
     btn.style.background = config.backgroundColor;
   }
+}
 
-  // click behaviour
+function applySocialToButton(cardId) {
+  const btn = document.getElementById(cardId);
+  if (!btn) return;
+
+  const { socialName, config } = getSocialConfig(cardId);
+  if (!config) return;
+
+  // persist selection
+  localStorage.setItem(`social_${cardId}`, socialName);
+  localStorage.setItem(`social_url_${cardId}`, config.url);
+
+  // apply UI
+  applySocialToElement(btn, cardId);
+
+  // navigation only for real homepage tiles
   btn.onclick = () => {
     window.location.href = config.url;
   };

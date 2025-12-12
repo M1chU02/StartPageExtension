@@ -27,14 +27,12 @@ generalSettingsModal.innerHTML = `<div id="general-settings" style="display: non
 
     <div class="settings-tile" id="socialsEdit">
       <h1>Socials</h1>
-      <div id="socialsTilesContainer">
-        <!-- We'll populate this dynamically -->
-      </div>
-      <div id="socialsSitesList" style="display: none;">
+
+      <div id="socialsPreviewHost"></div>
+
+      <div id="socialsSitesList" style="display:none;">
         <h2>Choose a site</h2>
-        <ul>
-          <!-- We'll populate this dynamically -->
-        </ul>
+        <ul></ul>
       </div>
     </div>
 
@@ -87,16 +85,20 @@ generalSettings.addEventListener("click", function (e) {
 
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
-    document.getElementById("general-settings").style.display = "none";
+    hideGeneralSettingsModal();
+    closeSocialPicker();
   }
 });
 
 function showGeneralSettingsModal() {
   document.getElementById("general-settings").style.display = "flex";
+  buildSocialsPreviewInSettings();
+  closeSocialPicker();
 }
 
 function hideGeneralSettingsModal() {
   document.getElementById("general-settings").style.display = "none";
+  closeSocialPicker();
 }
 
 document
@@ -390,25 +392,9 @@ function importAllData() {
   }
 }
 
-// === SOCIALS – configuration of tiles in settings ===
-const socialsTilesContainer = document.getElementById("socialsTilesContainer");
+// === SOCIALS – live preview in settings (clone real circle) ===
+
 const socialsSitesList = document.getElementById("socialsSitesList");
-
-const SOCIAL_SETTINGS_CARD_IDS = [
-  "card1",
-  "card2",
-  "card3",
-  "card4",
-  "spotifycard",
-];
-
-const SOCIAL_SETTINGS_DEFAULTS = {
-  card1: "Instagram",
-  card2: "Twitter",
-  card3: "Github",
-  card4: "Youtube",
-  spotifycard: "Spotify",
-};
 
 const SOCIAL_SETTINGS_SITES = [
   { name: "Spotify", url: "https://open.spotify.com/" },
@@ -425,103 +411,98 @@ const SOCIAL_SETTINGS_SITES = [
   { name: "Notion", url: "https://www.notion.so/" },
 ];
 
-function getCardLabel(cardId) {
-  switch (cardId) {
-    case "card1":
-      return "Top left";
-    case "card2":
-      return "Top right";
-    case "card3":
-      return "Bottom left";
-    case "card4":
-      return "Bottom right";
-    case "spotifycard":
-      return "Center";
-    default:
-      return cardId;
+const SOCIAL_IDS = ["card1", "card2", "card3", "card4", "spotifycard"];
+const PREVIEW_SUFFIX = "-settings-preview";
+
+function buildSocialsPreviewInSettings() {
+  const host = document.getElementById("socialsPreviewHost");
+  if (!host) return;
+
+  // This MUST be the wrapper of your real circle on the homepage:
+  // update selector if your wrapper has different id/class.
+  const realCircle =
+    document.getElementById("socialsdiv") ||
+    document.querySelector("#socialsdiv") ||
+    document.querySelector(".socialsdiv");
+
+  if (!realCircle) {
+    host.innerHTML =
+      "<div style='opacity:.7;font-size:12px'>Socials preview not found</div>";
+    return;
   }
+
+  host.innerHTML = "";
+
+  const clone = realCircle.cloneNode(true);
+  clone.id = "socialsdiv-settings-preview";
+  clone.classList.add("socials-preview-clone");
+
+  // rename ids inside the clone and attach edit actions
+  SOCIAL_IDS.forEach((id) => {
+    const btn = clone.querySelector(`#${CSS.escape(id)}`);
+    if (!btn) return;
+
+    btn.id = `${id}${PREVIEW_SUFFIX}`;
+
+    // prevent navigation in settings
+    btn.onclick = null;
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openSocialPicker(id);
+    });
+  });
+
+  host.appendChild(clone);
+
+  // apply current socials to preview buttons
+  refreshSocialsPreviewInSettings();
 }
 
-function createSocialTiles() {
-  if (!socialsTilesContainer) return;
-  socialsTilesContainer.innerHTML = "";
+function refreshSocialsPreviewInSettings() {
+  SOCIAL_IDS.forEach((id) => {
+    const previewBtn = document.getElementById(`${id}${PREVIEW_SUFFIX}`);
+    if (!previewBtn) return;
 
-  SOCIAL_SETTINGS_CARD_IDS.forEach((cardId) => {
-    const row = document.createElement("div");
-    row.className = "social-settings-row";
-
-    const label = document.createElement("span");
-    label.className = "social-settings-label";
-    label.textContent = getCardLabel(cardId);
-    row.appendChild(label);
-
-    const siteDisplay = document.createElement("span");
-    siteDisplay.id = `social-display-${cardId}`;
-    const savedName =
-      localStorage.getItem(`social_${cardId}`) ||
-      SOCIAL_SETTINGS_DEFAULTS[cardId] ||
-      "—";
-    siteDisplay.textContent = savedName;
-    row.appendChild(siteDisplay);
-
-    const editButton = document.createElement("button");
-    editButton.textContent = "Change";
-    editButton.addEventListener("click", () => showSocialSites(cardId));
-    row.appendChild(editButton);
-
-    socialsTilesContainer.appendChild(row);
+    // applySocialToElement comes from socials.js (you already have it)
+    if (typeof applySocialToElement === "function") {
+      applySocialToElement(previewBtn, id);
+    }
   });
 }
 
-function showSocialSites(cardId) {
+function openSocialPicker(cardId) {
   if (!socialsSitesList) return;
-  const sitesList = socialsSitesList.querySelector("ul");
-  sitesList.innerHTML = "";
+
+  const list = socialsSitesList.querySelector("ul");
+  list.innerHTML = "";
 
   SOCIAL_SETTINGS_SITES.forEach((site) => {
     const li = document.createElement("li");
     li.textContent = site.name;
-    li.addEventListener("click", () => selectSocialSite(cardId, site));
-    sitesList.appendChild(li);
+
+    li.addEventListener("click", () => {
+      localStorage.setItem(`social_${cardId}`, site.name);
+      localStorage.setItem(`social_url_${cardId}`, site.url);
+
+      // update homepage tile
+      if (typeof applySocialToButton === "function") {
+        applySocialToButton(cardId);
+      }
+
+      // update preview tile
+      refreshSocialsPreviewInSettings();
+
+      closeSocialPicker();
+    });
+
+    list.appendChild(li);
   });
 
-  socialsSitesList.dataset.cardId = cardId;
   socialsSitesList.style.display = "block";
 }
 
-function selectSocialSite(cardId, site) {
-  localStorage.setItem(`social_${cardId}`, site.name);
-  localStorage.setItem(`social_url_${cardId}`, site.url);
-
-  const siteDisplay = document.getElementById(`social-display-${cardId}`);
-  if (siteDisplay) {
-    siteDisplay.textContent = site.name;
-  }
-
-  if (socialsSitesList) {
-    socialsSitesList.style.display = "none";
-    delete socialsSitesList.dataset.cardId;
-  }
-
-  // Immediately update the tile on the main page (if function is available)
-  if (typeof applySocialToButton === "function") {
-    applySocialToButton(cardId);
-  }
+function closeSocialPicker() {
+  if (socialsSitesList) socialsSitesList.style.display = "none";
 }
-
-function loadSavedSocialSites() {
-  SOCIAL_SETTINGS_CARD_IDS.forEach((cardId) => {
-    const siteDisplay = document.getElementById(`social-display-${cardId}`);
-    if (!siteDisplay) return;
-
-    const savedName =
-      localStorage.getItem(`social_${cardId}`) ||
-      SOCIAL_SETTINGS_DEFAULTS[cardId] ||
-      "—";
-    siteDisplay.textContent = savedName;
-  });
-}
-
-// initialization
-createSocialTiles();
-loadSavedSocialSites();
