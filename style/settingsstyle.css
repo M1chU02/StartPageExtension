@@ -55,9 +55,7 @@
   cursor: pointer;
 }
 
-#socialsEdit {
-  grid-column: span 3;
-}
+
 
 .settings-tile {
   padding: 20px;
@@ -228,9 +226,7 @@
 }
 
 /* Socials configuration in settings modal */
-#socialsEdit {
-  position: relative; /* parent for absolute dropdown */
-}
+/* Socials configuration in settings modal */
 
 #socialsTilesContainer {
   display: flex;
@@ -286,4 +282,21 @@
 #socialsPreviewHost .socials-preview-clone {
   transform: scale(0.9);
   transform-origin: top center;
+  /* Restore layout from #socialsdiv */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  position: relative;
+}
+
+/* Standalone styles for #socialsEdit mimicking .settings-tile but without button overrides */
+#socialsEdit {
+  grid-column: span 3;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }

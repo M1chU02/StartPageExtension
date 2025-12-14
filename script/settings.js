@@ -25,7 +25,7 @@ generalSettingsModal.innerHTML = `<div id="general-settings" style="display: non
       </select>
     </div>
 
-    <div class="settings-tile" id="socialsEdit">
+    <div id="socialsEdit">
       <h1>Socials</h1>
 
       <div id="socialsPreviewHost"></div>
