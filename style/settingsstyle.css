@@ -18,6 +18,19 @@
   overflow-y: auto;
   margin-top: 20px;
   padding-right: 10px;
+  --sb-size: 10px;
+}
+
+#general-settings-form::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+#general-settings-form::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+#general-settings-form::-webkit-scrollbar-thumb {
+  border-radius: 10px;
 }
 
 #general-settings-close-button {
@@ -54,8 +67,6 @@
   border-radius: 3px;
   cursor: pointer;
 }
-
-
 
 .settings-tile {
   padding: 20px;

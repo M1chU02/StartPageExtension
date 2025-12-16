@@ -659,6 +659,14 @@ hr {
   color: var(--font-color);
 }
 
+#general-settings-form::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+}
+
+#general-settings-form::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+}
+
 #general-settings-close-button {
   background-color: red !important;
   color: var(--font-color);
