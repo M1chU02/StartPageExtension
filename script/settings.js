@@ -1,13 +1,11 @@
 const footerEl = document.getElementById("footer");
 const settingsBtn = document.getElementById("settingsBtn");
-settingsBtn.addEventListener("click", showGeneralSettingsModal);
 
-const generalSettingsModal = document.createElement("div");
-generalSettingsModal.innerHTML = `<div id="general-settings" style="display: none">
+// Define the HTML content for the settings modal
+const generalSettingsModalContent = `<div id="general-settings">
   <div id="general-settings-form">
     
     <div class="settings-tile" id="usernameChangeEl">
-    <button id="general-settings-close-button">&times;</button>
       <h1>Change Username</h1>
       <label for="username" id="change-username-label">Username:</label>
       <input type="text" id="username" autocomplete="off">
@@ -69,49 +67,82 @@ generalSettingsModal.innerHTML = `<div id="general-settings" style="display: non
     </div>
   </div>
 </div>`;
-document.body.appendChild(generalSettingsModal);
 
-const generalSettingsCloseButton = document.getElementById(
-  "general-settings-close-button"
-);
-generalSettingsCloseButton.addEventListener("click", hideGeneralSettingsModal);
-
-const generalSettings = document.getElementById("general-settings");
-generalSettings.addEventListener("click", function (e) {
-  if (e.target === generalSettings) {
-    hideGeneralSettingsModal();
-  }
-});
-
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape") {
-    hideGeneralSettingsModal();
-    closeSocialPicker();
-  }
-});
+let generalSettingsWindow;
 
 function showGeneralSettingsModal() {
-  document.getElementById("general-settings").style.display = "flex";
-  buildSocialsPreviewInSettings();
-  closeSocialPicker();
-}
+  generalSettingsWindow = new WinBox({
+    title: "General Settings",
+    background: "transparent",
+    modal: true,
+    width: "1050px",
+    height: "85%",
+    html: generalSettingsModalContent,
+    x: "center",
+    y: "center",
+    onclose: function () {
+      closeSocialPicker();
+      // generalSettingsWindow = null; // Optional: clear reference
+    },
+  });
 
-function hideGeneralSettingsModal() {
-  document.getElementById("general-settings").style.display = "none";
-  closeSocialPicker();
-}
+  // Attach event listeners AFTER the content is in the DOM (via WinBox)
+  // We can scope these to generalSettingsWindow.body to be safe
+  const body = generalSettingsWindow.body;
 
-document
-  .getElementById("changeUsername")
-  .addEventListener("click", changeUserName);
+  body
+    .querySelector("#changeUsername")
+    .addEventListener("click", changeUserName);
+  body.querySelector("#username").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      changeUserName();
+    }
+  });
 
-document.getElementById("username").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    changeUserName();
+  body
+    .querySelector("#delete-bookmarks-button")
+    .addEventListener("click", deleteAllBookmarks);
+  body
+    .querySelector("#export-bookmarks-button")
+    .addEventListener("click", exportBookmarks);
+  body
+    .querySelector("#import-bookmarks-input")
+    .addEventListener("change", importBookmarks);
+
+  body
+    .querySelector("#delete-notes-button")
+    .addEventListener("click", deleteAllNotes);
+  body
+    .querySelector("#export-notes-button")
+    .addEventListener("click", exportNotes);
+  body
+    .querySelector("#import-notes-input")
+    .addEventListener("change", importNotes);
+
+  body
+    .querySelector("#export-all-data-button")
+    .addEventListener("click", exportAllData);
+  body
+    .querySelector("#import-all-data-input")
+    .addEventListener("change", importAllData);
+  body
+    .querySelector("#change-theme-button")
+    .addEventListener("click", showThemeModal);
+
+  // Initialize features inside the modal
+  manageSearchEngine(body);
+  buildSocialsPreviewInSettings(body);
+  closeSocialPicker(); // Ensure it starts closed
+  if (typeof window.initializeBackgroundSettings === "function") {
+    window.initializeBackgroundSettings(body);
   }
-});
+}
+
+settingsBtn.addEventListener("click", showGeneralSettingsModal);
 
 function changeUserName() {
+  // Look in the specific window or document. Since IDs are unique, document.getElementById usually works,
+  // but if multiple modals exist, scoping is better. For now, document.getElementById is fine as IDs are unique.
   let newUserName = document.getElementById("username").value;
   if (newUserName == "") {
     document.getElementById("username").placeholder = "Enter username!";
@@ -121,10 +152,12 @@ function changeUserName() {
   }
 }
 
-function manageSearchEngine() {
-  const searchEngineSelect = document
-    .getElementById("searchEngineChangeEl")
-    .querySelector("select");
+function manageSearchEngine(scope = document) {
+  const searchEngineSelect = scope.querySelector(
+    "#searchEngineChangeEl select"
+  );
+
+  // These might be outside the modal (main search bar), so use global document for them.
   const searchForm = document.querySelector("#searchform");
   const searchInput = document.querySelector("#searchinput");
 
@@ -146,7 +179,7 @@ function manageSearchEngine() {
   // Function to update search form action
   function updateSearchForm() {
     const selectedEngine = searchEngineSelect.value;
-    const searchUrl = searchEngines[selectedEngine];
+    // const searchUrl = searchEngines[selectedEngine]; // unused var
     localStorage.setItem("selectedSearchEngine", selectedEngine);
   }
 
@@ -156,29 +189,40 @@ function manageSearchEngine() {
   // Listen for changes in search engine selection
   searchEngineSelect.addEventListener("change", updateSearchForm);
 
-  // Modify form submission behavior
+  // Modify form submission behavior - this needs to be attached ONCE to the main form,
+  // possibly in a separate init block, but here is okay if we ensure we don't duplicate listeners too much.
+  // Actually, manageSearchEngine is called every time modal opens.
+  // We should NOT attach listener to global searchForm here repeatedly.
+  // Ideally, the global search logic should be outside 'showGeneralSettingsModal'.
+  // However, for this refactor, let's keep it but be careful.
+  // Better: Extract global logic out of this specific function or check if already attached.
+  // For safety in this refactor, I will LEAVE the listener attachment to the main form OUT of this function
+  // if it's meant to run once on load.
+  // Looking at original code: it was run once at the end of file.
+}
+
+// Global search initialization (run once)
+(function initGlobalSearch() {
+  const searchForm = document.querySelector("#searchform");
+  const searchInput = document.querySelector("#searchinput");
+
+  const searchEngines = {
+    Google: "https://www.google.com/search?q=",
+    "Microsoft Bing": "https://www.bing.com/search?q=",
+    "Yahoo!": "https://search.yahoo.com/search?p=",
+    Yandex: "https://yandex.com/search/?text=",
+    DuckDuckGo: "https://duckduckgo.com/?q=",
+  };
+
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    const selectedEngine = searchEngineSelect.value;
-    const searchUrl = searchEngines[selectedEngine];
+    const savedSearchEngine =
+      localStorage.getItem("selectedSearchEngine") || "Google";
+    const searchUrl = searchEngines[savedSearchEngine];
     const searchQuery = encodeURIComponent(searchInput.value);
     window.location.href = `${searchUrl}${searchQuery}`;
   });
-}
-
-// Call the function to set up the search engine management
-manageSearchEngine();
-
-document
-  .getElementById("delete-bookmarks-button")
-  .addEventListener("click", deleteAllBookmarks);
-document
-  .getElementById("export-bookmarks-button")
-  .addEventListener("click", exportBookmarks);
-
-document
-  .getElementById("import-bookmarks-input")
-  .addEventListener("change", importBookmarks);
+})();
 
 function deleteAllBookmarks() {
   localStorage.removeItem("bookmarks");
@@ -216,23 +260,14 @@ function importBookmarks() {
   }
 }
 
-document
-  .getElementById("delete-notes-button")
-  .addEventListener("click", deleteAllNotes);
-document
-  .getElementById("export-notes-button")
-  .addEventListener("click", exportNotes);
-document
-  .getElementById("import-notes-input")
-  .addEventListener("change", importNotes);
-
 function deleteAllNotes() {
   localStorage.removeItem("notepadNotes");
-  notes.length = 0;
-  saveNotes();
-  loadDefaultNote();
-  updateNoteList();
-  switchNote(0);
+  // Assuming 'notes', 'saveNotes', 'loadDefaultNote' etc are global from notepad.js
+  if (typeof notes !== "undefined") notes.length = 0;
+  if (typeof saveNotes === "function") saveNotes();
+  if (typeof loadDefaultNote === "function") loadDefaultNote();
+  if (typeof updateNoteList === "function") updateNoteList();
+  if (typeof switchNote === "function") switchNote(0);
 }
 
 function exportNotes() {
@@ -258,7 +293,7 @@ function importNotes() {
     reader.onload = function (e) {
       const importedNotes = JSON.parse(e.target.result);
       localStorage.setItem("notepadNotes", importedNotes);
-      initializeNotepad();
+      if (typeof initializeNotepad === "function") initializeNotepad();
       location.reload();
     };
 
@@ -266,7 +301,12 @@ function importNotes() {
   }
 }
 
+// === THEME MODAL (kept mostly same, just scoped) ===
+
 function createThemeModal() {
+  // Only create if not exists
+  if (document.getElementById("theme-modal")) return;
+
   const themeModal = document.createElement("div");
   themeModal.id = "theme-modal";
   themeModal.innerHTML = `
@@ -286,6 +326,12 @@ function createThemeModal() {
 
   const themeList = document.getElementById("theme-list");
   themeList.addEventListener("click", handleThemeSelection);
+
+  themeModal.addEventListener("click", function (e) {
+    if (e.target === themeModal) {
+      hideThemeModal();
+    }
+  });
 }
 
 function handleThemeSelection(event) {
@@ -303,16 +349,14 @@ function applyTheme(theme) {
 }
 
 function showThemeModal() {
-  hideGeneralSettingsModal();
+  // If general settings is open, we might want to hide it or keep it open.
+  // Original logic hid it.
+  if (generalSettingsWindow) {
+    // generalSettingsWindow.hide(); // Optional behavior?
+  }
+
   const themeModal = document.getElementById("theme-modal");
   themeModal.style.display = "flex";
-  document
-    .getElementById("theme-modal")
-    .addEventListener("click", function (e) {
-      if (e.target === themeModal) {
-        hideThemeModal();
-      }
-    });
 }
 
 function hideThemeModal() {
@@ -323,29 +367,18 @@ function hideThemeModal() {
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     hideThemeModal();
+    // also close social picker if open? handled in its own logic or global listener
   }
 });
 
+// Init Theme Logic
 createThemeModal();
-
 document.addEventListener("DOMContentLoaded", () => {
   const selectedTheme = localStorage.getItem("selectedTheme");
   if (selectedTheme) {
     applyTheme(selectedTheme);
   }
 });
-
-document
-  .getElementById("change-theme-button")
-  .addEventListener("click", showThemeModal);
-
-document
-  .getElementById("export-all-data-button")
-  .addEventListener("click", exportAllData);
-
-document
-  .getElementById("import-all-data-input")
-  .addEventListener("change", importAllData);
 
 function exportAllData() {
   const allData = {
@@ -392,9 +425,7 @@ function importAllData() {
   }
 }
 
-// === SOCIALS – live preview in settings (clone real circle) ===
-
-const socialsSitesList = document.getElementById("socialsSitesList");
+// === SOCIALS – live preview in settings ===
 
 const SOCIAL_SETTINGS_SITES = [
   { name: "Spotify", url: "https://open.spotify.com/" },
@@ -414,12 +445,11 @@ const SOCIAL_SETTINGS_SITES = [
 const SOCIAL_IDS = ["card1", "card2", "card3", "card4", "spotifycard"];
 const PREVIEW_SUFFIX = "-settings-preview";
 
-function buildSocialsPreviewInSettings() {
-  const host = document.getElementById("socialsPreviewHost");
+function buildSocialsPreviewInSettings(scope = document) {
+  const host = scope.querySelector("#socialsPreviewHost");
   if (!host) return;
 
   // This MUST be the wrapper of your real circle on the homepage:
-  // update selector if your wrapper has different id/class.
   const realCircle =
     document.getElementById("socialsdiv") ||
     document.querySelector("#socialsdiv") ||
@@ -439,7 +469,16 @@ function buildSocialsPreviewInSettings() {
 
   // rename ids inside the clone and attach edit actions
   SOCIAL_IDS.forEach((id) => {
-    const btn = clone.querySelector(`#${CSS.escape(id)}`);
+    // Note: Since we are cloning, IDs are duplicated in DOM until we change them.
+    // clone.querySelector finds them inside the clone before they are attached to DOM?
+    // Yes, but standard ID lookup might be confused if we put it in DOM first.
+    // But we are editing CLONE's children.
+
+    // We need to find the element inside 'clone' that HAD the id 'id'.
+    // Since IDs might be duplicated now (if clone is not connected, it's fine-ish, but dangerous)
+    // Safe way: querySelector by [id="..."]
+
+    const btn = clone.querySelector(`[id="${id}"]`);
     if (!btn) return;
 
     btn.id = `${id}${PREVIEW_SUFFIX}`;
@@ -450,29 +489,30 @@ function buildSocialsPreviewInSettings() {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      openSocialPicker(id);
+      openSocialPicker(id, scope);
     });
   });
 
   host.appendChild(clone);
 
   // apply current socials to preview buttons
-  refreshSocialsPreviewInSettings();
+  refreshSocialsPreviewInSettings(scope);
 }
 
-function refreshSocialsPreviewInSettings() {
+function refreshSocialsPreviewInSettings(scope = document) {
   SOCIAL_IDS.forEach((id) => {
-    const previewBtn = document.getElementById(`${id}${PREVIEW_SUFFIX}`);
+    const previewBtn = scope.querySelector(`#${id}${PREVIEW_SUFFIX}`);
     if (!previewBtn) return;
 
-    // applySocialToElement comes from socials.js (you already have it)
+    // applySocialToElement comes from socials.js
     if (typeof applySocialToElement === "function") {
       applySocialToElement(previewBtn, id);
     }
   });
 }
 
-function openSocialPicker(cardId) {
+function openSocialPicker(cardId, scope = document) {
+  const socialsSitesList = scope.querySelector("#socialsSitesList");
   if (!socialsSitesList) return;
 
   const list = socialsSitesList.querySelector("ul");
@@ -492,9 +532,9 @@ function openSocialPicker(cardId) {
       }
 
       // update preview tile
-      refreshSocialsPreviewInSettings();
+      refreshSocialsPreviewInSettings(scope);
 
-      closeSocialPicker();
+      closeSocialPicker(scope);
     });
 
     list.appendChild(li);
@@ -503,6 +543,13 @@ function openSocialPicker(cardId) {
   socialsSitesList.style.display = "block";
 }
 
-function closeSocialPicker() {
+function closeSocialPicker(scope = document) {
+  // If we are passing scope (the body of winbox), find it there.
+  // If strict mode, standard document.getElementById might fail if winbox shadow/iframe (but it's just a div).
+  // However, `socialsSitesList` variable from top of file is NOT available here properly if we refactor.
+  // Best to query it again.
+  const socialsSitesList =
+    scope.querySelector("#socialsSitesList") ||
+    document.getElementById("socialsSitesList");
   if (socialsSitesList) socialsSitesList.style.display = "none";
 }

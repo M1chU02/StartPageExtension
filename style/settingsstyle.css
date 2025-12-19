@@ -1,23 +1,40 @@
+/* WinBox Body Override to prevent grey background */
+.wb-body {
+  background: transparent;
+}
+
+.wb-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.wb-body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 10px;
+}
+
+.wb-body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 10px;
+}
+
 #general-settings {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  justify-content: center;
-  align-items: flex-start;
-  z-index: 9999;
   display: flex;
+  justify-content: center;
+  background-color: transparent;
 }
 
 #general-settings-form {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  max-height: 90vh;
-  overflow-y: auto;
-  margin-top: 20px;
-  padding-right: 10px;
+  /* max-height: 90vh; Removed to fit WinBox */
+  height: auto;
+  width: 100%;
+  overflow-y: visible;
+  margin-top: 0;
+  padding: 10px;
   --sb-size: 10px;
 }
 
