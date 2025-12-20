@@ -1,58 +1,70 @@
-.up {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5em;
-}
-
+.up,
 .down {
   display: flex;
   flex-direction: row;
   gap: 0.5em;
 }
 
-.card1 {
+/* Shared Card Styles */
+.card1,
+.card2,
+.card3,
+.card4 {
   width: 140px;
   height: 140px;
   outline: none;
   border: none;
-  border-radius: 90px 5px 50% 5px;
+  padding: 0;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   transition: 0.2s ease-in-out;
   z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.instagram,
-.facebook,
-.linkedin,
-.tiktok,
-.reddit,
-.discord,
-.messenger,
-.notion {
-  margin-top: 1.5em;
-  margin-left: 1.2em;
-  fill: white;
+/* Specific Border Radius */
+.card1 {
+  border-radius: 90px 5px 50% 5px;
 }
 
 .card2 {
-  width: 140px;
-  height: 140px;
-  outline: none;
-  border: none;
   border-radius: 5px 90px 5px 50%;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: 0.2s ease-in-out;
-  z-index: 2;
 }
 
-.twitter {
-  margin-top: 1.5em;
-  margin-left: -0.9em;
+.card3 {
+  border-radius: 5px 50% 5px 90px;
+}
+
+.card4 {
+  border-radius: 50% 5px 90px 5px;
+}
+
+/* Common SVG Styling for Social Cards */
+.card1 svg,
+.card2 svg,
+.card3 svg,
+.card4 svg {
+  margin: 0;
   fill: white;
 }
 
+/* Specific Fix for Top-Right Tile Visual Alignment */
+.card2 svg {
+  transform: translate(-0.6em, 0.6em);
+}
+
+/* Hover Scaling */
+.card1:hover,
+.card2:hover,
+.card3:hover,
+.card4:hover {
+  cursor: pointer;
+  scale: 1.1;
+}
+
+/* Central Spotify Card */
 .spotifycard {
   width: 290px;
   height: 290px;
@@ -65,75 +77,11 @@
   border-radius: 92px;
 }
 
-.spotify {
-  fill: white;
-}
-
-.card3 {
-  width: 140px;
-  height: 140px;
-  outline: none;
-  border: none;
-  border-radius: 5px 50% 5px 90px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: 0.2s ease-in-out;
-  z-index: 2;
-}
-
-.github {
-  margin-top: -0.6em;
-  margin-left: 1.2em;
-  fill: white;
-}
-
-.card4 {
-  width: 140px;
-  height: 140px;
-  outline: none;
-  border: none;
-  border-radius: 50% 5px 90px 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: 0.2s ease-in-out;
-  z-index: 2;
-}
-
-.card1:hover,
-.card2:hover,
-.card3:hover,
-.card4:hover {
-  cursor: pointer;
-  scale: 1.1;
-}
-
-.youtube {
-  margin-top: -0.9em;
-  margin-left: -1.2em;
-  fill: white;
-}
-
-.card1:hover .instagram {
-  fill: white;
-}
-
-.card2:hover .twitter {
+.spotifycard svg {
   fill: white;
 }
 
 .spotifycard:hover {
   cursor: pointer;
   scale: 1.05;
-}
-
-.spotifycard:hover .spotify {
-  fill: white;
-}
-
-.card3:hover .github {
-  fill: white;
-}
-
-.card4:hover .youtube {
-  fill: white;
 }
