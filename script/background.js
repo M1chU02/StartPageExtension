@@ -9,10 +9,6 @@ window.initializeBackgroundSettings = function (scope = document) {
   // Clear existing to avoid duplicates if re-opened
   backgroundContainer.innerHTML = "";
 
-  // Re-attach event listener for random button
-  // Note: We need to remove old listener if we are re-attaching, or clone node.
-  // Easier to just assign onclick or addEventListener with cleanup?
-  // Since scope is destroyed on close, it's fine.
   randomThemeButton.addEventListener("click", toggleRandomBackground);
 
   // Update button state visually
@@ -30,8 +26,6 @@ window.initializeBackgroundSettings = function (scope = document) {
       themeBg.classList.add("miniBg");
       themeBg.id = "themeBg";
       themeBg.addEventListener("click", () => {
-        // This needs to find the element in the CURRENT scope
-        // or just use 'themeBg' variable which we have captured
         const themeBgColor = window.getComputedStyle(themeBg).backgroundColor;
         console.log(themeBgColor);
         setAndSaveBackgroundColor(themeBgColor);
@@ -115,7 +109,6 @@ const loadBackgroundFromStorage = () => {
   const isRandomBackground =
     localStorage.getItem("isRandomBackground") === "true";
 
-  // Just handling body styles here
   if (isRandomBackground) {
     setRandomBackground();
   } else {
@@ -142,7 +135,6 @@ const setRandomBackground = () => {
 const toggleRandomBackground = () => {
   const isRandomBackground =
     localStorage.getItem("isRandomBackground") === "true";
-  // We need to update UI for ALL potential buttons (if multiple exist, unlikely but safe)
   const randomBtns = document.querySelectorAll(
     "#random-theme-background-button"
   );
@@ -153,11 +145,6 @@ const toggleRandomBackground = () => {
       btn.classList.remove("toggleOn");
       btn.classList.add("toggleOff");
     });
-    loadBackgroundFromStorage(); // reloads current/saved? logic says: if false, load saved.
-    // But we just set it to false.
-    // Actually, toggleRandomBackground in original code did location.reload().
-    // Let's keep reload for simplicity as per original code?
-    // Original: location.reload();
     location.reload();
   } else {
     localStorage.setItem("isRandomBackground", "true");

@@ -1,16 +1,18 @@
 Dark Mode:
     --font-family: "Gruppo", "Chakra Petch";
+    --button-background: #007bff;
     --background-color: #141414;
     --button-hover-background: #0052aa;
-    --button-background: #007bff;
     --font-color: #ffffff;
     --submit-button-background: #707070;
     --submit-button-hover-background: #458bc2;
     --submit-button-font-color: #efefef;
-    --modal-background: rgba(0, 0, 0, 0.7);
+    --modal-background: rgba(0, 0, 0, 0.4);
     --form-container-background: #303030;
     --sb-track-color: #232e33;
     --sb-thumb-color: #007bff;
+    --tile-background: #3b3b3b;
+    --tile-border-radius: 10px;
 
 Ocean Blue:
     --font-family: "Helvetica Neue", Arial, sans-serif;
@@ -21,10 +23,12 @@ Ocean Blue:
     --submit-button-background: #4b4b4b;
     --submit-button-hover-background: #757575;
     --submit-button-font-color: #efefef;
-    --modal-background: rgba(0, 0, 0, 0.7);
+    --modal-background: rgba(0, 0, 0, 0.4);
     --form-container-background: #2d343e;
-    --sb-track-color: #1c2331;
+    --sb-track-color: #4b4b4b;
     --sb-thumb-color: #0097e6;
+    --tile-background: #353c48;
+    --tile-border-radius: 10px;
 
 Forest Green:
     --font-family: "Roboto", Arial, sans-serif;

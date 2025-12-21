@@ -335,9 +335,6 @@ body {
   margin-top: 10px;
   width: 100%;
   overflow-y: auto;
-}
-
-.newsdivs {
   --sb-size: 10px;
 }
 
@@ -546,6 +543,8 @@ hr {
   resize: none;
   border-radius: 20px;
   overflow: auto;
+  --sb-size: 10px;
+  cursor: auto;
 }
 
 #notepadarea:focus {
@@ -554,6 +553,18 @@ hr {
 
 #notepadarea:placeholder-shown {
   font-style: italic;
+}
+
+#notepadarea::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+#notepadarea::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+#notepadarea::-webkit-scrollbar-thumb {
+  border-radius: 10px;
 }
 
 #savenotesbtn {
@@ -575,23 +586,6 @@ hr {
 #savenotesbtn:hover {
   cursor: pointer;
   transition: 0.5s ease;
-}
-
-#notepadarea {
-  --sb-size: 10px;
-  cursor: auto;
-}
-
-#notepadarea::-webkit-scrollbar {
-  width: var(--sb-size);
-}
-
-#notepadarea::-webkit-scrollbar-track {
-  border-radius: 10px;
-}
-
-#notepadarea::-webkit-scrollbar-thumb {
-  border-radius: 10px;
 }
 
 .loader-container {

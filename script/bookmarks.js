@@ -1,8 +1,8 @@
 let bookmarks = [];
 
 window.addEventListener("load", function () {
-  renderBookmarks();
   bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+  renderBookmarks();
 });
 
 const addBookmarkModal = `<div id="bookmark-modal">
@@ -50,7 +50,7 @@ addButton.addEventListener("click", () => {
   const bookmarkForm = document.getElementById("bookmark-form");
   bookmarkForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const url = document.getElementById("url").value;
+    let url = document.getElementById("url").value; // 'let' because we modify it
     const name = document.getElementById("name").value;
     const bookmarkBg = document.getElementById("bookmarkcolor").value;
 
@@ -78,7 +78,7 @@ function addBookmark(url, name, bookmarkBg) {
 }
 
 function updateBookmark(index, url, name, bookmarkBg) {
-  let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+  bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
   bookmarks[index].url = url;
   bookmarks[index].name = name;
   bookmarks[index].bookmarkBg = bookmarkBg;
@@ -86,7 +86,7 @@ function updateBookmark(index, url, name, bookmarkBg) {
 }
 
 function deleteBookmark(index) {
-  let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+  bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
   bookmarks.splice(index, 1);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 }

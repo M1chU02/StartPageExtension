@@ -82,12 +82,9 @@ function showGeneralSettingsModal() {
     y: "center",
     onclose: function () {
       closeSocialPicker();
-      // generalSettingsWindow = null; // Optional: clear reference
     },
   });
 
-  // Attach event listeners AFTER the content is in the DOM (via WinBox)
-  // We can scope these to generalSettingsWindow.body to be safe
   const body = generalSettingsWindow.body;
 
   body
@@ -129,10 +126,9 @@ function showGeneralSettingsModal() {
     .querySelector("#change-theme-button")
     .addEventListener("click", showThemeModal);
 
-  // Initialize features inside the modal
   manageSearchEngine(body);
   buildSocialsPreviewInSettings(body);
-  closeSocialPicker(); // Ensure it starts closed
+  closeSocialPicker();
   if (typeof window.initializeBackgroundSettings === "function") {
     window.initializeBackgroundSettings(body);
   }
@@ -141,8 +137,6 @@ function showGeneralSettingsModal() {
 settingsBtn.addEventListener("click", showGeneralSettingsModal);
 
 function changeUserName() {
-  // Look in the specific window or document. Since IDs are unique, document.getElementById usually works,
-  // but if multiple modals exist, scoping is better. For now, document.getElementById is fine as IDs are unique.
   let newUserName = document.getElementById("username").value;
   if (newUserName == "") {
     document.getElementById("username").placeholder = "Enter username!";
@@ -157,11 +151,6 @@ function manageSearchEngine(scope = document) {
     "#searchEngineChangeEl select"
   );
 
-  // These might be outside the modal (main search bar), so use global document for them.
-  const searchForm = document.querySelector("#searchform");
-  const searchInput = document.querySelector("#searchinput");
-
-  // Define search engine URLs
   const searchEngines = {
     Google: "https://www.google.com/search?q=",
     "Microsoft Bing": "https://www.bing.com/search?q=",
@@ -170,38 +159,22 @@ function manageSearchEngine(scope = document) {
     DuckDuckGo: "https://duckduckgo.com/?q=",
   };
 
-  // Load saved search engine from localStorage
   const savedSearchEngine = localStorage.getItem("selectedSearchEngine");
   if (savedSearchEngine && searchEngines[savedSearchEngine]) {
     searchEngineSelect.value = savedSearchEngine;
   }
 
-  // Function to update search form action
   function updateSearchForm() {
     const selectedEngine = searchEngineSelect.value;
-    // const searchUrl = searchEngines[selectedEngine]; // unused var
     localStorage.setItem("selectedSearchEngine", selectedEngine);
   }
 
-  // Initial update
   updateSearchForm();
 
-  // Listen for changes in search engine selection
   searchEngineSelect.addEventListener("change", updateSearchForm);
-
-  // Modify form submission behavior - this needs to be attached ONCE to the main form,
-  // possibly in a separate init block, but here is okay if we ensure we don't duplicate listeners too much.
-  // Actually, manageSearchEngine is called every time modal opens.
-  // We should NOT attach listener to global searchForm here repeatedly.
-  // Ideally, the global search logic should be outside 'showGeneralSettingsModal'.
-  // However, for this refactor, let's keep it but be careful.
-  // Better: Extract global logic out of this specific function or check if already attached.
-  // For safety in this refactor, I will LEAVE the listener attachment to the main form OUT of this function
-  // if it's meant to run once on load.
-  // Looking at original code: it was run once at the end of file.
 }
 
-// Global search initialization (run once)
+// Global search initialization
 (function initGlobalSearch() {
   const searchForm = document.querySelector("#searchform");
   const searchInput = document.querySelector("#searchinput");
@@ -262,7 +235,6 @@ function importBookmarks() {
 
 function deleteAllNotes() {
   localStorage.removeItem("notepadNotes");
-  // Assuming 'notes', 'saveNotes', 'loadDefaultNote' etc are global from notepad.js
   if (typeof notes !== "undefined") notes.length = 0;
   if (typeof saveNotes === "function") saveNotes();
   if (typeof loadDefaultNote === "function") loadDefaultNote();
@@ -301,10 +273,9 @@ function importNotes() {
   }
 }
 
-// === THEME MODAL (kept mostly same, just scoped) ===
+// === THEME MODAL ===
 
 function createThemeModal() {
-  // Only create if not exists
   if (document.getElementById("theme-modal")) return;
 
   const themeModal = document.createElement("div");
@@ -349,12 +320,6 @@ function applyTheme(theme) {
 }
 
 function showThemeModal() {
-  // If general settings is open, we might want to hide it or keep it open.
-  // Original logic hid it.
-  if (generalSettingsWindow) {
-    // generalSettingsWindow.hide(); // Optional behavior?
-  }
-
   const themeModal = document.getElementById("theme-modal");
   themeModal.style.display = "flex";
 }
@@ -367,7 +332,6 @@ function hideThemeModal() {
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     hideThemeModal();
-    // also close social picker if open? handled in its own logic or global listener
   }
 });
 
@@ -449,7 +413,6 @@ function buildSocialsPreviewInSettings(scope = document) {
   const host = scope.querySelector("#socialsPreviewHost");
   if (!host) return;
 
-  // This MUST be the wrapper of your real circle on the homepage:
   const realCircle =
     document.getElementById("socialsdiv") ||
     document.querySelector("#socialsdiv") ||
@@ -467,23 +430,11 @@ function buildSocialsPreviewInSettings(scope = document) {
   clone.id = "socialsdiv-settings-preview";
   clone.classList.add("socials-preview-clone");
 
-  // rename ids inside the clone and attach edit actions
   SOCIAL_IDS.forEach((id) => {
-    // Note: Since we are cloning, IDs are duplicated in DOM until we change them.
-    // clone.querySelector finds them inside the clone before they are attached to DOM?
-    // Yes, but standard ID lookup might be confused if we put it in DOM first.
-    // But we are editing CLONE's children.
-
-    // We need to find the element inside 'clone' that HAD the id 'id'.
-    // Since IDs might be duplicated now (if clone is not connected, it's fine-ish, but dangerous)
-    // Safe way: querySelector by [id="..."]
-
     const btn = clone.querySelector(`[id="${id}"]`);
     if (!btn) return;
 
     btn.id = `${id}${PREVIEW_SUFFIX}`;
-
-    // prevent navigation in settings
     btn.onclick = null;
 
     btn.addEventListener("click", (e) => {
@@ -495,7 +446,6 @@ function buildSocialsPreviewInSettings(scope = document) {
 
   host.appendChild(clone);
 
-  // apply current socials to preview buttons
   refreshSocialsPreviewInSettings(scope);
 }
 
@@ -504,7 +454,6 @@ function refreshSocialsPreviewInSettings(scope = document) {
     const previewBtn = scope.querySelector(`#${id}${PREVIEW_SUFFIX}`);
     if (!previewBtn) return;
 
-    // applySocialToElement comes from socials.js
     if (typeof applySocialToElement === "function") {
       applySocialToElement(previewBtn, id);
     }
@@ -526,12 +475,10 @@ function openSocialPicker(cardId, scope = document) {
       localStorage.setItem(`social_${cardId}`, site.name);
       localStorage.setItem(`social_url_${cardId}`, site.url);
 
-      // update homepage tile
       if (typeof applySocialToButton === "function") {
         applySocialToButton(cardId);
       }
 
-      // update preview tile
       refreshSocialsPreviewInSettings(scope);
 
       closeSocialPicker(scope);
@@ -544,10 +491,6 @@ function openSocialPicker(cardId, scope = document) {
 }
 
 function closeSocialPicker(scope = document) {
-  // If we are passing scope (the body of winbox), find it there.
-  // If strict mode, standard document.getElementById might fail if winbox shadow/iframe (but it's just a div).
-  // However, `socialsSitesList` variable from top of file is NOT available here properly if we refactor.
-  // Best to query it again.
   const socialsSitesList =
     scope.querySelector("#socialsSitesList") ||
     document.getElementById("socialsSitesList");
