@@ -406,7 +406,7 @@ const SOCIAL_SETTINGS_SITES = [
   { name: "Notion", url: "https://www.notion.so/" },
 ];
 
-const SOCIAL_IDS = ["card1", "card2", "card3", "card4", "spotifycard"];
+const SOCIAL_IDS = ["card1", "card2", "card3", "card4", "centerCard"];
 const PREVIEW_SUFFIX = "-settings-preview";
 
 function buildSocialsPreviewInSettings(scope = document) {

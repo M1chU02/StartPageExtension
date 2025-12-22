@@ -684,6 +684,7 @@ hr {
 
 .settings-tile {
   background: var(--tile-background);
+  border-radius: var(--tile-border-radius);
 }
 
 .settings-tile input[type="text"],
@@ -729,6 +730,11 @@ hr {
 .settings-tile label[for="import-notes-input"]:hover,
 .settings-tile label[for="import-all-data-input"]:hover {
   background-color: var(--submit-button-hover-background);
+}
+
+#socialsEdit {
+  background: var(--tile-background);
+  border-radius: var(--tile-border-radius);
 }
 
 .delete {

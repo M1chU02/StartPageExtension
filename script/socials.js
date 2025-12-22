@@ -85,14 +85,14 @@ const SOCIAL_SITES = {
   },
 };
 
-const SOCIAL_CARD_IDS = ["card1", "card2", "card3", "card4", "spotifycard"];
+const SOCIAL_CARD_IDS = ["card1", "card2", "card3", "card4", "centerCard"];
 
 const SOCIAL_DEFAULTS = {
   card1: "Instagram",
   card2: "Twitter",
   card3: "Github",
   card4: "Youtube",
-  spotifycard: "Spotify",
+  centerCard: "Spotify",
 };
 
 function getSocialConfig(cardId) {
