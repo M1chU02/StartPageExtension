@@ -488,6 +488,15 @@ function openSocialPicker(cardId, scope = document) {
   });
 
   socialsSitesList.style.display = "block";
+
+  // Highlight the editing tile
+  const highlighted = scope.querySelectorAll(".editing-social-tile");
+  highlighted.forEach((el) => el.classList.remove("editing-social-tile"));
+
+  const currentPreview = scope.querySelector(`#${cardId}${PREVIEW_SUFFIX}`);
+  if (currentPreview) {
+    currentPreview.classList.add("editing-social-tile");
+  }
 }
 
 function closeSocialPicker(scope = document) {
@@ -495,4 +504,8 @@ function closeSocialPicker(scope = document) {
     scope.querySelector("#socialsSitesList") ||
     document.getElementById("socialsSitesList");
   if (socialsSitesList) socialsSitesList.style.display = "none";
+
+  // Remove highlight from all tiles
+  const highlighted = scope.querySelectorAll(".editing-social-tile");
+  highlighted.forEach((el) => el.classList.remove("editing-social-tile"));
 }

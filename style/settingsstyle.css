@@ -323,3 +323,9 @@
   align-items: center;
   position: relative;
 }
+
+.editing-social-tile {
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8) !important;
+  border: 2px solid white !important;
+  z-index: 100 !important;
+}
