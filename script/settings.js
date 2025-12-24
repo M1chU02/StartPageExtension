@@ -275,49 +275,182 @@ function importNotes() {
 
 // === THEME MODAL ===
 
-// === THEME MODAL ===
-
-const themeSettingsModalContent = `
-  <div id="theme-settings">
-    <div id="theme-list">
-      <div class="theme-option" data-theme="dark-mode">Dark Mode</div>
-      <div class="theme-option" data-theme="ocean-blue">Ocean Blue</div>
-      <!-- Add more themes here if needed -->
-    </div>
-  </div>`;
+const THEMES_CONFIG = [
+  { id: "dark-mode", name: "Dark Mode" },
+  { id: "ocean-blue", name: "Ocean Blue" },
+  // Add new themes here
+];
 
 let themeSettingsWindow;
 
-function openThemeSettingsModal() {
+async function openThemeSettingsModal() {
+  // Container for the dynamic content
+  const themeListContainer = document.createElement("div");
+  themeListContainer.id = "theme-list";
+  themeListContainer.classList.add("loading-themes");
+  themeListContainer.textContent = "Loading themes...";
+
   themeSettingsWindow = new WinBox({
     title: "Theme Selection",
     background: "transparent",
     modal: true,
     width: "1050px",
     height: "85%",
-    html: themeSettingsModalContent,
+    html: `<div id="theme-settings"></div>`, // simplified container
     x: "center",
     y: "center",
   });
 
   const body = themeSettingsWindow.body;
-  const themeList = body.querySelector("#theme-list");
+  const settingsContainer = body.querySelector("#theme-settings");
+  settingsContainer.appendChild(themeListContainer);
 
-  themeList.addEventListener("click", handleThemeSelection);
+  // Generate previews
+  await generateThemePreviews(themeListContainer);
+
+  themeListContainer.classList.remove("loading-themes");
+
+  // Attach event listeners to the cards
+  const cards = themeListContainer.querySelectorAll(".theme-preview-card");
+  cards.forEach((card) => {
+    card.addEventListener("click", handleThemeSelection);
+  });
+}
+
+async function generateThemePreviews(container) {
+  container.innerHTML = ""; // Clear loading text
+
+  for (const theme of THEMES_CONFIG) {
+    const cssVars = await fetchThemeCSS(theme.id);
+    const card = createThemeCard(theme, cssVars);
+    container.appendChild(card);
+  }
+}
+
+async function fetchThemeCSS(themeId) {
+  try {
+    const response = await fetch(`/themes/${themeId}.css`);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const cssText = await response.text();
+    const rootMatch = cssText.match(/:root\s*{([^}]+)}/);
+    if (rootMatch) {
+      const varsBlock = rootMatch[1];
+      return {
+        bg: extractVar(varsBlock, "--background-color"),
+        font: extractVar(varsBlock, "--font-color"),
+        fontFamily: extractVar(varsBlock, "--font-family"),
+        modalBg: extractVar(varsBlock, "--modal-background"),
+        formBg: extractVar(varsBlock, "--form-container-background"),
+        btnBg: extractVar(varsBlock, "--button-background"),
+        btnHover: extractVar(varsBlock, "--button-hover-background"),
+        submitBtnBg: extractVar(varsBlock, "--submit-button-background"),
+        submitBtnFont: extractVar(varsBlock, "--submit-button-font-color"),
+        tileBg:
+          extractVar(varsBlock, "--tile-background") ||
+          extractVar(varsBlock, "--form-container-background"),
+      };
+    }
+  } catch (e) {
+    console.error(`Failed to load CSS for ${themeId}`, e);
+  }
+  return null;
+}
+
+function extractVar(block, varName) {
+  // Regex to handle optional spaces and potential missing semicolon
+  const regex = new RegExp(`${varName}\\s*:\\s*([^;]+)(;|})?`);
+  const match = block.match(regex);
+  return match ? match[1].trim() : "";
+}
+
+function createThemeCard(theme, css) {
+  const card = document.createElement("div");
+  card.classList.add("theme-preview-card");
+  card.dataset.theme = theme.id;
+
+  // Check if current theme
+  if (localStorage.getItem("selectedTheme") === theme.id) {
+    card.classList.add("active-theme");
+  }
+
+  // Use defaults if CSS fetch failed
+  const style = css || {
+    bg: "#222",
+    font: "#fff",
+    fontFamily: "Arial, sans-serif",
+    modalBg: "#333",
+    formBg: "#444",
+    btnBg: "#007bff",
+    submitBtnBg: "#555",
+    submitBtnFont: "#fff",
+    tileBg: "#444",
+  };
+
+  // Safe font family string (replace double quotes with single quotes)
+  const safeFontFamily = style.fontFamily
+    ? style.fontFamily.replace(/"/g, "'")
+    : "Arial, sans-serif";
+
+  card.innerHTML = `
+    <div class="preview-mini-ui" style='background-color: ${style.bg}; color: ${style.font}; font-family: ${safeFontFamily};'>
+      
+      <!-- Header Area -->
+      <div class="preview-header-bar" style='background-color: ${style.modalBg}'>
+         <div class="preview-mini-date">12:00</div>
+      </div>
+
+      <div class="preview-body">
+        <!-- Search Bar -->
+        <div class="preview-search-bar" style='background-color: ${style.modalBg}'>
+            <div class="preview-search-input" style='background-color: ${style.formBg}'></div>
+        </div>
+
+        <!-- Centered Tiles/Icons -->
+        <div class="preview-icons-row">
+           <div class="preview-icon round" style='background-color: ${style.tileBg}; border: 1px solid ${style.submitBtnBg}'></div>
+           <div class="preview-icon center" style='background-color: ${style.formBg}'></div>
+           <div class="preview-icon round" style='background-color: ${style.tileBg}; border: 1px solid ${style.submitBtnBg}'></div>
+        </div>
+
+        <!-- Buttons Row -->
+        <div class="preview-apps-row">
+            <div class="preview-app-btn" style='background-color: ${style.submitBtnBg}; color: ${style.submitBtnFont}'>App</div>
+            <div class="preview-app-btn" style='background-color: ${style.submitBtnBg}; color: ${style.submitBtnFont}'>App</div>
+        </div>
+      </div>
+
+      <!-- Action Button Example -->
+      <div class="preview-action-btn" style='background-color: ${style.btnBg}'></div>
+    </div>
+    <div class="theme-name">${theme.name}</div>
+  `;
+  return card;
 }
 
 function handleThemeSelection(event) {
-  const selectedTheme = event.target.dataset.theme;
+  // Traverse up to find the card with data-theme
+  const card = event.target.closest(".theme-preview-card");
+  if (!card) return;
+
+  const selectedTheme = card.dataset.theme;
+
   if (selectedTheme) {
     localStorage.setItem("selectedTheme", selectedTheme);
+
+    // Update active class visually without reloading
+    const allCards = document.querySelectorAll(".theme-preview-card");
+    allCards.forEach((c) => c.classList.remove("active-theme"));
+    card.classList.add("active-theme");
+
     applyTheme(selectedTheme);
-    // Optional: Close the window after selection if desired, or keep it open.
-    // To match previous behavior of "Select and it changes", we keep it open or close it?
-    // The previous one had a specific close button or click outside.
-    // WinBox has a close button. Let's close it to give feedback that action is done.
-    if (themeSettingsWindow) {
-      themeSettingsWindow.close();
-    }
+
+    // Give a small delay to see the change, then close?
+    // Or just close immediately.
+    setTimeout(() => {
+      if (themeSettingsWindow) {
+        themeSettingsWindow.close();
+      }
+    }, 300);
   }
 }
 
