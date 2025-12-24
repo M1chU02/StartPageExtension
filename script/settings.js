@@ -124,7 +124,7 @@ function showGeneralSettingsModal() {
     .addEventListener("change", importAllData);
   body
     .querySelector("#change-theme-button")
-    .addEventListener("click", showThemeModal);
+    .addEventListener("click", openThemeSettingsModal);
 
   manageSearchEngine(body);
   buildSocialsPreviewInSettings(body);
@@ -275,34 +275,35 @@ function importNotes() {
 
 // === THEME MODAL ===
 
-function createThemeModal() {
-  if (document.getElementById("theme-modal")) return;
+// === THEME MODAL ===
 
-  const themeModal = document.createElement("div");
-  themeModal.id = "theme-modal";
-  themeModal.innerHTML = `
-    <div id="theme-modal-content">
-      <button id="theme-modal-close-button">&times;</button>
-      <h2>Select Theme</h2>
-      <ul id="theme-list">
-        <li data-theme="dark-mode">Dark Mode</li>
-        <li data-theme="ocean-blue">Ocean Blue</li>
-        <!-- Add more themes here -->
-      </ul>
-    </div>`;
-  document.body.appendChild(themeModal);
+const themeSettingsModalContent = `
+  <div id="theme-settings">
+    <div id="theme-list">
+      <div class="theme-option" data-theme="dark-mode">Dark Mode</div>
+      <div class="theme-option" data-theme="ocean-blue">Ocean Blue</div>
+      <!-- Add more themes here if needed -->
+    </div>
+  </div>`;
 
-  const closeButton = document.getElementById("theme-modal-close-button");
-  closeButton.addEventListener("click", hideThemeModal);
+let themeSettingsWindow;
 
-  const themeList = document.getElementById("theme-list");
-  themeList.addEventListener("click", handleThemeSelection);
-
-  themeModal.addEventListener("click", function (e) {
-    if (e.target === themeModal) {
-      hideThemeModal();
-    }
+function openThemeSettingsModal() {
+  themeSettingsWindow = new WinBox({
+    title: "Theme Selection",
+    background: "transparent",
+    modal: true,
+    width: "1050px",
+    height: "85%",
+    html: themeSettingsModalContent,
+    x: "center",
+    y: "center",
   });
+
+  const body = themeSettingsWindow.body;
+  const themeList = body.querySelector("#theme-list");
+
+  themeList.addEventListener("click", handleThemeSelection);
 }
 
 function handleThemeSelection(event) {
@@ -310,33 +311,24 @@ function handleThemeSelection(event) {
   if (selectedTheme) {
     localStorage.setItem("selectedTheme", selectedTheme);
     applyTheme(selectedTheme);
-    hideThemeModal();
+    // Optional: Close the window after selection if desired, or keep it open.
+    // To match previous behavior of "Select and it changes", we keep it open or close it?
+    // The previous one had a specific close button or click outside.
+    // WinBox has a close button. Let's close it to give feedback that action is done.
+    if (themeSettingsWindow) {
+      themeSettingsWindow.close();
+    }
   }
 }
 
 function applyTheme(theme) {
   const currentStylesheet = document.getElementById("themestylesheet");
-  currentStylesheet.href = `../themes/${theme}.css`;
-}
-
-function showThemeModal() {
-  const themeModal = document.getElementById("theme-modal");
-  themeModal.style.display = "flex";
-}
-
-function hideThemeModal() {
-  const themeModal = document.getElementById("theme-modal");
-  themeModal.style.display = "none";
-}
-
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape") {
-    hideThemeModal();
+  if (currentStylesheet) {
+    currentStylesheet.href = `../themes/${theme}.css`;
   }
-});
+}
 
 // Init Theme Logic
-createThemeModal();
 document.addEventListener("DOMContentLoaded", () => {
   const selectedTheme = localStorage.getItem("selectedTheme");
   if (selectedTheme) {

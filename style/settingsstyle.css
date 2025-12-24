@@ -205,46 +205,41 @@
   grid-column: span 3;
 }
 
-#theme-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+#theme-settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100%;
-  z-index: 1000;
+  width: 100%;
 }
 
-#theme-modal-content {
-  position: relative;
+#theme-settings #theme-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   width: 50%;
   max-width: 400px;
-  margin: 10% auto;
-  padding: 20px;
-  border-radius: 10px;
+}
+
+.theme-option {
+  padding: 15px 20px;
   font-size: 1.5rem;
-}
-
-#theme-modal-close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.2em;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   cursor: pointer;
-  border: none;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
 }
 
-#theme-list {
-  list-style: none;
-  padding: 0;
-}
-
-#theme-list li {
-  margin-bottom: 10px;
-  cursor: pointer;
-  font-size: 1.2em;
+.theme-option:hover {
+  background-color: var(
+    --submit-button-hover-background,
+    rgba(255, 255, 255, 0.2)
+  );
+  transform: scale(1.02);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Socials configuration in settings modal */
