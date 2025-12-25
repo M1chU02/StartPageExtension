@@ -32,6 +32,22 @@ function openApp(appName, title, url) {
   });
 }
 
+function toggleApp(appName, title, url) {
+  if (appInstances[appName]) {
+    appInstances[appName].close();
+  } else {
+    openApp(appName, title, url);
+  }
+}
+
+function closeAllApps() {
+  Object.keys(appInstances).forEach((appName) => {
+    if (appInstances[appName]) {
+      appInstances[appName].close();
+    }
+  });
+}
+
 timerBtn.addEventListener("click", () =>
   openApp("timer", "Timer", "/iFrames/timer/index.html")
 );
@@ -47,12 +63,13 @@ translatorBtn.addEventListener("click", () =>
 
 document.addEventListener("keyup", (e) => {
   if (e.altKey) {
-    if (e.key === "1") openApp("timer", "Timer", "/iFrames/timer/index.html");
+    if (e.key === "1") toggleApp("timer", "Timer", "/iFrames/timer/index.html");
     if (e.key === "2")
-      openApp("calendar", "Calendar", "/iFrames/calendar/index.html");
+      toggleApp("calendar", "Calendar", "/iFrames/calendar/index.html");
     if (e.key === "3")
-      openApp("calculator", "Calculator", "/iFrames/calculator/index.html");
+      toggleApp("calculator", "Calculator", "/iFrames/calculator/index.html");
     if (e.key === "4")
-      openApp("translator", "Translator", "/iFrames/translator/index.html");
+      toggleApp("translator", "Translator", "/iFrames/translator/index.html");
+    if (e.key === "0") closeAllApps();
   }
 });
