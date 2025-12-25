@@ -21,10 +21,14 @@ body {
 }
 .container {
   position: relative;
-  width: 1200px;
-  padding: 0 20px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .container .card {
   flex: 1;
