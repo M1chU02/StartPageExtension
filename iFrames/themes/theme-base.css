@@ -1,0 +1,180 @@
+body {
+  font-family: var(--font-family);
+  background-color: transparent;
+  color: var(--font-color);
+}
+
+* {
+  font-family: var(--font-family);
+  color: var(--font-color);
+}
+
+/* Calculator */
+.calculator {
+  background-color: var(--background-color);
+}
+
+#display {
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+
+button {
+  background-color: var(--button-background);
+  color: var(--font-color);
+}
+
+button:hover {
+  background-color: var(--button-hover-background);
+}
+
+.operator {
+  background-color: var(--calculator-operator);
+}
+
+.operator:hover {
+  background-color: var(--calculator-operator);
+}
+
+/*            */
+
+/* timer */
+
+#container {
+  background-color: var(--background-color);
+}
+
+#timerHeader {
+  color: var(--font-color);
+  background-color: var(--button-background);
+}
+
+#setTimer,
+#controls {
+  background-color: var(--background-color);
+}
+
+.timerInput {
+  background-color: var(--form-container-background);
+  color: var(--font-color);
+  border: 1px solid var(--font-color);
+}
+
+/*        */
+
+/* calendar */
+.content {
+  background-color: var(--background-color);
+}
+
+header .icons {
+  color: var(--font-color);
+}
+
+header .icons span i {
+  background-color: var(--background-color);
+}
+
+header .icons span i:hover {
+  background-color: var(--submit-button-background);
+}
+
+.days li::before {
+  background-color: var(--submit-button-background);
+}
+
+.days li.active {
+  color: var(--font-color);
+}
+.days li.inactive {
+  color: var(--font-color);
+}
+.days li:hover::before {
+  background-color: var(--submit-button-hover-background);
+}
+.days li.active::before {
+  background-color: var(--button-background);
+}
+
+/*          */
+
+/* translator */
+::-webkit-scrollbar-track {
+  background-color: var(--sb-track-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--sb-thumb-color);
+}
+
+.container .card {
+  background-color: var(--form-container-background);
+}
+
+.container .card .heading {
+  color: var(--font-color);
+}
+
+.dropdown-container .dropdown-toggle {
+  background-color: var(--background-color);
+}
+
+.dropdown-container .dropdown-menu {
+  background-color: var(--background-color);
+}
+
+.dropdown-container .dropdown-menu li {
+  border-bottom: var(--form-container-background);
+}
+
+.dropdown-container .dropdown-menu li:hover {
+  background-color: var(--form-container-background);
+}
+
+.dropdown-container .dropdown-menu li.active {
+  color: var(--font-color);
+  background-color: var(--button-background);
+}
+
+.container textarea {
+  color: var(--font-color);
+  font-family: var(--font-family);
+}
+
+.container .text-area .chars {
+  color: var(--font-color);
+}
+
+.swap-position {
+  border: 5px solid var(--background-color);
+  color: var(--font-color);
+  background-color: var(--button-background);
+}
+
+.swap-position svg {
+  fill: var(--font-color);
+}
+
+.card-bottom {
+  border-top: 2px solid var(--background-color);
+}
+
+.card-bottom label {
+  background-color: var(--background-color);
+}
+
+.card-bottom label:hover {
+  color: var(--font-color);
+  background-color: var(--button-background);
+}
+
+.card-bottom button {
+  color: var(--font-color);
+  background-color: var(--background-color);
+}
+
+.card-bottom button:hover {
+  color: var(--font-color);
+  background-color: var(--button-background);
+}
+/*            */

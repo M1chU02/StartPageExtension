@@ -11,4 +11,7 @@
   --form-container-background: #2d343e;
   --sb-track-color: #4b4b4b;
   --sb-thumb-color: #0097e6;
+  --tile-background: #353c48;
+  --tile-border-radius: 10px;
+  --calculator-operator: #ff9f43;
 }
