@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   skipBtn.addEventListener("click", skipTrack);
 
   volumeControl.addEventListener("input", () => {
-    audio.volume = volumeControl.value;
+    audio.volume = Math.pow(volumeControl.value, 2);
   });
 
   trackSelect.addEventListener("change", () => {
