@@ -10,11 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
   let isPlaying = false;
 
   function togglePlayPause() {
+    if (!audio.src || audio.src === window.location.href) {
+      if (trackSelect.value) {
+        audio.src = trackSelect.value;
+      } else {
+        return; // Do nothing if no track selected
+      }
+    }
+
     if (isPlaying) {
       audio.pause();
       playPauseBtn.textContent = "Play";
     } else {
-      audio.play();
+      audio.play().catch((e) => console.error("Playback error:", e));
       playPauseBtn.textContent = "Pause";
     }
     isPlaying = !isPlaying;
