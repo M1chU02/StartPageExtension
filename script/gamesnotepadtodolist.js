@@ -16,12 +16,14 @@ function hideAllSections() {
 }
 
 // Event listeners for navbar buttons
+// Event listeners for navbar buttons
 navGamesBtn.addEventListener("click", () => {
   hideAllSections();
   gameselectDiv.style.display = "flex";
   navGamesBtn.classList.add("active");
   navNotepadBtn.classList.remove("active");
   navTodolistBtn.classList.remove("active");
+  localStorage.setItem("activeSection", "games");
 });
 
 navNotepadBtn.addEventListener("click", () => {
@@ -30,6 +32,7 @@ navNotepadBtn.addEventListener("click", () => {
   navNotepadBtn.classList.add("active");
   navGamesBtn.classList.remove("active");
   navTodolistBtn.classList.remove("active");
+  localStorage.setItem("activeSection", "notepad");
 });
 
 navTodolistBtn.addEventListener("click", () => {
@@ -38,12 +41,28 @@ navTodolistBtn.addEventListener("click", () => {
   navTodolistBtn.classList.add("active");
   navGamesBtn.classList.remove("active");
   navNotepadBtn.classList.remove("active");
+  localStorage.setItem("activeSection", "todolist");
 });
 
-// Display Notepad section by default on page load
+// Display Notepad section by default on page load or restore last active
 window.addEventListener("DOMContentLoaded", () => {
-  notepadDiv.style.display = "flex";
-  navNotepadBtn.classList.add("active");
+  const activeSection = localStorage.getItem("activeSection");
+  hideAllSections();
+  navNotepadBtn.classList.remove("active");
+  navGamesBtn.classList.remove("active");
+  navTodolistBtn.classList.remove("active");
+
+  if (activeSection === "games") {
+    gameselectDiv.style.display = "flex";
+    navGamesBtn.classList.add("active");
+  } else if (activeSection === "todolist") {
+    todolistDiv.style.display = "flex";
+    navTodolistBtn.classList.add("active");
+  } else {
+    // Default to Notepad
+    notepadDiv.style.display = "flex";
+    navNotepadBtn.classList.add("active");
+  }
 });
 
 const listSelector = document.getElementById("listSelector");
