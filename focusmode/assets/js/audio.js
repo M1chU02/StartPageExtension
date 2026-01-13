@@ -71,9 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   audio.addEventListener("timeupdate", updatePlaybackSlider);
-  audio.addEventListener("loadedmetadata", () => {
-    playbackSlider.max = audio.duration;
-  });
+  audio.addEventListener("ended", skipTrack);
 
   // Initialize the current song title
   updateCurrentSongTitle();
