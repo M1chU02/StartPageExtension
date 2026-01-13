@@ -65,6 +65,11 @@ const generalSettingsModalContent = `<div id="general-settings">
       <div id="backgroundImagesContainer"></div>
       <button id="random-theme-background-button">Random Background</button>
     </div>
+
+    <div class="settings-tile">
+      <h1>About</h1>
+      <button id="show-changelog-button">Changelog</button>
+    </div>
   </div>
 </div>`;
 
@@ -125,6 +130,10 @@ function showGeneralSettingsModal() {
   body
     .querySelector("#change-theme-button")
     .addEventListener("click", openThemeSettingsModal);
+
+  body
+    .querySelector("#show-changelog-button")
+    .addEventListener("click", showChangelog);
 
   manageSearchEngine(body);
   buildSocialsPreviewInSettings(body);
@@ -633,4 +642,43 @@ function closeSocialPicker(scope = document) {
   // Remove highlight from all tiles
   const highlighted = scope.querySelectorAll(".editing-social-tile");
   highlighted.forEach((el) => el.classList.remove("editing-social-tile"));
+}
+
+function showChangelog() {
+  fetch("CHANGELOG.md")
+    .then((response) => response.text())
+    .then((text) => {
+      // Parse markdown if marked is available, otherwise use plain text
+      const content =
+        typeof marked !== "undefined"
+          ? marked.parse(text)
+          : `<pre>${text}</pre>`;
+
+      new WinBox({
+        title: "Changelog",
+        modal: true,
+        width: "800px",
+        height: "600px",
+        background: "#222",
+        html: `<div class="changelog-content" style="padding: 40px; color: #e0e0e0; overflow-y: auto; height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px; line-height: 1.8;">
+                <style>
+                  .changelog-content h1 { font-size: 2.5em; border-bottom: 2px solid #444; padding-bottom: 15px; margin-bottom: 30px; color: #fff; font-weight: bold; }
+                  .changelog-content h2 { font-size: 2em; margin-top: 40px; margin-bottom: 20px; color: #ffd700; border-bottom: 1px solid #333; padding-bottom: 10px; }
+                  .changelog-content h3 { font-size: 1.5em; margin-top: 30px; margin-bottom: 15px; color: #87cefa; }
+                  .changelog-content ul { padding-left: 30px; }
+                  .changelog-content li { margin-bottom: 10px; list-style-type: disc; }
+                  .changelog-content a { color: #87cefa; text-decoration: none; border-bottom: 1px dotted #87cefa; }
+                  .changelog-content a:hover { text-decoration: none; border-bottom: 1px solid #87cefa; }
+                  .changelog-content p { margin-bottom: 15px; }
+                </style>
+                ${content}
+              </div>`,
+        x: "center",
+        y: "center",
+      });
+    })
+    .catch((err) => {
+      console.error("Failed to load changelog:", err);
+      alert("Failed to load changelog.");
+    });
 }
