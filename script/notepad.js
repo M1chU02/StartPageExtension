@@ -234,9 +234,12 @@ function showNoteSettings(index) {
 
   const deleteNoteButton = settingsWindow.body.querySelector("#delete-note");
   deleteNoteButton.addEventListener("click", function () {
-    const confirmation = confirm("Are you sure you want to delete this note?");
+    const noteToDeleteTitle = notes[index].title;
+    const confirmation = confirm(
+      `Are you sure you want to delete "${noteToDeleteTitle}"?`
+    );
     if (confirmation) {
-      deleteNote(currentNoteIndex);
+      deleteNote(index);
       settingsWindow.close();
     }
   });
