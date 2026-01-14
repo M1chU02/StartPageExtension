@@ -331,7 +331,25 @@
         <!-- Select to choose between lists -->
         <select id="listSelector"></select>
         <!-- Button to add a new list -->
-        <button id="addListBtn">Add New List</button> 
+        <button id="addListBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
+          </svg>
+        </button>
+        <!-- Button to reorder lists -->
+        <button id="reorderListBtn" class="reorder-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <!-- Button to open list settings -->
+        <button id="todoSettingsBtn">
+          <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+            <path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z"></path>
+          </svg>
+        </button> 
     </div>
     <hr>
     <!-- Editable To-Do list -->

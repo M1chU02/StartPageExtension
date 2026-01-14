@@ -19,7 +19,6 @@ body {
   background-color: var(--background-color);
   color: var(--font-color);
   font-family: var(--font-family);
-  /* cursor: url("/cursors/default_min.png"), auto; */
 }
 
 * {
