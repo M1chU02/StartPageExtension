@@ -130,7 +130,8 @@ function reorderNotes(oldIndex, newIndex) {
 
 function updateNoteList() {
   noteList.innerHTML = "";
-  let reorderButton = document.querySelector(".reorder-btn");
+  const notepadNavbar = document.getElementById("notepad-navbar");
+  let reorderButton = notepadNavbar.querySelector(".reorder-btn");
   if (!reorderButton) {
     reorderButton = document.createElement("button");
     reorderButton.innerHTML = `
@@ -140,7 +141,6 @@ function updateNoteList() {
         <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>`;
     reorderButton.classList.add("reorder-btn");
-    const notepadNavbar = document.getElementById("notepad-navbar");
     notepadNavbar.appendChild(reorderButton);
     reorderButton.addEventListener("click", showReorderModal);
   }
