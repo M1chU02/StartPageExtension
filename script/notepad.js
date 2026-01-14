@@ -40,6 +40,8 @@ function switchNote(index) {
     if (currentNoteButton) {
       currentNoteButton.classList.add("currentNote");
     }
+
+    localStorage.setItem("lastViewedNoteIndex", index);
   }
 }
 
@@ -72,6 +74,7 @@ function deleteNote(index) {
 
   updateNoteList();
   switchNote(currentNoteIndex);
+  localStorage.setItem("lastViewedNoteIndex", currentNoteIndex);
 }
 
 function addNote() {
@@ -248,7 +251,17 @@ function showNoteSettings(index) {
 function initializeNotepad() {
   loadDefaultNote();
   updateNoteList();
-  switchNote(0);
+
+  const lastViewedIndex = parseInt(localStorage.getItem("lastViewedNoteIndex"));
+  if (
+    !isNaN(lastViewedIndex) &&
+    lastViewedIndex >= 0 &&
+    lastViewedIndex < notes.length
+  ) {
+    switchNote(lastViewedIndex);
+  } else {
+    switchNote(0);
+  }
 }
 
 window.addEventListener("load", initializeNotepad);
