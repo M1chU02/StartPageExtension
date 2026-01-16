@@ -18,16 +18,14 @@
 #todolistdiv > #todolistnav > #addListBtn,
 #todolistdiv > #todolistnav > #reorderListBtn,
 #todolistdiv > #todolistnav > #todoSettingsBtn {
-  height: 100%;
-  width: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  height: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 #todolistdiv button {

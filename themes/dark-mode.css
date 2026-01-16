@@ -611,15 +611,25 @@ hr {
   border: 2px solid var(--submit-button-hover-background);
 }
 
-#todolistdiv #addListBtn {
+#todolistdiv #addListBtn,
+#todolistdiv #reorderListBtn,
+#todolistdiv #todoSettingsBtn {
   background-color: var(--button-background);
   color: var(--font-color);
   border: 2px solid var(--button-background);
 }
 
-#todolistdiv #addListBtn:hover {
+#todolistdiv #addListBtn:hover,
+#todolistdiv #reorderListBtn:hover,
+#todolistdiv #todoSettingsBtn:hover {
   background-color: var(--button-hover-background);
   color: var(--font-color);
+}
+
+#todolistdiv #addListBtn > svg,
+#todolistdiv #reorderListBtn > svg,
+#todolistdiv #todoSettingsBtn > svg {
+  fill: var(--font-color);
 }
 
 #todolistdiv #saveBtn {
