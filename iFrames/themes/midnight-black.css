@@ -1,0 +1,17 @@
+:root {
+  --font-family: "Courier New", monospace;
+  --background-color: #000000;
+  --button-hover-background: #1a1a1a;
+  --button-background: #333333;
+  --font-color: #ffffff;
+  --submit-button-background: #707070;
+  --submit-button-hover-background: #999999;
+  --submit-button-font-color: #efefef;
+  --modal-background: rgba(0, 0, 0, 0.7);
+  --form-container-background: #1a1a1a;
+  --sb-track-color: #000000;
+  --sb-thumb-color: #333333;
+  --calculator-operator: #707070;
+  --tile-border-radius: 10px;
+  --tile-background: #1a1a1a;
+}

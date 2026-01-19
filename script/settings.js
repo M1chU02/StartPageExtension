@@ -157,7 +157,7 @@ function changeUserName() {
 
 function manageSearchEngine(scope = document) {
   const searchEngineSelect = scope.querySelector(
-    "#searchEngineChangeEl select"
+    "#searchEngineChangeEl select",
   );
 
   const searchEngines = {
@@ -287,7 +287,12 @@ function importNotes() {
 const THEMES_CONFIG = [
   { id: "dark-mode", name: "Dark Mode" },
   { id: "ocean-blue", name: "Ocean Blue" },
-  // Add new themes here
+  { id: "forest-green", name: "Forest Green" },
+  { id: "violet", name: "Violet" },
+  { id: "sunset-orange", name: "Sunset Orange" },
+  { id: "midnight-black", name: "Midnight Black" },
+  { id: "retro-brown", name: "Retro Brown" },
+  { id: "deep-purple", name: "Deep Purple" },
 ];
 
 let themeSettingsWindow;

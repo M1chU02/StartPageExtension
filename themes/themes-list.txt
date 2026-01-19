@@ -1,15 +1,15 @@
 Dark Mode:
     --font-family: "Gruppo", "Chakra Petch";
     --button-background: #007bff;
-    --background-color: #141414;
     --button-hover-background: #0052aa;
+    --background-color: #141414;
     --font-color: #ffffff;
     --submit-button-background: #707070;
     --submit-button-hover-background: #458bc2;
     --submit-button-font-color: #efefef;
-    --modal-background: rgba(0, 0, 0, 0.4);
     --form-container-background: #303030;
     --sb-track-color: #232e33;
+    --modal-background: rgba(0, 0, 0, 0.4);
     --sb-thumb-color: #007bff;
     --tile-background: #3b3b3b;
     --tile-border-radius: 10px;
@@ -43,6 +43,7 @@ Forest Green:
     --form-container-background: #34495e;
     --sb-track-color: #1d2d22;
     --sb-thumb-color: #388e3c;
+    --tile-border-radius: 10px;
 
 Violet:
     --font-family: "Caveat", cursive;
@@ -57,6 +58,7 @@ Violet:
     --form-container-background: #5d4d65;
     --sb-track-color: #2d1b3a;
     --sb-thumb-color: #8e44ad;
+    --tile-border-radius: 10px;
 
 Sunset Orange:
     --font-family: "Georgia", serif;
@@ -71,6 +73,7 @@ Sunset Orange:
     --form-container-background: #6b5b5b;
     --sb-track-color: #3c2f2f;
     --sb-thumb-color: #ff5733;
+    --tile-border-radius: 10px;
 
 Midnight Black:
     --font-family: "Courier New", monospace;
@@ -85,6 +88,7 @@ Midnight Black:
     --form-container-background: #1a1a1a;
     --sb-track-color: #000000;
     --sb-thumb-color: #333333;
+    --tile-border-radius: 10px;
 
 Retro Brown:
     --font-family: "Times New Roman", serif;
@@ -99,6 +103,7 @@ Retro Brown:
     --form-container-background: #5b4d4d;
     --sb-track-color: #392f2f;
     --sb-thumb-color: #a26767;
+    --tile-border-radius: 10px;
 
 Deep Purple:
     --font-family: "Pacifico", cursive;
@@ -113,3 +118,4 @@ Deep Purple:
     --form-container-background: #5d4d65;
     --sb-track-color: #2c3e50;
     --sb-thumb-color: #9b59b6;
+    --tile-border-radius: 10px;

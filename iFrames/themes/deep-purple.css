@@ -1,0 +1,17 @@
+:root {
+  --font-family: "Pacifico", cursive;
+  --background-color: #2c3e50;
+  --button-hover-background: #8e44ad;
+  --button-background: #9b59b6;
+  --font-color: #ffffff;
+  --submit-button-background: #6c3483;
+  --submit-button-hover-background: #a569bd;
+  --submit-button-font-color: #efefef;
+  --modal-background: rgba(0, 0, 0, 0.7);
+  --form-container-background: #5d4d65;
+  --sb-track-color: #2c3e50;
+  --sb-thumb-color: #9b59b6;
+  --calculator-operator: #6c3483;
+  --tile-border-radius: 10px;
+  --tile-background: #5d4d65;
+}

@@ -1,18 +1,18 @@
 :root {
-  --font-family: ;
-  --background-color: ;
-  --button-background: ;
-  --button-hover-background: ;
-  --font-color: ;
-  --submit-button-background: ;
-  --submit-button-hover-background: ;
-  --submit-button-font-color: ;
-  --modal-background: ;
-  --form-container-background: ;
-  --sb-track-color: ;
-  --sb-thumb-color: ;
-  --tile-background: ;
-  --tile-border-radius: ;
+  --font-family: "Courier New", monospace;
+  --background-color: #000000;
+  --button-hover-background: #1a1a1a;
+  --button-background: #333333;
+  --font-color: #ffffff;
+  --submit-button-background: #707070;
+  --submit-button-hover-background: #999999;
+  --submit-button-font-color: #efefef;
+  --modal-background: rgba(0, 0, 0, 0.7);
+  --form-container-background: #1a1a1a;
+  --sb-track-color: #000000;
+  --sb-thumb-color: #333333;
+  --tile-border-radius: 10px;
+  --tile-background: #1a1a1a;
 }
 
 body {
@@ -798,8 +798,6 @@ hr {
   background-color: var(--submit-button-background);
   border: 2px solid var(--submit-button-hover-background);
   color: var(--font-color);
-  box-shadow: 0 0 0 var(--submit-button-hover-background);
-  animation: pulsate 1.2s infinite alternate;
 }
 
 .downloadBackupButton:hover {
