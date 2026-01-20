@@ -66,9 +66,25 @@ const generalSettingsModalContent = `<div id="general-settings">
       <button id="random-theme-background-button">Random Background</button>
     </div>
 
-    <div class="settings-tile">
-      <h1>About</h1>
-      <button id="show-changelog-button">Changelog</button>
+    <div id="cursor-about-container">
+      <div class="settings-tile" id="cursorSettingsTile">
+        <h1>Cursor settings</h1>
+        <div class="cursor-settings-container">
+          <div class="cursor-toggle-section">
+            <button id="cursorToggleButton" class="on-off-btn">on/off</button>
+          </div>
+          <div class="cursor-slider-section">
+            <span>size</span>
+            <div class="custom-slider-track">
+              <input type="range" id="cursorSize" min="16" max="64" value="32">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-tile" id="aboutSettingsTile">
+        <h1>About</h1>
+        <button id="show-changelog-button">Changelog</button>
+      </div>
     </div>
   </div>
 </div>`;
@@ -134,6 +150,8 @@ function showGeneralSettingsModal() {
   body
     .querySelector("#show-changelog-button")
     .addEventListener("click", showChangelog);
+
+  initializeCursorSettings(body);
 
   manageSearchEngine(body);
   buildSocialsPreviewInSettings(body);
@@ -686,4 +704,37 @@ function showChangelog() {
       console.error("Failed to load changelog:", err);
       alert("Failed to load changelog.");
     });
+}
+function initializeCursorSettings(scope = document) {
+  const cursorToggleButton = scope.querySelector("#cursorToggleButton");
+  const cursorSize = scope.querySelector("#cursorSize");
+
+  // Load saved settings
+  let isEnabled = localStorage.getItem("customCursorEnabled") === "true";
+  const size = localStorage.getItem("customCursorSize") || "32";
+
+  if (isEnabled) {
+    cursorToggleButton.classList.add("active");
+  } else {
+    cursorToggleButton.classList.remove("active");
+  }
+
+  cursorSize.value = size;
+
+  cursorToggleButton.addEventListener("click", () => {
+    isEnabled = !isEnabled;
+    localStorage.setItem("customCursorEnabled", isEnabled);
+    if (isEnabled) {
+      cursorToggleButton.classList.add("active");
+    } else {
+      cursorToggleButton.classList.remove("active");
+    }
+    if (window.updateCustomCursor) window.updateCustomCursor();
+  });
+
+  cursorSize.addEventListener("input", (e) => {
+    const newSize = e.target.value;
+    localStorage.setItem("customCursorSize", newSize);
+    if (window.updateCustomCursor) window.updateCustomCursor();
+  });
 }

@@ -231,7 +231,9 @@
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -473,4 +475,98 @@
 .editing-social-tile {
   box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8) !important;
   border: 2px solid white !important;
+}
+
+#cursor-about-container {
+  grid-column: span 3;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+#cursorSettingsTile {
+  flex: 2;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+}
+
+#aboutSettingsTile {
+  flex: 1;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+}
+
+.cursor-settings-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.on-off-btn {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  color: white;
+  padding: 8px 15px;
+  font-size: 1.5rem;
+  font-family: "Gruppo", cursive;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.on-off-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.cursor-slider-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  max-width: 300px;
+}
+
+.cursor-slider-section span {
+  font-size: 1.8rem;
+  font-family: "Gruppo", cursive;
+  font-weight: bold;
+}
+
+.custom-slider-track {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.custom-slider-track input[type="range"] {
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: white;
+  height: 3px;
+  border-radius: 2px;
+  outline: none;
+}
+
+.custom-slider-track input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 40px;
+  height: 48px;
+  background: white;
+  border-radius: 50% 45% 55% 48%; /* Organic blob shape */
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  transition: transform 0.1s;
+}
+
+.custom-slider-track input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
 }
