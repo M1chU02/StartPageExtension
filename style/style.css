@@ -725,3 +725,57 @@ body.custom-cursor-active,
 body.custom-cursor-active * {
   cursor: none !important;
 }
+
+/* Weather Forecast Tooltip */
+.weather-tooltip {
+  position: fixed;
+  display: none;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 10000;
+  min-width: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: inherit;
+}
+
+.weather-tooltip-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+}
+
+.weather-tooltip-row {
+  display: grid;
+  grid-template-columns: 60px 60px 1fr;
+  gap: 10px;
+  padding: 8px 0;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.weather-tooltip-row:last-child {
+  border-bottom: none;
+}
+
+.weather-tooltip-time {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.weather-tooltip-temp {
+  font-weight: bold;
+  color: #87cefa;
+  font-size: 1.1rem;
+}
+
+.weather-tooltip-desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+}

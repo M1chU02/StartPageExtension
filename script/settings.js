@@ -499,7 +499,31 @@ document.addEventListener("DOMContentLoaded", () => {
   if (selectedTheme) {
     applyTheme(selectedTheme);
   }
+
+  // Check for version change and show changelog
+  checkVersionAndShowChangelog();
 });
+
+function checkVersionAndShowChangelog() {
+  // Get current version from manifest
+  if (
+    typeof chrome !== "undefined" &&
+    chrome.runtime &&
+    chrome.runtime.getManifest
+  ) {
+    const currentVersion = chrome.runtime.getManifest().version;
+    const lastSeenVersion = localStorage.getItem("lastSeenVersion");
+
+    // If version has changed (or first time), show changelog
+    if (lastSeenVersion !== currentVersion) {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        showChangelog();
+        localStorage.setItem("lastSeenVersion", currentVersion);
+      }, 500);
+    }
+  }
+}
 
 function exportAllData() {
   const allData = {
