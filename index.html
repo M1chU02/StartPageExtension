@@ -78,7 +78,7 @@
       <h1>Bookmarks</h1>
       <div id="bookmark-list"></div>
 
-      <button id="add-button">
+      <button id="add-button" title="Add bookmark">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
@@ -104,7 +104,7 @@
             />
             <span>Local News</span>
           </label>
-          <button id="refreshNewsBtn">
+          <button id="refreshNewsBtn" title="Refresh news">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -268,7 +268,7 @@
   <div id="notepaddiv">
     <div id="notepad-navbar">
       <div id="note-list"></div>
-      <button id="add-note-btn">
+      <button id="add-note-btn" title="Add note">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
@@ -287,11 +287,11 @@
     <div id="notepadarea" contenteditable="true" data-placeholder="Make a note..."></div>
     <div id="editor-buttons">
       <div id="basic-text-editor">
-        <button id="notepadboldbtn"><strong>B</strong></button>
-        <button id="notepaditalicbtn"><em>I</em></button>
-        <button id="notepadunderlinebtn"><u>U</u></button>
+        <button id="notepadboldbtn" title="Bold"><strong>B</strong></button>
+        <button id="notepaditalicbtn" title="Italic"><em>I</em></button>
+        <button id="notepadunderlinebtn" title="Underline"><u>U</u></button>
         <label for="fontSize">Font Size:</label>
-        <select id="fontSize">
+        <select id="fontSize" title="Change font size">
           <option value="16px">16px</option>
           <option value="20px">20px</option>
           <option value="24px">24px</option>
@@ -301,8 +301,8 @@
         </select>
       </div>
       <div id="advanced-text-editor">
-        <button id="notepadlistbtn">&#8226; List</button>
-        <button id="notepadcheckbtn">☑ Checkbox</button>
+        <button id="notepadlistbtn" title="Insert list">&#8226; List</button>
+        <button id="notepadcheckbtn" title="Insert checkbox">☑ Checkbox</button>
       </div>
     </div>
     <div id="savenotesbtn">
@@ -331,13 +331,13 @@
         <!-- Select to choose between lists -->
         <select id="listSelector"></select>
         <!-- Button to add a new list -->
-        <button id="addListBtn">
+        <button id="addListBtn" title="Add to-do list">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24" width="24" height="24">
             <path d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
           </svg>
         </button>
         <!-- Button to reorder lists -->
-        <button id="reorderListBtn" class="reorder-btn">
+        <button id="reorderListBtn" class="reorder-btn" title="Reorder to-do lists">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -345,7 +345,7 @@
           </svg>
         </button>
         <!-- Button to open list settings -->
-        <button id="todoSettingsBtn">
+        <button id="todoSettingsBtn" title="To-do list settings">
           <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
             <path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z"></path>
           </svg>

@@ -23,7 +23,7 @@ function saveNotes() {
 function switchNote(index) {
   if (currentNoteIndex !== index) {
     const prevNoteButton = noteList.querySelector(
-      `.switchnote[data-index="${currentNoteIndex}"]`
+      `.switchnote[data-index="${currentNoteIndex}"]`,
     );
     if (prevNoteButton) {
       prevNoteButton.classList.remove("currentNote");
@@ -35,7 +35,7 @@ function switchNote(index) {
     updateNoteList();
 
     const currentNoteButton = noteList.querySelector(
-      `.switchnote[data-index="${index}"]`
+      `.switchnote[data-index="${index}"]`,
     );
     if (currentNoteButton) {
       currentNoteButton.classList.add("currentNote");
@@ -141,6 +141,7 @@ function updateNoteList() {
         <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>`;
     reorderButton.classList.add("reorder-btn");
+    reorderButton.setAttribute("title", "Reorder notes");
     notepadNavbar.appendChild(reorderButton);
     reorderButton.addEventListener("click", showReorderModal);
   }
@@ -157,6 +158,7 @@ function updateNoteList() {
 
     const settingsButton = document.createElement("button");
     settingsButton.classList.add("settingsbtn");
+    settingsButton.setAttribute("title", "Note settings");
     settingsButton.innerHTML = `
   <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
     <path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z"></path>
@@ -220,7 +222,7 @@ function showNoteSettings(index) {
     e.preventDefault();
     const plainTextContent = notes[currentNoteIndex].content.replace(
       /<[^>]+>/g,
-      ""
+      "",
     );
     const noteTitle = notes[currentNoteIndex].title;
 
@@ -239,7 +241,7 @@ function showNoteSettings(index) {
   deleteNoteButton.addEventListener("click", function () {
     const noteToDeleteTitle = notes[index].title;
     const confirmation = confirm(
-      `Are you sure you want to delete "${noteToDeleteTitle}"?`
+      `Are you sure you want to delete "${noteToDeleteTitle}"?`,
     );
     if (confirmation) {
       deleteNote(index);
