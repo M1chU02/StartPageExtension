@@ -721,6 +721,7 @@ hr {
   display: block;
 }
 
+/* Always hide native cursor when custom cursor is active */
 body.custom-cursor-active,
 body.custom-cursor-active * {
   cursor: none !important;
