@@ -13,7 +13,9 @@
   border-radius: 5px;
   cursor: pointer;
   margin: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 label {
@@ -315,4 +317,16 @@ button span {
 
 #save-order:hover {
   opacity: 0.8;
+}
+
+#notepadarea a.notepad-auto-link,
+#notepadarea a.notepad-auto-link:visited,
+#notepadarea a.notepad-auto-link:hover,
+#notepadarea a.notepad-auto-link:active {
+  color: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  cursor: pointer;
 }

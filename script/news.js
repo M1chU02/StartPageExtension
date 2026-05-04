@@ -8,7 +8,7 @@ function checkCookie() {
   if (!cookieExists) {
     const expirationDate = new Date();
     expirationDate.setTime(
-      expirationDate.getTime() + STORAGE_EXPIRATION_HOURS * 60 * 60 * 1000
+      expirationDate.getTime() + STORAGE_EXPIRATION_HOURS * 60 * 60 * 1000,
     );
     document.cookie = `newsCookie=1; expires=${expirationDate.toUTCString()}`;
   }

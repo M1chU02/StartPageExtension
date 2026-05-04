@@ -10,6 +10,79 @@ const addNoteBtn = document.getElementById("add-note-btn");
 const notes = JSON.parse(localStorage.getItem("notepadNotes")) || [];
 let currentNoteIndex = -1;
 let isCreatingNote = false;
+const URL_REGEX = /((?:https?:\/\/|www\.)[^\s<]+)/gi;
+
+function normalizeUrl(url) {
+  return url.startsWith("www.") ? `https://${url}` : url;
+}
+
+function convertTextNodeUrlsToLinks(textNode, parent) {
+  const text = textNode.nodeValue;
+  URL_REGEX.lastIndex = 0;
+
+  if (!URL_REGEX.test(text)) {
+    return;
+  }
+
+  URL_REGEX.lastIndex = 0;
+  const fragment = document.createDocumentFragment();
+  let lastIndex = 0;
+  let match = URL_REGEX.exec(text);
+
+  while (match) {
+    const matchedText = match[0];
+    const startIndex = match.index;
+
+    if (startIndex > lastIndex) {
+      fragment.appendChild(
+        document.createTextNode(text.slice(lastIndex, startIndex)),
+      );
+    }
+
+    const anchor = document.createElement("a");
+    anchor.href = normalizeUrl(matchedText);
+    anchor.textContent = matchedText;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    anchor.classList.add("notepad-auto-link");
+    fragment.appendChild(anchor);
+
+    lastIndex = startIndex + matchedText.length;
+    match = URL_REGEX.exec(text);
+  }
+
+  if (lastIndex < text.length) {
+    fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+  }
+
+  parent.replaceChild(fragment, textNode);
+}
+
+function linkifyNode(node) {
+  if (node.nodeType === Node.TEXT_NODE && node.parentNode) {
+    convertTextNodeUrlsToLinks(node, node.parentNode);
+    return;
+  }
+
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    return;
+  }
+
+  const element = node;
+  if (element.tagName === "A") {
+    return;
+  }
+
+  const childNodes = Array.from(element.childNodes);
+  childNodes.forEach((childNode) => linkifyNode(childNode));
+}
+
+function linkifyContent(content) {
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = content;
+  linkifyNode(wrapper);
+  return wrapper.innerHTML;
+}
 
 noteList.addEventListener("wheel", (evt) => {
   evt.preventDefault();
@@ -31,7 +104,12 @@ function switchNote(index) {
 
     saveCurrentNote();
     currentNoteIndex = index;
-    textarea.innerHTML = notes[index].content;
+    const linkedContent = linkifyContent(notes[index].content || "");
+    if (notes[index].content !== linkedContent) {
+      notes[index].content = linkedContent;
+      saveNotes();
+    }
+    textarea.innerHTML = linkedContent;
     updateNoteList();
 
     const currentNoteButton = noteList.querySelector(
@@ -47,7 +125,7 @@ function switchNote(index) {
 
 function saveCurrentNote() {
   if (currentNoteIndex !== -1) {
-    notes[currentNoteIndex].content = textarea.innerHTML;
+    notes[currentNoteIndex].content = linkifyContent(textarea.innerHTML);
     saveNotes();
   }
 }
@@ -291,6 +369,16 @@ saveButton.addEventListener("click", function () {
 });
 
 addNoteBtn.addEventListener("click", addNote);
+
+textarea.addEventListener("click", (event) => {
+  const anchor = event.target.closest("a");
+  if (!anchor) {
+    return;
+  }
+
+  event.preventDefault();
+  window.open(anchor.href, "_blank", "noopener,noreferrer");
+});
 
 function showReorderModal() {
   const reorderModal = `
