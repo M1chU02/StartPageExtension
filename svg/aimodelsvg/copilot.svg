@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <g id="copilot">
+    <path fill="#32b9e7" d="M8 3H5C3.7 3 3 4 2.6 5.2L.5 13c-.6 2.2.8 4 3 4H7l3-11c.5-1.8-.2-3-2-3Z" />
+    <path fill="#a6e8b4" d="M8 3h8l-3 7H6Z" />
+    <path fill="#a276ed" d="M16 21h3c1.3 0 2-1 2.4-2.2l2.1-7.8c.6-2.2-.8-4-3-4H17l-3 11c-.5 1.8.2 3 2 3Z" />
+    <path fill="#ff91a9" d="M16 21H8l3-7h7Z" />
+    <path fill="#fff" d="M10 7h7l-3 10H7Z" />
+  </g>
+</svg>

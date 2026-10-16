@@ -1,0 +1,53 @@
+#socials-apps #socialsdiv {
+  margin-bottom: 3vh;
+}
+
+#aimodelsdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(8px, 1vw, 24px);
+  width: 100%;
+  flex-shrink: 0;
+  margin-bottom: 3vh;
+}
+
+.aimodelbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: clamp(44px, 4vw, 96px);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.aimodelbutton svg {
+  width: 55%;
+  height: 55%;
+  fill: currentColor;
+}
+
+.aimodelbutton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px var(--button-background);
+}
+
+.aimodelbutton:focus-visible {
+  outline: 3px solid var(--font-color);
+  outline-offset: 4px;
+}
+
+#chatgptLink { background-color: #10a37f; }
+#geminiLink { background-color: #4285f4; }
+#claudeLink { background-color: #d97757; }
+#copilotLink { background-color: var(--form-container-background); }
+
+@media (prefers-reduced-motion: reduce) {
+  .aimodelbutton { transition: none; }
+}
