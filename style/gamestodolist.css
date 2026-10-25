@@ -238,3 +238,58 @@ button span {
 #save-list-order:hover {
   opacity: 0.8;
 }
+
+/* Task item layout */
+#todolist li.task-item,
+.kanban-list li.task-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Priority and status select styling */
+.task-priority,
+.task-status {
+  border: none;
+  background: #eee;
+  padding: 2px 4px;
+}
+
+.task-delete {
+  background: none;
+  border: none;
+  color: #c00;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Overdue highlight */
+.task-overdue {
+  background-color: rgba(255,0,0,0.2);
+}
+
+/* Kanban board */
+#kanbanBoard {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.kanban-column {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 200px;
+  padding: 5px;
+}
+.kanban-column h3 {
+  text-align: center;
+  margin: 0 0 5px 0;
+}
+.kanban-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+

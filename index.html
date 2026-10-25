@@ -207,7 +207,7 @@
               <use xlink:href="/svg/aimodelsvg/chatgpt.svg#chatgpt" />
             </svg>
           </a>
-          <a class="aimodelbutton" id="geminiLink" href="https://gemini.google.com/" title="Gemini" aria-label="Gemini">
+          <a class="aimodelbutton" id="geminiLink" href="https://gemini.google.com/u/1/" title="Gemini" aria-label="Gemini">
             <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true" focusable="false">
               <use xlink:href="/svg/aimodelsvg/gemini.svg#gemini" />
             </svg>
@@ -376,7 +376,16 @@
         </button> 
     </div>
     <hr>
-    <!-- Editable To-Do list -->
+            <div id="todolist-controls" style="display: flex; align-items: center; gap: 8px; margin: 8px 0;">
+          <label for="sortSelect">Sort by:</label>
+          <select id="sortSelect">
+            <option value="title">Title</option>
+            <option value="priority">Priority</option>
+            <option value="dueDate">Due Date</option>
+          </select>
+          <button id="kanbanToggleBtn">Kanban</button>
+        </div>
+        <!-- Editable To-Do list -->
     <div id="todolist">
         <ul contenteditable="true" data-placeholder="Type a task and press Enter"></ul>
     </div>
