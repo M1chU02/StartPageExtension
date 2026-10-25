@@ -1,7 +1,7 @@
 window.initializeBackgroundSettings = function (scope = document) {
   const backgroundContainer = scope.querySelector("#backgroundImagesContainer");
   const randomThemeButton = scope.querySelector(
-    "#random-theme-background-button"
+    "#random-theme-background-button",
   );
 
   if (!backgroundContainer || !randomThemeButton) return;
@@ -78,7 +78,7 @@ const setAndSaveBackground = (src) => {
 
   // Update toggles if open
   const randomBtns = document.querySelectorAll(
-    "#random-theme-background-button"
+    "#random-theme-background-button",
   );
   randomBtns.forEach((btn) => {
     btn.classList.remove("toggleOn");
@@ -95,7 +95,7 @@ const setAndSaveBackgroundColor = (color) => {
 
   // Update toggles if open
   const randomBtns = document.querySelectorAll(
-    "#random-theme-background-button"
+    "#random-theme-background-button",
   );
   randomBtns.forEach((btn) => {
     btn.classList.remove("toggleOn");
@@ -136,7 +136,7 @@ const toggleRandomBackground = () => {
   const isRandomBackground =
     localStorage.getItem("isRandomBackground") === "true";
   const randomBtns = document.querySelectorAll(
-    "#random-theme-background-button"
+    "#random-theme-background-button",
   );
 
   if (isRandomBackground) {
@@ -159,4 +159,33 @@ const toggleRandomBackground = () => {
 
 document.addEventListener("DOMContentLoaded", function () {
   loadBackgroundFromStorage();
+  // Notification alarm handler for to-do reminders
+  if (typeof chrome !== "undefined" && chrome.alarms && chrome.notifications) {
+    chrome.alarms.onAlarm.addListener(function (alarm) {
+      if (alarm.name && alarm.name.startsWith("todo-")) {
+        const parts = alarm.name.split("-");
+        if (parts.length === 3) {
+          const listIdx = parseInt(parts[1], 10);
+          const taskIdx = parseInt(parts[2], 10);
+          const stored = localStorage.getItem("toDoLists");
+          if (stored) {
+            try {
+              const lists = JSON.parse(stored);
+              const task = lists[listIdx].content[taskIdx];
+              if (task) {
+                chrome.notifications.create({
+                  type: "basic",
+                  iconUrl: "icon.png",
+                  title: "Task Reminder",
+                  message: `Task "${task.title}" is due soon.`,
+                });
+              }
+            } catch (e) {
+              console.error("Failed to show task reminder:", e);
+            }
+          }
+        }
+      }
+    });
+  }
 });

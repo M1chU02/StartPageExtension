@@ -65,6 +65,20 @@ const generalSettingsModalContent = `<div id="general-settings">
       <div id="backgroundImagesContainer"></div>
       <button id="random-theme-background-button">Random Background</button>
     </div>
+    <div class="settings-tile" id="notificationSettings">
+      <h1>Notifications</h1>
+      <label><input type="checkbox" id="enableNotifications"> Enable Notifications</label><br/>
+      <label for="leadTime">Reminder lead time:</label>
+      <select id="leadTime">
+        <option value="1440">1 day</option>
+        <option value="60">1 hour</option>
+        <option value="15">15 minutes</option>
+        <option value="custom">Custom</option>
+      </select>
+      <input type="number" id="customLeadTime" placeholder="Minutes" style="display:none;"><br/>
+      <label><input type="checkbox" id="overdueAlerts"> Overdue Alerts</label><br/>
+      <button id="testNotification">Send Test Notification</button>
+    </div>
 
     <div id="cursor-about-container">
       <div class="settings-tile" id="cursorSettingsTile">
@@ -152,6 +166,7 @@ function showGeneralSettingsModal() {
     .addEventListener("click", showChangelog);
 
   initializeCursorSettings(body);
+  initializeNotificationSettings(body);
 
   manageSearchEngine(body);
   buildSocialsPreviewInSettings(body);
@@ -454,8 +469,7 @@ function createThemeCard(theme, css) {
       <!-- Action Button Example -->
       <div class="preview-action-btn" style='background-color: ${style.btnBg}'></div>
     </div>
-    <div class="theme-name">${theme.name}</div>
-  `;
+    <div class="theme-name">${theme.name}</div>`;
   return card;
 }
 
@@ -532,6 +546,13 @@ function exportAllData() {
     selectedTheme: localStorage.getItem("selectedTheme"),
     background: localStorage.getItem("backgroundImage"),
     username: localStorage.getItem("userName"),
+    toDoLists: localStorage.getItem("toDoLists"),
+    notificationSettings: {
+      enabled: localStorage.getItem("todoNotificationsEnabled"),
+      leadTime: localStorage.getItem("todoReminderLeadTime"),
+      customLead: localStorage.getItem("todoReminderCustom"),
+      overdue: localStorage.getItem("todoOverdueAlertsEnabled"),
+    },
   };
 
   const blob = new Blob([JSON.stringify(allData)], {
@@ -558,6 +579,28 @@ function importAllData() {
       const importedData = JSON.parse(e.target.result);
 
       localStorage.setItem("bookmarks", importedData.bookmarks);
+      // Import to-do lists and notification settings
+      if (importedData.toDoLists) {
+        localStorage.setItem("toDoLists", importedData.toDoLists);
+      }
+      if (importedData.notificationSettings) {
+        localStorage.setItem(
+          "todoNotificationsEnabled",
+          importedData.notificationSettings.enabled,
+        );
+        localStorage.setItem(
+          "todoReminderLeadTime",
+          importedData.notificationSettings.leadTime,
+        );
+        localStorage.setItem(
+          "todoReminderCustom",
+          importedData.notificationSettings.customLead,
+        );
+        localStorage.setItem(
+          "todoOverdueAlertsEnabled",
+          importedData.notificationSettings.overdue,
+        );
+      }
       localStorage.setItem("notepadNotes", importedData.notes);
       localStorage.setItem("selectedTheme", importedData.selectedTheme);
       localStorage.setItem("backgroundImage", importedData.background);
@@ -760,5 +803,78 @@ function initializeCursorSettings(scope = document) {
     const newSize = e.target.value;
     localStorage.setItem("customCursorSize", newSize);
     if (window.updateCustomCursor) window.updateCustomCursor();
+  });
+}
+
+function initializeNotificationSettings(scope = document) {
+  const enableCheckbox = scope.querySelector("#enableNotifications");
+  const leadSelect = scope.querySelector("#leadTime");
+  const customInput = scope.querySelector("#customLeadTime");
+  const overdueCheckbox = scope.querySelector("#overdueAlerts");
+  const testBtn = scope.querySelector("#testNotification");
+
+  // Load saved settings
+  enableCheckbox.checked =
+    localStorage.getItem("todoNotificationsEnabled") === "true";
+  const savedLead = localStorage.getItem("todoReminderLeadTime") || "60";
+  leadSelect.value = savedLead;
+  if (leadSelect.value === "custom") {
+    customInput.style.display = "";
+    customInput.value = localStorage.getItem("todoReminderCustom") || "";
+  } else {
+    customInput.style.display = "none";
+  }
+  overdueCheckbox.checked =
+    localStorage.getItem("todoOverdueAlertsEnabled") === "true";
+
+  // Event listeners
+  enableCheckbox.addEventListener("change", () => {
+    const enabled = enableCheckbox.checked;
+    localStorage.setItem("todoNotificationsEnabled", enabled);
+    if (
+      enabled &&
+      typeof Notification !== "undefined" &&
+      Notification.permission !== "granted"
+    ) {
+      Notification.requestPermission();
+    }
+  });
+
+  leadSelect.addEventListener("change", () => {
+    if (leadSelect.value === "custom") {
+      customInput.style.display = "";
+    } else {
+      customInput.style.display = "none";
+    }
+    localStorage.setItem("todoReminderLeadTime", leadSelect.value);
+  });
+
+  customInput.addEventListener("input", () => {
+    localStorage.setItem("todoReminderCustom", customInput.value);
+  });
+
+  overdueCheckbox.addEventListener("change", () => {
+    localStorage.setItem("todoOverdueAlertsEnabled", overdueCheckbox.checked);
+  });
+
+  testBtn.addEventListener("click", () => {
+    if (!enableCheckbox.checked) {
+      alert("Enable notifications first.");
+      return;
+    }
+    if (typeof chrome !== "undefined" && chrome.notifications) {
+      chrome.notifications.create({
+        type: "basic",
+        iconUrl: "icon.png",
+        title: "Test Notification",
+        message: "This is a test task reminder.",
+      });
+    } else if (window.Notification && Notification.permission === "granted") {
+      new Notification("Test Notification", {
+        body: "This is a test task reminder.",
+      });
+    } else {
+      alert("Notifications not supported or permission not granted.");
+    }
   });
 }
