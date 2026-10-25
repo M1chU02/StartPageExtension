@@ -245,30 +245,71 @@ button span {
   display: flex;
   align-items: center;
   gap: 8px;
+  background: var(--tile-background);
+  border-radius: var(--tile-border-radius);
   padding: 4px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 4px;
 }
 
 /* Priority and status select styling */
 .task-priority,
 .task-status {
   border: none;
-  background: #eee;
+  background: var(--form-container-background);
+  color: var(--font-color);
   padding: 2px 4px;
 }
 
+/* Delete button */
 .task-delete {
   background: none;
   border: none;
-  color: #c00;
+  color: var(--priority-high-color);
   font-weight: bold;
   cursor: pointer;
 }
 
 /* Overdue highlight */
 .task-overdue {
-  background-color: rgba(255,0,0,0.2);
+  background: var(--task-overdue-bg);
 }
+
+/* Controls */
+#todolist-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+#todolist-controls select {
+  border: none;
+  outline: none;
+  background: var(--form-container-background);
+  color: var(--font-color);
+  padding: 5px 10px;
+  border-radius: 3rem;
+}
+#todolist-controls button {
+  background: var(--button-background);
+  color: var(--font-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+}
+
+/* Priority badge */
+.task-priority-badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-right: 5px;
+  color: var(--font-color);
+}
+.task-priority-badge.low { background: var(--priority-low-color); }
+.task-priority-badge.medium { background: var(--priority-medium-color); }
+.task-priority-badge.high { background: var(--priority-high-color); }
 
 /* Kanban board */
 #kanbanBoard {
@@ -278,14 +319,17 @@ button span {
 }
 .kanban-column {
   flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 2px solid var(--button-background);
+  border-radius: var(--tile-border-radius);
+  background-color: var(--modal-background);
+  box-shadow: 10px 10px 2px 2px rgba(0, 0, 0, 0.15);
   min-height: 200px;
   padding: 5px;
 }
 .kanban-column h3 {
   text-align: center;
   margin: 0 0 5px 0;
+  color: var(--font-color);
 }
 .kanban-list {
   list-style: none;
