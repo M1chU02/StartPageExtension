@@ -36,5 +36,5 @@ function downloadBackup() {
   a.download = "backup_" + timestamp + ".json";
   a.click();
   localStorage.setItem("backupdate", currentDate.toISOString());
-  URL.revokeObjectURL(url);
+  URL.revokeObjectURL(a.href);
 }

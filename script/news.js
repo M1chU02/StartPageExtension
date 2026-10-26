@@ -33,8 +33,9 @@ refreshButton.addEventListener("click", () => {
   localStorage.removeItem(GLOBALNEWS_STORAGE_KEY);
 
   checkCookie();
+  const geolocationCookie = getCookie("geolocation");
 
-  const [lat, lng] = geolocationCookie.split(",");
+      const [lat, lng] = geolocationCookie ? geolocationCookie.split(",") : [null, null];
   const reverseGeocodeUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`;
 
   fetch(reverseGeocodeUrl)
@@ -180,7 +181,7 @@ function renderNewsFromStorage(data, isGlobal) {
   });
 }
 
-const [lat, lng] = geolocationCookie.split(",");
+    const [lat, lng] = geolocationCookie ? geolocationCookie.split(",") : [null, null];
 
 const reverseGeocodeUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`;
 

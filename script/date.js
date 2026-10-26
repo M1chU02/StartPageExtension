@@ -9,7 +9,7 @@ function clock() {
 
   let currentTime = hour + ":" + min;
   document.getElementById("hour").innerHTML = currentTime;
-  setTimeout(clock, 1000);
+  // Removed redundant setTimeout
 }
 
 clock();

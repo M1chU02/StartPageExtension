@@ -12,8 +12,8 @@ const notepadcheckbtn = document.getElementById("notepadcheckbtn");
 notepadboldbtn.addEventListener("click", makeBold);
 notepaditalicbtn.addEventListener("click", makeItalic);
 notepadunderlinebtn.addEventListener("click", makeUnderline);
-fontSize.addEventListener("change", () => {
-  var selectedValue = this.value;
+fontSize.addEventListener("change", (e) => {
+  const selectedValue = e.target.value;
   changeFontSize(selectedValue);
 });
 notepadlistbtn.addEventListener("click", addList);

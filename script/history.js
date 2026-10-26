@@ -33,9 +33,9 @@ function displayTabHistory(historyItems) {
     var timestampElement = document.createElement("span");
     timestampElement.textContent = timestamp.toLocaleString() + ": ";
 
-    var link = document.createElement("a");
+    var link = document.createElement("span");
     link.textContent = item.title || item.url; // Fallback to URL if no title
-    link.href = item.url;
+    // link.href removed;
 
     // Append favicon, timestamp, and link to the list item
     listItemLink.appendChild(faviconImg);
