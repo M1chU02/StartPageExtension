@@ -101,7 +101,7 @@ const generalSettingsModalContent = `<div id="general-settings">
       </div>
       <div class="settings-tile" id="copyright">
         <h1>Copyright</h1>
-        <p>R 2026 MichU. All rights reserved.</p>
+        <p>&copy; 2026 MichU. All rights reserved.</p>
       </div>
     </div>
   </div>
