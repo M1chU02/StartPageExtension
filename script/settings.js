@@ -99,6 +99,10 @@ const generalSettingsModalContent = `<div id="general-settings">
         <h1>About</h1>
         <button id="show-changelog-button">Changelog</button>
       </div>
+      <div class="settings-tile" id="copyright">
+        <h1>Copyright</h1>
+        <p>R 2026 MichU. All rights reserved.</p>
+      </div>
     </div>
   </div>
 </div>`;

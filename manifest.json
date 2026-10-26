@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "StartPageExtension",
+  "author": "MichU",
   "version": "1.0",
   "permissions": [
     "tabs",
