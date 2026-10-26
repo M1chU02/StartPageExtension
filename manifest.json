@@ -14,7 +14,7 @@
     "newtab": "index.html"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://*.firebaseio.com https://*.googleapis.com https://api.bigdatacloud.net https://api.open-meteo.com"
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src https://*.firebaseio.com https://*.googleapis.com https://api.bigdatacloud.net https://api.open-meteo.com https://newsdata.io"
   },
   "host_permissions": ["http://*/*", "https://*/*"]
 }
