@@ -8,13 +8,13 @@ function setOfflineUI(isOffline) {
     offlineDiv.style.display = 'flex';
   } else {
     offlineDiv.style.display = 'none';
-    // Ensure offline elements are visible if they should be (they may be hidden via CSS initially)
+    // Ensure offline elements are visible (they may be hidden by CSS initially)
     offlineElements.forEach(el => (el.style.display = ''));
   }
 }
 
-// Set initial UI based on current online status
-setOfflineUI(!navigator.onLine);
+// Set initial UI assuming online; actual offline events will adjust if needed
+setOfflineUI(false);
 
 // Listen for online/offline events to update UI dynamically
 window.addEventListener('offline', () => setOfflineUI(true));
