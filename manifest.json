@@ -14,7 +14,7 @@
     "newtab": "index.html"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://*.firebaseio.com https://*.googleapis.com https://api.bigdatacloud.net https://api.open-meteo.com"
   },
   "host_permissions": ["http://*/*", "https://*/*"]
 }

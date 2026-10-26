@@ -65,6 +65,10 @@ const generalSettingsModalContent = `<div id="general-settings">
       <div id="backgroundImagesContainer"></div>
       <button id="random-theme-background-button">Random Background</button>
     </div>
+    <div class="settings-tile" id="authSettingsEl">
+      <h1>Account</h1>
+      <button id="login-register-btn">Login / Register</button>
+    </div>
     <div class="settings-tile" id="notificationSettings">
       <h1>Notifications</h1>
       <label><input type="checkbox" id="enableNotifications"> Enable Notifications</label><br/>
@@ -177,6 +181,15 @@ function showGeneralSettingsModal() {
   closeSocialPicker();
   if (typeof window.initializeBackgroundSettings === "function") {
     window.initializeBackgroundSettings(body);
+  }
+  // Account login/register button in settings
+  const loginBtn = body.querySelector('#login-register-btn');
+  if (loginBtn) {
+    loginBtn.addEventListener('click', () => {
+      if (typeof window.showAuthModal === 'function') {
+        window.showAuthModal();
+      }
+    });
   }
 }
 
