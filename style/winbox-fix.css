@@ -1,0 +1,4 @@
+/* Ensure WinBox modals appear above all content */
+.winbox {
+  z-index: 10000 !important;
+}
